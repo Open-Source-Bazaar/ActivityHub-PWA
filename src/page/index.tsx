@@ -22,7 +22,7 @@ import UserInfo from './userInfo';
 const menu = () => [
         {
             title: t('openSource'),
-            href: 'https://github.com/kaiyuanshe/PWA'
+            href: 'https://github.com/Open-Source-Bazaar/ActivityHub-PWA'
         }
     ],
     routes = [
@@ -53,11 +53,11 @@ export const PageFrame = observer(() => (
             brand={
                 <>
                     <img
-                        alt={t('kaiyuanshe')}
-                        src="https://kaiyuanshe.cn/image/KaiYuanShe-logo.png"
+                        alt={t('open-source-bazaar')}
+                        src="https://github.com/Open-Source-Bazaar.png"
                         style={{ width: '2rem', marginRight: '0.5rem' }}
                     />
-                    {t('kaiyuanshe')}
+                    {t('open-source-bazaar')}
                 </>
             }
         >

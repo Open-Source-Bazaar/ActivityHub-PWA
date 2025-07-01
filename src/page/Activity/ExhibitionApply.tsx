@@ -1,4 +1,4 @@
-import { ProgramTypeEnum3, Project } from '@kaiyuanshe/data-server';
+import { ProgramTypeEnum3, Project } from '@open-source-bazaar/orgserver';
 import { Button, FilePicker, FormField, Tab, Tabs } from 'boot-cell';
 import debounce from 'lodash.debounce';
 import { observable } from 'mobx';

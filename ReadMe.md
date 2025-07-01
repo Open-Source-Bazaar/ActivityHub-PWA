@@ -1,16 +1,15 @@
-![](https://kaiyuanshe.cn/image/KaiYuanShe-logo.png)
+![](https://github.com/Open-Source-Bazaar.png)
 
-# KaiYuanShe PWA
+# ActivityHub PWA
 
-[开源社][1]官方网站的[渐进式 Web 应用][2]
+ActivityHub 的[渐进式 Web 应用][2]
 
-[![NPM Dependency](https://david-dm.org/kaiyuanshe/PWA.svg)][3]
-[![CI & CD](https://github.com/kaiyuanshe/PWA/workflows/CI%20&%20CD/badge.svg)][4]
+[![CI & CD](https://github.com/Open-Source-Bazaar/ActivityHub-PWA/actions/workflows/main.yml/badge.svg)][4]
 
 ## 重要链接
 
-- 开发看板：https://github.com/kaiyuanshe/PWA/projects/1?fullscreen=true
-- 后端 API：https://github.com/kaiyuanshe/service
+- 开发看板：https://github.com/Open-Source-Bazaar/ActivityHub-PWA/projects/1?fullscreen=true
+- 后端 API：https://github.com/Open-Source-Bazaar/service
 
 ## Technology stack
 
@@ -35,10 +34,8 @@ npm start
 pnpm build
 ```
 
-[1]: https://kaiyuanshe.cn/
 [2]: https://developer.mozilla.org/zh-CN/docs/Web/Progressive_web_apps
-[3]: https://david-dm.org/kaiyuanshe/PWA
-[4]: https://github.com/kaiyuanshe/PWA/actions
+[4]: https://github.com/Open-Source-Bazaar/ActivityHub-PWA/actions/workflows/main.yml
 [5]: https://typescriptlang.org/
 [6]: https://web-cell.dev/
 [7]: https://getbootstrap.com/

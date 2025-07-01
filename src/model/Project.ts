@@ -1,4 +1,4 @@
-import { Project } from '@kaiyuanshe/data-server';
+import { Project } from '@open-source-bazaar/orgserver';
 
 import { CollectionModel } from './service';
 

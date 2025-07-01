@@ -82,7 +82,7 @@ export default {
     syncGithub: 'Sync with GitHub',
     save: 'Save',
     openSource: 'Open Source',
-    kaiyuanshe: 'Kaiyuanshe',
+    'open-source-bazaar': 'Open Source Bazaar',
     score: 'Score',
     loginToComment: 'Log in to comment',
     yourComment: 'Your Comment',

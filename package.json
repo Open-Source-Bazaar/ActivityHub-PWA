@@ -1,7 +1,7 @@
 {
-    "name": "@kaiyuanshe/pwa",
+    "name": "@open-source-bazaar/activityhub-pwa",
     "version": "0.8.0",
-    "description": "PWA of KaiYuanShe",
+    "description": "ActivityHub PWA",
     "keywords": [
         "web-component",
         "typescript",
@@ -10,10 +10,10 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/kaiyuanshe/PWA.git"
+        "url": "git+https://github.com/Open-Source-Bazaar/ActivityHub-PWA.git"
     },
     "bugs": {
-        "url": "https://github.com/kaiyuanshe/PWA/issues"
+        "url": "https://github.com/Open-Source-Bazaar/ActivityHub-PWA/issues"
     },
     "dependencies": {
         "@nuintun/qrcode": "^5.0.2",
@@ -37,7 +37,7 @@
         "@cspell/eslint-plugin": "^9.1.1",
         "@eslint/js": "^9.29.0",
         "@html-eslint/eslint-plugin": "^0.41.0",
-        "@kaiyuanshe/data-server": "^1.0.0",
+        "@open-source-bazaar/orgserver": "^1.0.0",
         "@parcel/config-default": "~2.15.2",
         "@parcel/packager-raw-url": "~2.15.2",
         "@parcel/transformer-less": "~2.15.2",

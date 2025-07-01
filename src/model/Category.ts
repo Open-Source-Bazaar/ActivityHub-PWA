@@ -1,4 +1,4 @@
-import { Category } from '@kaiyuanshe/data-server';
+import { Category } from '@open-source-bazaar/orgserver';
 
 import { CollectionModel } from './service';
 

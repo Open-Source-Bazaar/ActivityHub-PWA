@@ -62,7 +62,7 @@ export default class UserInfo
     render() {
         const avatarUrl =
             session?.user?.avatar?.url ||
-            'https://kaiyuanshe.cn/image/KaiYuanShe-logo.png';
+            'https://github.com/Open-Source-Bazaar.png';
 
         return (
             <div className={styles.user_container}>

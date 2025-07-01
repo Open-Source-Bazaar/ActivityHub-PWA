@@ -5,7 +5,7 @@ import {
     Place,
     Program as _Program,
     Project
-} from '@kaiyuanshe/data-server';
+} from '@open-source-bazaar/orgserver';
 import { observable } from 'mobx';
 import { Filter, NewData, toggle } from 'mobx-restful';
 

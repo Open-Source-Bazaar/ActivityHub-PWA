@@ -1,12 +1,12 @@
-import { Partnership } from '@kaiyuanshe/data-server';
 import { Byte, Encoder } from '@nuintun/qrcode';
+import { Partnership } from '@open-source-bazaar/orgserver';
 import { DataObject, Filter } from 'mobx-restful';
 import { StrapiListModel } from 'mobx-strapi';
 
 import session from './Session';
 
 if (!['localhost', '127.0.0.1', '0.0.0.0'].includes(location.hostname))
-    session.client.baseURI = 'https://data.kaiyuanshe.cn/api/';
+    session.client.baseURI = 'https://data.bazaar.fcc-cd.dev/api/';
 
 export abstract class CollectionModel<
     D extends DataObject,

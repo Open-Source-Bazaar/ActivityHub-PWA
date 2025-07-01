@@ -82,7 +82,7 @@ export default {
     syncGithub: '同步 GitHub',
     save: '儲存',
     openSource: '開放原始碼',
-    kaiyuanshe: '開源社',
+    'open-source-bazaar': '開源市集',
     score: '評分',
     loginToComment: '登入即可評論',
     yourComment: '您的評語',

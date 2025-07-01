@@ -66,7 +66,7 @@ importers:
       '@html-eslint/eslint-plugin':
         specifier: ^0.41.0
         version: 0.41.0(eslint@9.29.0(jiti@2.4.2))
-      '@kaiyuanshe/data-server':
+      '@open-source-bazaar/orgserver':
         specifier: ^1.0.0
         version: 1.0.0
       '@parcel/config-default':
@@ -955,9 +955,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kaiyuanshe/data-server@1.0.0':
-    resolution: {integrity: sha512-k3jWFxIu6xz/RnMfmTF/PftbVYaqbnZbQkg2r8MASoDfk1jEKJzjsibyc766TM88rYDr+Bgrlf+c/njmvjWL3A==, tarball: https://npm.pkg.github.com/download/@kaiyuanshe/data-server/1.0.0/06ab1413dcacee6ab896483ad6267879f5bec91c}
-
   '@lezer/common@1.2.3':
     resolution: {integrity: sha512-w7ojc8ejBqr2REPsWxJjrMFsA/ysDCFICn8zEOR9mrqzOu2amhITYuLD8ag6XZf0CFXDrhKqw7+tW8cX66NaDA==}
 
@@ -1042,6 +1039,9 @@ packages:
 
   '@nuintun/qrcode@5.0.2':
     resolution: {integrity: sha512-IkbIU+bgHmivthsdjwR5Cos0ZkFJKILY/PgwARiTOzYGQLP4vBa40LDXajlkH5HX/zRuPgg3Jyufp+81t67XLg==}
+
+  '@open-source-bazaar/orgserver@1.0.0':
+    resolution: {integrity: sha512-R2cg9avEgr3lWriJR63/vHROKR6/iY4gthv3Ki/6kCc9fpKXP/NPpsBY/R+EBxjf0Mjdpv1atxEBEV8nH/PRVQ==, tarball: https://npm.pkg.github.com/download/@open-source-bazaar/orgserver/1.0.0/4c9a6ac3b8254e90331c74af3e5b6203280e34a9}
 
   '@parcel/bundler-default@2.15.2':
     resolution: {integrity: sha512-k0psV7OZYs1g6jcJweBjINVZaVTcfFr6PuCQr28biZ85qbc70f5pWzCzY963+dF3XO/QwTzDABZsJUiDf5jPfQ==}
@@ -5031,8 +5031,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kaiyuanshe/data-server@1.0.0': {}
-
   '@lezer/common@1.2.3': {}
 
   '@lezer/lr@1.4.2':
@@ -5096,6 +5094,8 @@ snapshots:
   '@nuintun/qrcode@5.0.2':
     dependencies:
       tslib: 2.8.1
+
+  '@open-source-bazaar/orgserver@1.0.0': {}
 
   '@parcel/bundler-default@2.15.2(@parcel/core@2.15.2(@swc/helpers@0.5.17))':
     dependencies:

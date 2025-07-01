@@ -1,8 +1,8 @@
 {
-  "name": "开源社官网",
-  "short_name": "开源社",
+  "name": "ActivityHub",
+  "short_name": "ActivityHub",
   "start_url": ".",
-  "description": "PWA of KaiYuanShe",
+  "description": "ActivityHub PWA",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
@@ -12,7 +12,7 @@
   "background_color": "transparent",
   "icons": [
     {
-      "src": "https://kaiyuanshe.cn/image/KaiYuanShe-logo.png",
+      "src": "https://github.com/Open-Source-Bazaar.png",
       "type": "image/png",
       "sizes": "337x337"
     }

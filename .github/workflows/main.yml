@@ -24,7 +24,7 @@ jobs:
               run: |
                   cat >> .npmrc <<EOF
                   //npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
-                  @kaiyuanshe:registry=https://npm.pkg.github.com
+                  @open-source-bazaar:registry=https://npm.pkg.github.com
                   always-auth=true
                   EOF
                   pnpm i --frozen-lockfile
@@ -36,7 +36,6 @@ jobs:
               uses: peaceiris/actions-gh-pages@v4
               with:
                   publish_dir: ./dist
-                  cname: coscon.kaiyuanshe.cn
                   personal_token: ${{ secrets.GITHUB_TOKEN }}
                   force_orphan: true
 

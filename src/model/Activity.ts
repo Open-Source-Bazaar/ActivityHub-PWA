@@ -2,7 +2,7 @@ import {
     Activity as _Activity,
     Organization,
     Partnership as _Partnership
-} from '@kaiyuanshe/data-server';
+} from '@open-source-bazaar/orgserver';
 import { marked } from 'marked';
 import { computed } from 'mobx';
 import { toggle } from 'mobx-restful';

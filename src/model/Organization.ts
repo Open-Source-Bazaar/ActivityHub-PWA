@@ -1,4 +1,4 @@
-import { Organization } from '@kaiyuanshe/data-server';
+import { Organization } from '@open-source-bazaar/orgserver';
 import { observable } from 'mobx';
 import { toggle } from 'mobx-restful';
 
