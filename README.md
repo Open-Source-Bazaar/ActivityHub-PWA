@@ -1,8 +1,8 @@
-# Next-Bootstrap-ts
+# activityhub-pwa
 
 [React][1] project scaffold based on [TypeScript][2], [Next.js][3], [Bootstrap][4] & [Workbox][5]. And this project bootstrapped with [`create-next-app`][6].
 
-[![CI & CD](https://github.com/idea2app/Next-Bootstrap-ts/actions/workflows/main.yml/badge.svg)][7]
+[![CI & CD](https://github.com/open-source-bazaar/activityhub-pwa/actions/workflows/main.yml/badge.svg)][7]
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)][8]
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)][9]
@@ -103,9 +103,9 @@ pnpm container
 [4]: https://getbootstrap.com/
 [5]: https://developers.google.com/web/tools/workbox
 [6]: https://github.com/vercel/next.js/tree/canary/packages/create-next-app
-[7]: https://github.com/idea2app/Next-Bootstrap-ts/actions/workflows/main.yml
-[8]: https://codespaces.new/idea2app/Next-Bootstrap-ts
-[9]: https://gitpod.io/?autostart=true#https://github.com/idea2app/Next-Bootstrap-ts
+[7]: https://github.com/open-source-bazaar/activityhub-pwa/actions/workflows/main.yml
+[8]: https://codespaces.new/open-source-bazaar/activityhub-pwa
+[9]: https://gitpod.io/?autostart=true#https://github.com/open-source-bazaar/activityhub-pwa
 [10]: https://mdxjs.com/
 [11]: https://mobx.js.org/
 [12]: https://koajs.com/
@@ -115,12 +115,12 @@ pnpm container
 [16]: https://github.com/apps/settings
 [17]: https://pullrequestbadge.com/
 [18]: https://code.visualstudio.com/
-[19]: https://github.com/new?template_name=Next-Bootstrap-ts&template_owner=idea2app
-[20]: https://github.com/idea2app/Next-Bootstrap-ts/blob/80967ed49045af9dbcf4d3695a2c39d53a6f71f1/.github/workflows/pull-request.yml#L9-L11
-[21]: https://github.com/idea2app/Next-Bootstrap-ts/settings/secrets/actions
+[19]: https://github.com/new?template_name=activityhub-pwa&template_owner=open-source-bazaar
+[20]: https://github.com/open-source-bazaar/activityhub-pwa/blob/80967ed49045af9dbcf4d3695a2c39d53a6f71f1/.github/workflows/pull-request.yml#L9-L11
+[21]: https://github.com/open-source-bazaar/activityhub-pwa/settings/secrets/actions
 [22]: https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io/blob/8df9944449002758f7ec809deeb260ce08182259/.github/workflows/main.yml#L34-L63
-[23]: https://github.com/idea2app/Next-Bootstrap-ts/issues/new/choose
-[24]: https://github.com/idea2app/Next-Bootstrap-ts/projects
+[23]: https://github.com/open-source-bazaar/activityhub-pwa/issues/new/choose
+[24]: https://github.com/open-source-bazaar/activityhub-pwa/projects
 [25]: https://nextjs.org/docs/api-routes/introduction
 [26]: https://nextjs.org/docs
 [27]: https://nextjs.org/learn
