@@ -42,4 +42,14 @@ export default {
 
   // MDX Article
   article: '文章',
+
+  // Homepage sections
+  latest_activities: '最新活动',
+  active_instructors: '活跃讲师',
+  sponsors: '赞助商',
+  communities: '社区伙伴',
+  media_partners: '媒体伙伴',
+  more_events: '更多活动',
+  view_profile: '查看档案',
+  activity_banner: '精选活动',
 } as const;

@@ -1,7 +1,7 @@
 html,
 body {
-  padding: 0;
   margin: 0;
+  padding: 0;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -31,6 +31,20 @@ article {
     max-width: 100%;
   }
 }
+
+// Homepage enhancements
+.text-shadow {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.hover-shadow {
+  transition: box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
 // custom 404 page (Global edition)
 div:has(.next-error-h1) {
   height: auto !important;
