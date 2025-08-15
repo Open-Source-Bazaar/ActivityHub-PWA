@@ -40,6 +40,16 @@ export default {
   load_more: '加載更多……',
   no_more: '沒有更多',
 
+  // Homepage sections
+  latest_activities: '最新活動',
+  active_speakers: '活躍講師',
+  more_activities: '更多活動',
+  sponsors: '贊助商',
+  partners: '合作夥伴',
+  communities: '社群',
+  speaker_ranking: '講師排行',
+  view_profile: '查看資料',
+
   // MDX Article
   article: '文章',
 } as const;

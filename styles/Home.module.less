@@ -1,11 +1,11 @@
 .main {
-  min-height: 100vh;
   padding: 4rem 0;
+  min-height: 100vh;
 }
 
 .title {
-  line-height: 1.15;
   font-size: 4rem;
+  line-height: 1.15;
   a {
     &:hover,
     &:focus,
@@ -22,20 +22,37 @@
 .code {
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family:
+    Menlo,
+    Monaco,
+    Lucida Console,
+    Liberation Mono,
+    DejaVu Sans Mono,
+    Bitstream Vera Sans Mono,
+    Courier New,
+    monospace;
 }
 
 .card {
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
   color: inherit;
-  transition: color 0.15s ease, border-color 0.15s ease;
   &:hover,
   &:focus,
   &:active {
-    color: #0070f3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 112, 243, 0.15);
     border-color: #0070f3;
+    color: #0070f3;
   }
   p {
     line-height: 1.5;
   }
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }

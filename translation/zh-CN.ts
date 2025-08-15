@@ -38,6 +38,16 @@ export default {
   // Scroll List
   scroll_list: '滚动列表',
   load_more: '加载更多……',
+
+  // Homepage sections
+  latest_activities: '最新活动',
+  active_speakers: '活跃讲师',
+  more_activities: '更多活动',
+  sponsors: '赞助商',
+  partners: '合作伙伴',
+  communities: '社区',
+  speaker_ranking: '讲师排行',
+  view_profile: '查看资料',
   no_more: '没有更多',
 
   // MDX Article

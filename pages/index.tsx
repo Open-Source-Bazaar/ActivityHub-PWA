@@ -1,75 +1,233 @@
 import { observer } from 'mobx-react';
-import { useContext } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Fragment, useContext } from 'react';
+import {
+  Badge,
+  Button,
+  Card,
+  Carousel,
+  Col,
+  Container,
+  Image,
+  Row,
+} from 'react-bootstrap';
 
-import { GitCard } from '../components/Git/Card';
 import { PageHead } from '../components/PageHead';
 import { I18nContext } from '../models/Translation';
 import styles from '../styles/Home.module.less';
-import { framework, mainNav } from './api/home';
+import {
+  bannerActivities,
+  OrganizationType,
+  OrganizationTypeName,
+  partners,
+  recentActivities,
+  topSpeakers,
+} from './api/home';
 
 const HomePage = observer(() => {
   const i18n = useContext(I18nContext);
   const { t } = i18n;
 
   return (
-    <Container as="main" className={styles.main}>
+    <>
       <PageHead title={t('home_page')} />
 
-      <h1 className={`m-0 text-center ${styles.title}`}>
-        {t('welcome_to')}
-        <a className="text-primary mx-2" href="https://nextjs.org">
-          Next.js!
-        </a>
-      </h1>
+      {/* Banner Carousel Section */}
+      <Container fluid className="p-0">
+        <Carousel>
+          {bannerActivities.map(({ id, displayName, ribbon, banner, link }) => (
+            <Carousel.Item key={id}>
+              <a className="d-block stretched-link" href={link}>
+                <Image
+                  className="w-100 object-fit-cover"
+                  style={{ height: '60vh', minHeight: '400px' }}
+                  src={banner.uri}
+                  alt={banner.name}
+                />
+              </a>
+              <Carousel.Caption className="text-shadow">
+                <h3 className="fs-2 fw-bold">{displayName}</h3>
+                <p className="fs-5">{ribbon}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </Container>
 
-      <p className={`text-center fs-4 ${styles.description}`}>
-        {t('get_started_by_editing')}
-        <code className={`mx-2 rounded-3 bg-light ${styles.code}`}>
-          pages/index.tsx
-        </code>
-      </p>
+      {/* Latest Activities Section */}
+      <section className="my-5 py-5 bg-light">
+        <Container>
+          <h2 className="text-center mb-5">{t('latest_activities')}</h2>
+          <Row className="g-4" xs={1} sm={2} md={3}>
+            {recentActivities.map(
+              ({ id, title, summary, date, image, link }) => (
+                <Col key={id}>
+                  <Card
+                    className={`h-100 ${styles.card}`}
+                    style={{ borderRadius: '15px', overflow: 'hidden' }}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={image}
+                      alt={title}
+                      style={{ height: '200px', objectFit: 'cover' }}
+                    />
+                    <Card.Body className="d-flex flex-column">
+                      <Card.Title className="fs-5 mb-2">{title}</Card.Title>
+                      <Card.Text className="text-muted flex-grow-1">
+                        {summary}
+                      </Card.Text>
+                      <div className="d-flex justify-content-between align-items-center mt-3">
+                        <Badge bg="primary" className="rounded-pill">
+                          {date}
+                        </Badge>
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          href={link}
+                          className="stretched-link"
+                        >
+                          了解更多 &rarr;
+                        </Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ),
+            )}
+          </Row>
 
-      <Row className="g-4" xs={1} sm={2} md={4}>
-        {mainNav(i18n).map(({ link, title, summary }) => (
-          <Col key={link}>
-            <Card
-              className={`h-100 p-4 rounded-3 border ${styles.card}`}
-              tabIndex={-1}
-            >
-              <Card.Body>
-                <Card.Title as="h2" className="fs-4 mb-3">
-                  <a href={link} className="stretched-link">
-                    {title} &rarr;
-                  </a>
-                </Card.Title>
-                <Card.Text className="fs-5">{summary}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+          <div className="text-center mt-5">
+            <Button variant="primary" size="lg" href="/activity/">
+              {t('more_activities')}
+            </Button>
+          </div>
+        </Container>
+      </section>
 
-      <h2 className="my-4 text-center">{t('upstream_projects')}</h2>
-
-      <Row className="g-4" xs={1} sm={2} md={3}>
-        {framework.map(
-          ({ title, languages, tags, summary, link, repository }) => (
-            <Col key={title}>
-              <GitCard
-                className={`h-100 ${styles.card}`}
-                full_name={title}
-                html_url={repository}
-                homepage={link}
-                languages={languages}
-                topics={tags}
-                description={summary}
-              />
+      {/* Active Speakers Section */}
+      <section className="my-5 py-5">
+        <Container>
+          <h2 className="text-center mb-5">{t('active_speakers')}</h2>
+          <Row className="justify-content-center">
+            <Col lg={8}>
+              <Card className="shadow-sm">
+                <Card.Header className="bg-primary text-white text-center">
+                  <h4 className="mb-0">{t('speaker_ranking')}</h4>
+                </Card.Header>
+                <Card.Body className="p-0">
+                  {topSpeakers.map(
+                    ({ id, name, avatar, email, score, title }, index) => (
+                      <div
+                        key={id}
+                        className="d-flex align-items-center p-3 border-bottom position-relative"
+                      >
+                        <div className="me-3">
+                          <Badge
+                            bg={
+                              index === 0
+                                ? 'warning'
+                                : index === 1
+                                  ? 'secondary'
+                                  : index === 2
+                                    ? 'dark'
+                                    : 'light'
+                            }
+                            className="rounded-circle p-2 fs-6"
+                            style={{ width: '40px', height: '40px' }}
+                          >
+                            {index + 1}
+                          </Badge>
+                        </div>
+                        <Image
+                          src={avatar}
+                          alt={name}
+                          roundedCircle
+                          width={50}
+                          height={50}
+                          className="me-3"
+                        />
+                        <div className="flex-grow-1">
+                          <div className="fw-bold">{name}</div>
+                          <div className="text-muted small">{title}</div>
+                          <div className="text-muted small">{email}</div>
+                        </div>
+                        <div className="text-end">
+                          <div className="fw-bold text-primary">
+                            {score.toLocaleString()}
+                          </div>
+                          <div className="text-muted small">积分</div>
+                        </div>
+                        <a
+                          href={`/speaker/${id}`}
+                          className="stretched-link"
+                          aria-label={t('view_profile')}
+                        >
+                          <span className="visually-hidden">
+                            {t('view_profile')}
+                          </span>
+                        </a>
+                      </div>
+                    ),
+                  )}
+                </Card.Body>
+              </Card>
             </Col>
-          ),
-        )}
-      </Row>
-    </Container>
+          </Row>
+        </Container>
+      </section>
+
+      {/* Partners Section */}
+      <section className="my-5 py-5 bg-light">
+        <Container>
+          {Object.entries(partners()).map(([type, list]) => (
+            <Fragment key={type}>
+              <h3 className="text-center my-5">
+                {OrganizationTypeName(i18n)[+type as OrganizationType]}
+              </h3>
+              <Row
+                as="ul"
+                className="list-unstyled justify-content-center align-items-center g-4"
+                xs={2}
+                sm={3}
+                md={4}
+                lg={6}
+              >
+                {list.map(({ name, url, logo }) => (
+                  <Col key={name} as="li" className="text-center">
+                    <a
+                      target="_blank"
+                      href={url}
+                      rel="noopener noreferrer"
+                      className="d-block p-3 text-decoration-none"
+                      title={name}
+                    >
+                      <Image
+                        src={logo}
+                        alt={name}
+                        fluid
+                        className="grayscale-hover"
+                        style={{
+                          maxHeight: '60px',
+                          filter: 'grayscale(100%)',
+                          transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.filter = 'grayscale(0%)';
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.filter = 'grayscale(100%)';
+                        }}
+                      />
+                    </a>
+                  </Col>
+                ))}
+              </Row>
+            </Fragment>
+          ))}
+        </Container>
+      </section>
+    </>
   );
 });
+
 export default HomePage;

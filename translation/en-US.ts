@@ -42,6 +42,16 @@ export default {
   load_more: 'Load more...',
   no_more: 'No more',
 
+  // Homepage sections
+  latest_activities: 'Latest Activities',
+  active_speakers: 'Active Speakers',
+  more_activities: 'More Activities',
+  sponsors: 'Sponsors',
+  partners: 'Partners',
+  communities: 'Communities',
+  speaker_ranking: 'Speaker Ranking',
+  view_profile: 'View Profile',
+
   // MDX Article
   article: 'Article',
 } as const;
