@@ -1,5 +1,6 @@
 import cspellPlugin from '@cspell/eslint-plugin';
 import eslint from '@eslint/js';
+// @ts-ignore - Missing type declarations
 import nextPlugin from '@next/eslint-plugin-next';
 import stylistic from '@stylistic/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';

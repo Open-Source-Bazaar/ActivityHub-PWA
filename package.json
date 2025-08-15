@@ -118,7 +118,7 @@
     "lint": "next lint --fix &&  tsc --noEmit",
     "lint:all": "eslint --fix .",
     "lint:inspect": "eslint --inspect-config",
-    "test": "lint-staged  &&  npm run lint",
+    "test": "lint-staged  &&  pnpm run lint",
     "pack-image": "docker build -t open-source-bazaar/activityhub-pwa:latest .",
     "container": "docker rm -f activityhub-pwa  &&  docker run --name activityhub-pwa -p 3000:3000 -d open-source-bazaar/activityhub-pwa:latest"
   }
