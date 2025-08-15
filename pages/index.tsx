@@ -1,75 +1,148 @@
 import { observer } from 'mobx-react';
-import { useContext } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Fragment, useContext } from 'react';
+import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
 
-import { GitCard } from '../components/Git/Card';
+import { ActivityListLayout } from '../components/ActivityListLayout';
 import { PageHead } from '../components/PageHead';
+import { UserRankView } from '../components/UserRankView';
 import { I18nContext } from '../models/Translation';
-import styles from '../styles/Home.module.less';
-import { framework, mainNav } from './api/home';
+import {
+  Activity,
+  mockActivities,
+  mockTopUsers,
+  OrganizationType,
+  OrganizationTypeName,
+  partner,
+  UserRank,
+} from './api/home';
 
 const HomePage = observer(() => {
   const i18n = useContext(I18nContext);
   const { t } = i18n;
 
+  // Use mock data (in a real app, this would come from getServerSideProps)
+  const activities: Activity[] = mockActivities;
+  const topUsers: UserRank[] = mockTopUsers;
+
   return (
-    <Container as="main" className={styles.main}>
+    <>
       <PageHead title={t('home_page')} />
 
-      <h1 className={`m-0 text-center ${styles.title}`}>
-        {t('welcome_to')}
-        <a className="text-primary mx-2" href="https://nextjs.org">
-          Next.js!
-        </a>
-      </h1>
-
-      <p className={`text-center fs-4 ${styles.description}`}>
-        {t('get_started_by_editing')}
-        <code className={`mx-2 rounded-3 bg-light ${styles.code}`}>
-          pages/index.tsx
-        </code>
-      </p>
-
-      <Row className="g-4" xs={1} sm={2} md={4}>
-        {mainNav(i18n).map(({ link, title, summary }) => (
-          <Col key={link}>
-            <Card
-              className={`h-100 p-4 rounded-3 border ${styles.card}`}
-              tabIndex={-1}
-            >
-              <Card.Body>
-                <Card.Title as="h2" className="fs-4 mb-3">
-                  <a href={link} className="stretched-link">
-                    {title} &rarr;
+      {/* Banner/Carousel Section */}
+      <Container className="mt-5">
+        <h2 className="mb-4 text-center">{t('activity_banner')}</h2>
+        <Carousel>
+          {activities
+            .filter(({ banners }) => banners?.[0])
+            .map(
+              ({
+                name: key,
+                displayName,
+                ribbon,
+                banners: [{ uri, name }],
+              }) => (
+                <Carousel.Item key={key}>
+                  <a
+                    className="d-block stretched-link"
+                    href={`/activity/${key}/`}
+                  >
+                    <Image
+                      className="w-100 object-fit-cover"
+                      style={{ height: '60vh' }}
+                      src={uri}
+                      alt={name}
+                    />
                   </a>
-                </Card.Title>
-                <Card.Text className="fs-5">{summary}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
+                  <Carousel.Caption className="text-white">
+                    <h3 className="text-shadow">{displayName}</h3>
+                    <p className="text-shadow">{ribbon}</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ),
+            )}
+        </Carousel>
+      </Container>
+
+      {/* Latest Activities Section */}
+      <section className="my-5 py-5 bg-light">
+        <Container>
+          <h2 className="mb-4 text-center">{t('latest_activities')}</h2>
+          <ActivityListLayout defaultData={activities} />
+          <div className="text-center mt-4">
+            <Button
+              className="px-5"
+              variant="outline-primary"
+              size="lg"
+              href="/activity/"
+            >
+              {t('more_events')}
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      {/* Active Instructors/Top Users Section */}
+      <div
+        className="py-5"
+        style={{
+          background: 'linear-gradient(#F8F9FA,#fff)',
+        }}
+      >
+        <Container>
+          <UserRankView
+            title={t('active_instructors')}
+            rank={topUsers.map(
+              ({ userId, user: { name, avatar, email }, score }) => ({
+                userId,
+                user: { name, avatar, email },
+                score,
+              }),
+            )}
+            linkOf={({ id }) => `/user/${id}`}
+          />
+        </Container>
+      </div>
+
+      {/* Partner Logos Section */}
+      <Container className="py-5">
+        {Object.entries(partner(i18n)).map(([type, list]) => (
+          <Fragment key={type}>
+            <h3 className="my-4 text-center">
+              {OrganizationTypeName(i18n)[+type as OrganizationType]}
+            </h3>
+            <Row
+              as="ul"
+              className="list-unstyled justify-content-center g-4 mb-5"
+              xs={2}
+              sm={3}
+              md={4}
+              xl={6}
+            >
+              {list.map(({ name, url, logo }) => (
+                <Col key={name} as="li" className="text-center">
+                  <a
+                    target="_blank"
+                    href={url}
+                    rel="noreferrer"
+                    className="text-decoration-none d-block p-3 rounded border hover-shadow"
+                    title={name}
+                  >
+                    <Image
+                      fluid
+                      src={logo}
+                      alt={name}
+                      style={{ maxHeight: '60px', objectFit: 'contain' }}
+                      className="mb-2"
+                    />
+                    <div className="small text-muted">{name}</div>
+                  </a>
+                </Col>
+              ))}
+            </Row>
+          </Fragment>
         ))}
-      </Row>
-
-      <h2 className="my-4 text-center">{t('upstream_projects')}</h2>
-
-      <Row className="g-4" xs={1} sm={2} md={3}>
-        {framework.map(
-          ({ title, languages, tags, summary, link, repository }) => (
-            <Col key={title}>
-              <GitCard
-                className={`h-100 ${styles.card}`}
-                full_name={title}
-                html_url={repository}
-                homepage={link}
-                languages={languages}
-                topics={tags}
-                description={summary}
-              />
-            </Col>
-          ),
-        )}
-      </Row>
-    </Container>
+      </Container>
+    </>
   );
 });
 export default HomePage;

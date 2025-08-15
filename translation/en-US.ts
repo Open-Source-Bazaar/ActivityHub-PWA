@@ -44,4 +44,14 @@ export default {
 
   // MDX Article
   article: 'Article',
+
+  // Homepage sections
+  latest_activities: 'Latest Activities',
+  active_instructors: 'Top Contributors',
+  sponsors: 'Sponsors',
+  communities: 'Communities',
+  media_partners: 'Media Partners',
+  more_events: 'More Events',
+  view_profile: 'View Profile',
+  activity_banner: 'Featured Events',
 } as const;

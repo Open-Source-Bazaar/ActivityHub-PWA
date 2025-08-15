@@ -42,4 +42,14 @@ export default {
 
   // MDX Article
   article: '文章',
+
+  // Homepage sections
+  latest_activities: '最新活動',
+  active_instructors: '活躍講師',
+  sponsors: '贊助商',
+  communities: '社區夥伴',
+  media_partners: '媒體夥伴',
+  more_events: '更多活動',
+  view_profile: '查看檔案',
+  activity_banner: '精選活動',
 } as const;
