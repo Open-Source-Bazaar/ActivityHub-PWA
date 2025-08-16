@@ -52,7 +52,7 @@ const HomePage = observer(() => {
                   <a className="d-block stretched-link" href={link}>
                     <Image
                       className="w-100 object-fit-cover"
-                      style={{ height: '60vh', minHeight: '400px' }}
+                      style={{ height: '60vh', minHeight: '25rem' }}
                       src={banner!.uri}
                       alt={banner!.name}
                     />
@@ -75,7 +75,7 @@ const HomePage = observer(() => {
           <Row className="g-4" xs={1} md={2} lg={3}>
             {latestActivities.slice(0, 6).map(activity => (
               <Col key={activity.id}>
-                <ActivityCard activity={activity} />
+                <ActivityCard {...activity} />
               </Col>
             ))}
           </Row>
@@ -106,7 +106,7 @@ const HomePage = observer(() => {
           {Object.entries(partnersByType).map(([type, typePartners]) => (
             <div key={type}>
               <h3 className="my-4 text-center">
-                {t(`${type}_partners` as keyof typeof i18n.t)}
+                {t(`${type}_partners` as keyof typeof i18n.currentMap)}
               </h3>
               <Row
                 as="ul"
