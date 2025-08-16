@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import { FC, Fragment, useContext } from 'react';
-import { Col, Image, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { I18nContext } from '../../models/Translation';
 import { Partner } from '../../pages/api/home';
+import { SponsorCard } from '../SponsorCard';
 
 export interface PartnerLogosProps {
   partners: Partner[];
@@ -60,33 +61,9 @@ export const PartnerLogos: FC<PartnerLogosProps> = observer(({ partners }) => {
             md={4}
             lg={6}
           >
-            {typePartners.map(({ name, url, logo }) => (
-              <Col key={name} as="li" className="text-center">
-                <a
-                  target="_blank"
-                  href={url}
-                  rel="noreferrer"
-                  className="d-block p-3 rounded bg-light hover-shadow"
-                  style={{
-                    transition: 'all 0.2s ease',
-                    minHeight: '100px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                  title={name}
-                >
-                  <Image
-                    fluid
-                    src={logo}
-                    alt={name}
-                    style={{
-                      maxHeight: '60px',
-                      maxWidth: '120px',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </a>
+            {typePartners.map(partner => (
+              <Col key={partner.name} as="li" className="text-center">
+                <SponsorCard sponsor={partner} />
               </Col>
             ))}
           </Row>

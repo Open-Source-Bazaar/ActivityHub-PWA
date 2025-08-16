@@ -49,4 +49,5 @@ export default {
   partners: '合作伙伴',
   more_activities: '更多活动',
   view_profile: '查看资料',
+  participants: '参与者',
 } as const;

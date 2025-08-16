@@ -51,4 +51,5 @@ export default {
   partners: 'Partners',
   more_activities: 'More Activities',
   view_profile: 'View Profile',
+  participants: 'participants',
 } as const;
