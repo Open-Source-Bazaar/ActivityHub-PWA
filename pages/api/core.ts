@@ -1,3 +1,5 @@
+import 'core-js/full/array/from-async';
+
 import Router, { RouterParamContext } from '@koa/router';
 import { Context, Middleware } from 'koa';
 import { HTTPError } from 'koajax';
