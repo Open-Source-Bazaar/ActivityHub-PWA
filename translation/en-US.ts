@@ -44,4 +44,11 @@ export default {
 
   // MDX Article
   article: 'Article',
+
+  // Homepage sections
+  latest_activities: 'Latest Activities',
+  active_instructors: 'Active Instructors',
+  partners: 'Partners',
+  more_activities: 'More Activities',
+  view_profile: 'View Profile',
 } as const;
