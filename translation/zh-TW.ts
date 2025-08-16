@@ -50,4 +50,9 @@ export default {
   more_activities: '更多活動',
   view_profile: '查看資料',
   participants: '參與者',
+
+  // Partner types
+  technology_partners: '技術合作夥伴',
+  community_partners: '社群合作夥伴',
+  sponsors: '贊助商',
 } as const;

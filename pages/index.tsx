@@ -1,12 +1,12 @@
+import { UserRankView } from 'idea-react';
 import { observer } from 'mobx-react';
 import { useContext } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
+import { groupBy } from 'web-utility';
 
-import { ActivityList } from '../components/Homepage/ActivityList';
-import { BannerCarousel } from '../components/Homepage/BannerCarousel';
-import { InstructorRanking } from '../components/Homepage/InstructorRanking';
-import { PartnerLogos } from '../components/Homepage/PartnerLogos';
+import { ActivityCard } from '../components/ActivityCard';
 import { PageHead } from '../components/PageHead';
+import { SponsorCard } from '../components/SponsorCard';
 import { I18nContext } from '../models/Translation';
 import {
   activeInstructors,
@@ -19,23 +19,71 @@ const HomePage = observer(() => {
   const i18n = useContext(I18nContext);
   const { t } = i18n;
 
+  // Filter activities with banners for carousel
+  const activitiesWithBanners = bannerActivities.filter(
+    activity => activity.banner,
+  );
+
+  // Transform instructor data for UserRankView
+  const rankData = activeInstructors.map(
+    ({ id, name, avatar, email, score }) => ({
+      id,
+      name,
+      avatar,
+      email,
+      score,
+    }),
+  );
+
+  // Group partners by type using web-utility
+  const partnersByType = groupBy(partners, 'type');
+
   return (
     <>
       <PageHead title={t('home_page')} />
 
       {/* Hero Banner Carousel */}
       <Container fluid className="px-0">
-        <BannerCarousel activities={bannerActivities} />
+        {activitiesWithBanners.length > 0 && (
+          <Carousel className="mb-5">
+            {activitiesWithBanners.map(
+              ({ id, displayName, description, banner, link }) => (
+                <Carousel.Item key={id}>
+                  <a className="d-block stretched-link" href={link}>
+                    <Image
+                      className="w-100 object-fit-cover"
+                      style={{ height: '60vh', minHeight: '400px' }}
+                      src={banner!.uri}
+                      alt={banner!.name}
+                    />
+                  </a>
+                  <Carousel.Caption className="text-shadow">
+                    <h3>{displayName}</h3>
+                    <p>{description}</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ),
+            )}
+          </Carousel>
+        )}
       </Container>
 
       {/* Latest Activities Section */}
       <section className="py-5 bg-light">
         <Container>
           <h2 className="text-center mb-5">{t('latest_activities')}</h2>
-          <ActivityList
-            activities={latestActivities.slice(0, 6)}
-            showMoreButton
-          />
+          <Row className="g-4" xs={1} md={2} lg={3}>
+            {latestActivities.slice(0, 6).map(activity => (
+              <Col key={activity.id}>
+                <ActivityCard activity={activity} />
+              </Col>
+            ))}
+          </Row>
+          <div className="text-center mt-4">
+            <Button variant="outline-primary" size="lg" href="/activity">
+              {t('more_activities')}
+            </Button>
+          </div>
         </Container>
       </section>
 
@@ -43,7 +91,11 @@ const HomePage = observer(() => {
       <section className="py-5">
         <Container>
           <h2 className="text-center mb-5">{t('active_instructors')}</h2>
-          <InstructorRanking instructors={activeInstructors} />
+          <UserRankView
+            title={t('active_instructors')}
+            rank={rankData}
+            linkOf={user => `/instructor/${user.id}`}
+          />
         </Container>
       </section>
 
@@ -51,7 +103,31 @@ const HomePage = observer(() => {
       <section className="py-5 bg-light">
         <Container>
           <h2 className="text-center mb-4">{t('partners')}</h2>
-          <PartnerLogos partners={partners} />
+          {Object.entries(partnersByType).map(([type, typePartners]) => (
+            <div key={type}>
+              <h3 className="my-4 text-center">
+                {t(`${type}_partners` as keyof typeof i18n.t)}
+              </h3>
+              <Row
+                as="ul"
+                className="list-unstyled justify-content-center align-items-center g-4 mb-5"
+                xs={2}
+                sm={3}
+                md={4}
+                lg={6}
+              >
+                {typePartners.map(partner => (
+                  <Col key={partner.name} as="li" className="text-center">
+                    <SponsorCard
+                      name={partner.name}
+                      url={partner.url}
+                      logo={partner.logo}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          ))}
         </Container>
       </section>
     </>

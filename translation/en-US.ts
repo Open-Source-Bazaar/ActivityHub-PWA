@@ -52,4 +52,9 @@ export default {
   more_activities: 'More Activities',
   view_profile: 'View Profile',
   participants: 'participants',
+
+  // Partner types
+  technology_partners: 'Technology Partners',
+  community_partners: 'Community Partners',
+  sponsors: 'Sponsors',
 } as const;

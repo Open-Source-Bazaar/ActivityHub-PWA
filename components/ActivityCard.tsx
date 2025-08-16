@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 
 import { I18nContext } from '../models/Translation';
 import { Activity } from '../pages/api/home';
+import styles from './ActivityCard.module.less';
 
 export interface ActivityCardProps {
   activity: Activity;
@@ -22,7 +23,7 @@ export const ActivityCard: FC<ActivityCardProps> = observer(({ activity }) => {
   } = activity;
 
   return (
-    <Card className="h-100 shadow-sm activity-card">
+    <Card className={`h-100 shadow-sm ${styles.activityCard}`}>
       {banner && (
         <Card.Img
           variant="top"
@@ -39,20 +40,20 @@ export const ActivityCard: FC<ActivityCardProps> = observer(({ activity }) => {
           </a>
         </Card.Title>
         <Card.Text className="text-muted mb-2">{description}</Card.Text>
-        <div className="small text-muted">
-          <div className="mb-1">
+        <ul className="list-unstyled small text-muted">
+          <li className="mb-1">
             <i className="bi bi-calendar me-2" />
             {new Date(startDate).toLocaleDateString()}
-          </div>
-          <div className="mb-1">
+          </li>
+          <li className="mb-1">
             <i className="bi bi-geo-alt me-2" />
             {location}
-          </div>
-          <div>
+          </li>
+          <li>
             <i className="bi bi-people me-2" />
             {participants} {t('participants')}
-          </div>
-        </div>
+          </li>
+        </ul>
       </Card.Body>
     </Card>
   );

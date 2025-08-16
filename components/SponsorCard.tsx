@@ -2,16 +2,8 @@ import { observer } from 'mobx-react';
 import { FC } from 'react';
 import { Image } from 'react-bootstrap';
 
-import { Partner } from '../pages/api/home';
-
-export interface SponsorCardProps {
-  sponsor: Partner;
-}
-
-export const SponsorCard: FC<SponsorCardProps> = observer(({ sponsor }) => {
-  const { name, url, logo } = sponsor;
-
-  return (
+export const SponsorCard: FC<{ name: string; url: string; logo: string }> =
+  observer(({ name, url, logo }) => (
     <a
       href={url}
       target="_blank"
@@ -37,5 +29,4 @@ export const SponsorCard: FC<SponsorCardProps> = observer(({ sponsor }) => {
         }}
       />
     </a>
-  );
-});
+  ));
