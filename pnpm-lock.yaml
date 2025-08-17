@@ -177,6 +177,9 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^15.4.6
         version: 15.4.6
+      '@open-source-bazaar/activityhub-service':
+        specifier: 1.0.0-rc.0
+        version: 1.0.0-rc.0(core-js@3.45.0)(mobx@6.13.7)(typescript@5.9.2)
       '@softonus/prettier-plugin-duplicate-remover':
         specifier: ^1.1.2
         version: 1.1.2
@@ -1403,6 +1406,9 @@ packages:
 
   '@octokit/openapi-types@25.1.0':
     resolution: {integrity: sha512-idsIggNXUKkk0+BExUn1dQ92sfysJrje03Q0bv0e+KPLrvyqZF8MnBpFz8UNfYDwB3Ie7Z0TByjWfzxt7vseaA==}
+
+  '@open-source-bazaar/activityhub-service@1.0.0-rc.0':
+    resolution: {integrity: sha512-QAv3tOgX+Vbm5GRsD8pVm4Wyob2GKRlC5iCTVzDfYJbVBRd34TPt5YnncJVS5lWulq61Oq7w2if8K4pz2lV68A==, tarball: https://npm.pkg.github.com/download/@open-source-bazaar/activityhub-service/1.0.0-rc.0/903f416daedf6e82a31d57bc94839edf64899331}
 
   '@opentelemetry/api-logs@0.203.0':
     resolution: {integrity: sha512-9B9RU0H7Ya1Dx/Rkyc4stuBZSGVQF27WigitInx2QQoj6KUpEFYPKoWjdFTunJYxmXmh17HeBvbMa1EhGyPmqQ==}
@@ -6502,6 +6508,19 @@ snapshots:
       fastq: 1.19.1
 
   '@octokit/openapi-types@25.1.0': {}
+
+  '@open-source-bazaar/activityhub-service@1.0.0-rc.0(core-js@3.45.0)(mobx@6.13.7)(typescript@5.9.2)':
+    dependencies:
+      '@types/jsonwebtoken': 9.0.10
+      '@types/koa': 3.0.0
+      mobx-github: 0.3.11(core-js@3.45.0)(typescript@5.9.2)
+      mobx-restful: 2.1.0(core-js@3.45.0)(mobx@6.13.7)(typescript@5.9.2)
+    transitivePeerDependencies:
+      - core-js
+      - element-internals-polyfill
+      - jsdom
+      - mobx
+      - typescript
 
   '@opentelemetry/api-logs@0.203.0':
     dependencies:

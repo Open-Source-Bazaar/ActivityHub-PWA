@@ -1,6 +1,6 @@
 {
-  "name": "activityhub-pwa scaffold",
-  "short_name": "Next.ts demo",
+  "name": "ActivityHub PWA",
+  "short_name": "ActivityHub",
   "start_url": ".",
   "description": "React project scaffold based on TypeScript, Next.js, Bootstrap & Workbox.",
   "scope": "/",
