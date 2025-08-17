@@ -47,18 +47,18 @@ const HomePage = observer(() => {
         {activitiesWithBanners.length > 0 && (
           <Carousel className="mb-5">
             {activitiesWithBanners.map(
-              ({ id, displayName, description, banner, link }) => (
+              ({ id, title, description, banner, url }) => (
                 <Carousel.Item key={id}>
-                  <a className="d-block stretched-link" href={link}>
+                  <a className="d-block stretched-link" href={url}>
                     <Image
                       className="w-100 object-fit-cover"
                       style={{ height: '60vh', minHeight: '25rem' }}
-                      src={banner!.uri}
-                      alt={banner!.name}
+                      src={banner}
+                      alt={title}
                     />
                   </a>
                   <Carousel.Caption className="text-shadow">
-                    <h3>{displayName}</h3>
+                    <h3>{title}</h3>
                     <p>{description}</p>
                   </Carousel.Caption>
                 </Carousel.Item>

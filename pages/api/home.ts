@@ -1,3 +1,6 @@
+// Import backend types for reference - used in interface design
+import type { Activity, User } from '@open-source-bazaar/activityhub-service';
+
 import { i18n } from '../../models/Translation';
 
 export const mainNav = ({ t }: typeof i18n) => [
@@ -23,27 +26,28 @@ export const mainNav = ({ t }: typeof i18n) => [
   },
 ];
 
-// Homepage data structures
-export interface Activity {
-  id: string;
-  name: string;
-  displayName: string;
+// Display interfaces based on backend types but simplified for frontend use
+export interface ActivityDisplay {
+  // Core Activity fields from backend (see Activity type)
+  id: number;
+  title: string;
+  startTime: string;
+  endTime?: string;
+  address?: string;
+  url?: string;
+  banner?: string;
+  // Additional display fields for frontend
   description: string;
-  banner?: {
-    uri: string;
-    name: string;
-  };
-  startDate: string;
-  location: string;
   participants: number;
-  link: string;
 }
 
-export interface Instructor {
-  id: string;
+export interface InstructorDisplay {
+  // Core User fields from backend (see User type)
+  id: number;
   name: string;
-  avatar: string;
-  email: string;
+  avatar?: string;
+  email?: string;
+  // Additional display fields for frontend
   score: number;
   specialties: string[];
 }
@@ -56,91 +60,82 @@ export interface Partner {
 }
 
 // Mock data for homepage sections
-export const bannerActivities: Activity[] = [
+export const bannerActivities: ActivityDisplay[] = [
   {
-    id: '1',
-    name: 'react-workshop-2024',
-    displayName: 'React Advanced Workshop 2024',
+    id: 1,
+    title: 'React Advanced Workshop 2024',
     description:
       'Join our comprehensive React workshop covering the latest features and best practices.',
-    banner: {
-      uri: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop',
-      name: 'React Workshop Banner',
-    },
-    startDate: '2024-03-15',
-    location: 'Chengdu Tech Hub',
+    banner: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop',
+    startTime: '2024-03-15T09:00:00Z',
+    endTime: '2024-03-15T17:00:00Z',
+    address: 'Chengdu Tech Hub',
     participants: 120,
-    link: '/activity/react-workshop-2024',
+    url: '/activity/react-workshop-2024',
   },
   {
-    id: '2',
-    name: 'nextjs-masterclass',
-    displayName: 'Next.js Masterclass',
+    id: 2,
+    title: 'Next.js Masterclass',
     description:
       'Master the full-stack React framework with hands-on projects.',
-    banner: {
-      uri: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
-      name: 'Next.js Masterclass Banner',
-    },
-    startDate: '2024-04-20',
-    location: 'Online Event',
+    banner: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
+    startTime: '2024-04-20T09:00:00Z',
+    endTime: '2024-04-20T17:00:00Z',
+    address: 'Online Event',
     participants: 200,
-    link: '/activity/nextjs-masterclass',
+    url: '/activity/nextjs-masterclass',
   },
   {
-    id: '3',
-    name: 'typescript-bootcamp',
-    displayName: 'TypeScript Bootcamp',
+    id: 3,
+    title: 'TypeScript Bootcamp',
     description:
       'From JavaScript to TypeScript: A complete transformation guide.',
-    banner: {
-      uri: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=1200&h=600&fit=crop',
-      name: 'TypeScript Bootcamp Banner',
-    },
-    startDate: '2024-05-10',
-    location: 'Innovation Center',
+    banner: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=1200&h=600&fit=crop',
+    startTime: '2024-05-10T09:00:00Z',
+    endTime: '2024-05-10T17:00:00Z',
+    address: 'Innovation Center',
     participants: 80,
-    link: '/activity/typescript-bootcamp',
+    url: '/activity/typescript-bootcamp',
   },
 ];
 
-export const latestActivities: Activity[] = [
+export const latestActivities: ActivityDisplay[] = [
   ...bannerActivities,
   {
-    id: '4',
-    name: 'js-fundamentals',
-    displayName: 'JavaScript Fundamentals',
+    id: 4,
+    title: 'JavaScript Fundamentals',
     description: 'Build a solid foundation in JavaScript programming.',
-    startDate: '2024-03-01',
-    location: 'Community Center',
+    startTime: '2024-03-01T09:00:00Z',
+    endTime: '2024-03-01T17:00:00Z',
+    address: 'Community Center',
     participants: 50,
-    link: '/activity/js-fundamentals',
+    url: '/activity/js-fundamentals',
   },
   {
-    id: '5',
-    name: 'web-api-workshop',
-    displayName: 'Web API Development Workshop',
+    id: 5,
+    title: 'Web API Development Workshop',
     description: 'Learn to build robust REST APIs with modern tools.',
-    startDate: '2024-03-08',
-    location: 'Tech Incubator',
+    startTime: '2024-03-08T09:00:00Z',
+    endTime: '2024-03-08T17:00:00Z',
+    address: 'Tech Incubator',
     participants: 75,
-    link: '/activity/web-api-workshop',
+    url: '/activity/web-api-workshop',
   },
   {
-    id: '6',
-    name: 'frontend-optimization',
-    displayName: 'Frontend Performance Optimization',
+    id: 6,
+    title: 'Frontend Performance Optimization',
     description: 'Techniques and tools for lightning-fast web applications.',
-    startDate: '2024-03-22',
-    location: 'Digital Hub',
+    startTime: '2024-03-22T09:00:00Z',
+    endTime: '2024-03-22T17:00:00Z',
+    address: 'Digital Hub',
     participants: 90,
-    link: '/activity/frontend-optimization',
+    url: '/activity/frontend-optimization',
   },
 ];
 
-export const activeInstructors: Instructor[] = [
+export const activeInstructors: InstructorDisplay[] = [
   {
-    id: '1',
+    id: 1,
     name: 'Sarah Chen',
     avatar:
       'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
@@ -149,7 +144,7 @@ export const activeInstructors: Instructor[] = [
     specialties: ['React', 'TypeScript', 'Next.js'],
   },
   {
-    id: '2',
+    id: 2,
     name: 'Alex Wang',
     avatar:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
@@ -158,7 +153,7 @@ export const activeInstructors: Instructor[] = [
     specialties: ['Node.js', 'GraphQL', 'Docker'],
   },
   {
-    id: '3',
+    id: 3,
     name: 'Li Mei',
     avatar:
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
@@ -167,7 +162,7 @@ export const activeInstructors: Instructor[] = [
     specialties: ['Vue.js', 'Python', 'AI/ML'],
   },
   {
-    id: '4',
+    id: 4,
     name: 'David Zhang',
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
@@ -176,7 +171,7 @@ export const activeInstructors: Instructor[] = [
     specialties: ['Angular', 'Java', 'Cloud'],
   },
   {
-    id: '5',
+    id: 5,
     name: 'Emma Liu',
     avatar:
       'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
