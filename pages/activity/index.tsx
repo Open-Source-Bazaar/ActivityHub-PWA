@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { Pager } from 'mobx-restful-table';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 
 import { ActivityCard } from '../../components/ActivityCard';
 import { PageHead } from '../../components/PageHead';
@@ -44,6 +44,17 @@ const ActivityListPage: FC<ActivityListPageProps> = observer(
         <hgroup className="text-center mb-5">
           <h1 className="display-4 mb-3">{t('all_activities')}</h1>
           <p className="lead text-muted">{t('discover_activities_description')}</p>
+          <div className="mt-4">
+            <Button 
+              variant="primary" 
+              size="lg"
+              href="/activity/new/editor"
+              className="d-inline-flex align-items-center gap-2"
+            >
+              <Icon name="plus-circle" />
+              {t('create_meeting')}
+            </Button>
+          </div>
         </hgroup>
 
         {activities.length > 0 ? (
