@@ -45,13 +45,14 @@ const ActivityListPage: FC<ActivityListPageProps> = observer(
           <h1 className="display-4 mb-3">{t('all_activities')}</h1>
           <p className="lead text-muted">{t('discover_activities_description')}</p>
           <div className="mt-4">
-            <Button 
-              variant="primary" 
-              size="lg"
-              href="/activity/new/editor"
+            <Button
               className="d-inline-flex align-items-center gap-2"
+              variant="primary"
+              size="lg"
+              href="/activity/0/editor"
             >
               <Icon name="plus-circle" />
+
               {t('create_activity')}
             </Button>
           </div>

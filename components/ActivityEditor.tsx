@@ -19,29 +19,17 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
 
   componentDidMount() {
     const { activity } = this.props;
-    if (activity) {
-      // Set the current editing item in the store
-      activityStore.currentOne = activity;
-    }
+
+    if (activity) activityStore.currentOne = activity;
   }
 
-  submitHandler = async (formData: any) => {
-    const { t } = this.observedContext;
-    const { activity } = this.props;
+  submitHandler = ({ id }: Activity) => {
+    const { t } = this.observedContext,
+      { activity } = this.props;
 
-    // Extract only the fields we want to update
-    const updateData = {
-      title: formData.title,
-      startTime: formData.startTime,
-      endTime: formData.endTime,
-      address: formData.address,
-      url: formData.url,
-    };
-
-    const result = await activityStore.updateOne(updateData, activity?.id);
-    
     alert(activity ? t('activity_updated_successfully') : t('activity_created_successfully'));
-    window.location.href = `/activity/${result.id}`;
+
+    window.location.href = `/activity/${id}`;
   };
 
   @computed
@@ -83,6 +71,7 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
 
   render() {
     const { downloading, uploading } = activityStore;
+
     const loading = downloading > 0 || uploading > 0;
 
     return (
