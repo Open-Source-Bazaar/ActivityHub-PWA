@@ -1,4 +1,4 @@
-// Import backend types for reference - used in interface design
+// Import backend types directly - no need for custom display interfaces
 import type { Activity, User } from '@open-source-bazaar/activityhub-service';
 
 import activityStore from '../../models/Activity';
@@ -28,31 +28,8 @@ export const mainNav = ({ t }: typeof i18n) => [
   },
 ];
 
-// Display interfaces based on backend types but simplified for frontend use
-export interface ActivityDisplay {
-  // Core Activity fields from backend (see Activity type)
-  id: number;
-  title: string;
-  startTime: string;
-  endTime?: string;
-  address?: string;
-  url?: string;
-  banner?: string;
-  // Additional display fields for frontend
-  description: string;
-  participants: number;
-}
-
-export interface InstructorDisplay {
-  // Core User fields from backend (see User type)
-  id: number;
-  name: string;
-  avatar?: string;
-  email?: string;
-  // Additional display fields for frontend
-  score: number;
-  specialties: string[];
-}
+// Re-export backend types for use in components
+export type { Activity, User };
 
 export interface Partner {
   name: string;
@@ -62,14 +39,12 @@ export interface Partner {
 }
 
 // API functions to fetch real data from backend
-export async function fetchBannerActivities(): Promise<ActivityDisplay[]> {
+export async function fetchBannerActivities(): Promise<Activity[]> {
   try {
     // Fetch activities with banners - limit to latest 5 for carousel
     const { pageData } = await activityStore.loadPage(1, 5, {} as any);
 
-    return pageData
-      .filter(activity => activity.banner) // Only activities with banners
-      .map(transformActivityToDisplay);
+    return pageData.filter(activity => activity.banner); // Only activities with banners
   } catch (error) {
     console.error('Failed to fetch banner activities:', error);
 
@@ -77,12 +52,12 @@ export async function fetchBannerActivities(): Promise<ActivityDisplay[]> {
   }
 }
 
-export async function fetchLatestActivities(): Promise<ActivityDisplay[]> {
+export async function fetchLatestActivities(): Promise<Activity[]> {
   try {
     // Fetch latest activities - limit to 10 for homepage display
     const { pageData } = await activityStore.loadPage(1, 10, {} as any);
 
-    return pageData.map(transformActivityToDisplay);
+    return pageData;
   } catch (error) {
     console.error('Failed to fetch latest activities:', error);
 
@@ -90,44 +65,17 @@ export async function fetchLatestActivities(): Promise<ActivityDisplay[]> {
   }
 }
 
-export async function fetchActiveInstructors(): Promise<InstructorDisplay[]> {
+export async function fetchActiveInstructors(): Promise<User[]> {
   try {
     // Fetch top users/instructors - limit to 5 for ranking
     const { pageData } = await userStore.loadPage(1, 5, {} as any);
 
-    return pageData.map(transformUserToInstructor);
+    return pageData;
   } catch (error) {
     console.error('Failed to fetch active instructors:', error);
 
     return [];
   }
-}
-
-// Transform backend Activity to frontend ActivityDisplay
-function transformActivityToDisplay(activity: Activity): ActivityDisplay {
-  return {
-    id: activity.id!,
-    title: activity.title || 'Untitled Activity',
-    description: (activity as any).organization?.summary || 'No description available',
-    startTime: activity.startTime || new Date().toISOString(),
-    endTime: activity.endTime,
-    address: activity.address || 'Location TBD',
-    url: `/activity/${activity.id}`,
-    banner: activity.banner || undefined,
-    participants: 0, // Backend doesn't have this field yet, using default
-  };
-}
-
-// Transform backend User to frontend InstructorDisplay
-function transformUserToInstructor(user: User): InstructorDisplay {
-  return {
-    id: user.id!,
-    name: user.name || 'Anonymous User',
-    avatar: user.avatar,
-    email: user.email,
-    score: 0, // Backend doesn't have score field yet, using default
-    specialties: [], // Backend doesn't have specialties field yet, using default
-  };
 }
 
 export const partners: Partner[] = [

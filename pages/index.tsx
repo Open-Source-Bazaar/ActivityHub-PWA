@@ -10,18 +10,18 @@ import { PageHead } from '../components/PageHead';
 import { SponsorCard } from '../components/SponsorCard';
 import { I18nContext } from '../models/Translation';
 import {
-  ActivityDisplay,
+  Activity,
   fetchActiveInstructors,
   fetchBannerActivities,
   fetchLatestActivities,
-  InstructorDisplay,
   partners,
+  User,
 } from './api/home';
 
 interface HomePageProps {
-  bannerActivities: ActivityDisplay[];
-  latestActivities: ActivityDisplay[];
-  activeInstructors: InstructorDisplay[];
+  bannerActivities: Activity[];
+  latestActivities: Activity[];
+  activeInstructors: User[];
 }
 
 const HomePage = observer(
@@ -32,13 +32,13 @@ const HomePage = observer(
     // Filter activities with banners for carousel
     const activitiesWithBanners = bannerActivities.filter(activity => activity.banner);
 
-    // Transform instructor data for UserRankView
-    const rankData = activeInstructors.map(({ id, name, avatar, email, score }) => ({
+    // Transform instructor data for UserRankView (using available User fields)
+    const rankData = activeInstructors.map(({ id, name, avatar, email }) => ({
       id,
       name,
       avatar,
       email,
-      score,
+      score: 0, // Backend doesn't have score field yet, using default
     }));
 
     // Group partners by type using web-utility
@@ -52,9 +52,9 @@ const HomePage = observer(
         <Container fluid className="px-0">
           {activitiesWithBanners.length > 0 && (
             <Carousel className="mb-5">
-              {activitiesWithBanners.map(({ id, title, description, banner, url }) => (
+              {activitiesWithBanners.map(({ id, title, banner, url }) => (
                 <Carousel.Item key={id}>
-                  <a className="d-block stretched-link" href={url}>
+                  <a className="d-block stretched-link" href={url || `/activity/${id}`}>
                     <Image
                       className="w-100 object-fit-cover"
                       style={{ height: '60vh', minHeight: '25rem' }}
@@ -64,7 +64,6 @@ const HomePage = observer(
                   </a>
                   <Carousel.Caption className="text-shadow">
                     <h3>{title}</h3>
-                    <p>{description}</p>
                   </Carousel.Caption>
                 </Carousel.Item>
               ))}
