@@ -57,6 +57,7 @@ export default {
   
   // Activity Editor
   activity_name: '活動名稱',
+  banner: '橫幅圖片',
   activity_start_time: '活動開始時間',
   activity_end_time: '活動結束時間',
   create_activity: '創建活動',

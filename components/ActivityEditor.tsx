@@ -3,9 +3,10 @@ import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { Field, RestForm } from 'mobx-restful-table';
+import { Field, FileUploader,RestForm } from 'mobx-restful-table';
 
 import activityStore from '../models/Activity';
+import fileStore from '../models/File';
 import { i18n, I18nContext } from '../models/Translation';
 
 export interface ActivityEditorProps {
@@ -44,6 +45,20 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
         invalidMessage: t('activity_name_required'),
       },
       {
+        key: 'banner',
+        renderLabel: t('banner'),
+        renderInput: ({ banner }) => (
+          <RestForm.FieldBox name="banner">
+            <FileUploader
+              store={fileStore}
+              name="banner"
+              accept="image/*"
+              defaultValue={banner ? [banner] : []}
+            />
+          </RestForm.FieldBox>
+        ),
+      },
+      {
         key: 'startTime',
         renderLabel: t('activity_start_time'),
         type: 'datetime-local',
@@ -72,7 +87,7 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
   render() {
     const { downloading, uploading } = activityStore;
 
-    const loading = downloading > 0 || uploading > 0;
+    const loading = downloading > 0 || uploading > 0 || fileStore.uploading > 0;
 
     return (
       <>

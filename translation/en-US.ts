@@ -59,6 +59,7 @@ export default {
     
   // Activity Editor
   activity_name: 'Activity Name',
+  banner: 'Banner Image',
   activity_start_time: 'Activity Start Time',
   activity_end_time: 'Activity End Time',
   create_activity: 'Create Activity',
