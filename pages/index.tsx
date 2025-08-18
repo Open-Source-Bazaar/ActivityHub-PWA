@@ -1,10 +1,9 @@
-import { Activity, Organization,User } from '@open-source-bazaar/activityhub-service';
+import { Activity, Organization, User } from '@open-source-bazaar/activityhub-service';
 import { UserRankView } from 'idea-react';
 import { observer } from 'mobx-react';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { useContext } from 'react';
 import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
-import { groupBy } from 'web-utility';
 
 import { ActivityCard } from '../components/ActivityCard';
 import { PageHead } from '../components/PageHead';
