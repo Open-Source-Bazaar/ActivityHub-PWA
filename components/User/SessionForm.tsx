@@ -10,7 +10,7 @@ import { formToJSON } from 'web-utility';
 import userStore from '../../models/User';
 
 export interface SessionFormProps {
-  onSignIn: (data?: SignInData) => any;
+  onSignIn?: (data?: SignInData) => any;
 }
 
 interface SignUpInput extends SignUpData {
@@ -63,12 +63,12 @@ export class SessionForm extends Component<SessionFormProps> {
     } else {
       await userStore.signIn(email, password);
 
-      this.props.onSignIn({ email, password });
+      this.props.onSignIn?.({ email, password });
     }
   };
 
   renderPasswordField = (signType = this.signType, loading = false) => (
-    <div className="d-flex flex-column justify-content-center gap-2">
+    <div className="flex-fill d-flex flex-column justify-content-center gap-2">
       <FormField
         as="input"
         type="password"

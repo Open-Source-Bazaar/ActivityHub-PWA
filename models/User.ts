@@ -4,9 +4,10 @@ import { clear } from 'idb-keyval';
 import { HTTPClient } from 'koajax';
 import { observable } from 'mobx';
 import { persist, restore, toggle } from 'mobx-restful';
+import { setCookie } from 'web-utility';
 
 import { TableModel } from './Base';
-import { API_HOST } from './configuration';
+import { API_HOST, isServer } from './configuration';
 
 export class UserModel extends TableModel<User> {
   baseURI = 'user';
@@ -15,7 +16,9 @@ export class UserModel extends TableModel<User> {
   @observable
   accessor session: User | undefined;
 
-  restored = restore(this, 'User');
+  restored =
+    !isServer() &&
+    restore(this, 'User').then(() => setCookie('token', this.session?.token || '', { path: '/' }));
 
   client = new HTTPClient({ baseURI: API_HOST, responseType: 'json' }).use(({ request }, next) => {
     const isSameDomain = API_HOST.startsWith(new URL(request.path, API_HOST).origin);
