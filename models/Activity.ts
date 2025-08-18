@@ -7,3 +7,5 @@ export class ActivityModel extends TableModel<Activity> {
   baseURI = 'activity';
   client = userStore.client;
 }
+
+export default new ActivityModel();

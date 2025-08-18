@@ -1,7 +1,9 @@
 // Import backend types for reference - used in interface design
 import type { Activity, User } from '@open-source-bazaar/activityhub-service';
 
+import activityStore from '../../models/Activity';
 import { i18n } from '../../models/Translation';
+import userStore from '../../models/User';
 
 export const mainNav = ({ t }: typeof i18n) => [
   {
@@ -59,127 +61,74 @@ export interface Partner {
   type: 'sponsor' | 'community' | 'technology';
 }
 
-// Mock data for homepage sections
-export const bannerActivities: ActivityDisplay[] = [
-  {
-    id: 1,
-    title: 'React Advanced Workshop 2024',
-    description:
-      'Join our comprehensive React workshop covering the latest features and best practices.',
-    banner: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop',
-    startTime: '2024-03-15T09:00:00Z',
-    endTime: '2024-03-15T17:00:00Z',
-    address: 'Chengdu Tech Hub',
-    participants: 120,
-    url: '/activity/react-workshop-2024',
-  },
-  {
-    id: 2,
-    title: 'Next.js Masterclass',
-    description:
-      'Master the full-stack React framework with hands-on projects.',
-    banner: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
-    startTime: '2024-04-20T09:00:00Z',
-    endTime: '2024-04-20T17:00:00Z',
-    address: 'Online Event',
-    participants: 200,
-    url: '/activity/nextjs-masterclass',
-  },
-  {
-    id: 3,
-    title: 'TypeScript Bootcamp',
-    description:
-      'From JavaScript to TypeScript: A complete transformation guide.',
-    banner: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=1200&h=600&fit=crop',
-    startTime: '2024-05-10T09:00:00Z',
-    endTime: '2024-05-10T17:00:00Z',
-    address: 'Innovation Center',
-    participants: 80,
-    url: '/activity/typescript-bootcamp',
-  },
-];
+// API functions to fetch real data from backend
+export async function fetchBannerActivities(): Promise<ActivityDisplay[]> {
+  try {
+    // Fetch activities with banners - limit to latest 5 for carousel
+    const { pageData } = await activityStore.loadPage(1, 5, {} as any);
 
-export const latestActivities: ActivityDisplay[] = [
-  ...bannerActivities,
-  {
-    id: 4,
-    title: 'JavaScript Fundamentals',
-    description: 'Build a solid foundation in JavaScript programming.',
-    startTime: '2024-03-01T09:00:00Z',
-    endTime: '2024-03-01T17:00:00Z',
-    address: 'Community Center',
-    participants: 50,
-    url: '/activity/js-fundamentals',
-  },
-  {
-    id: 5,
-    title: 'Web API Development Workshop',
-    description: 'Learn to build robust REST APIs with modern tools.',
-    startTime: '2024-03-08T09:00:00Z',
-    endTime: '2024-03-08T17:00:00Z',
-    address: 'Tech Incubator',
-    participants: 75,
-    url: '/activity/web-api-workshop',
-  },
-  {
-    id: 6,
-    title: 'Frontend Performance Optimization',
-    description: 'Techniques and tools for lightning-fast web applications.',
-    startTime: '2024-03-22T09:00:00Z',
-    endTime: '2024-03-22T17:00:00Z',
-    address: 'Digital Hub',
-    participants: 90,
-    url: '/activity/frontend-optimization',
-  },
-];
+    return pageData
+      .filter(activity => activity.banner) // Only activities with banners
+      .map(transformActivityToDisplay);
+  } catch (error) {
+    console.error('Failed to fetch banner activities:', error);
 
-export const activeInstructors: InstructorDisplay[] = [
-  {
-    id: 1,
-    name: 'Sarah Chen',
-    avatar:
-      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-    email: 'sarah.chen@example.com',
-    score: 4850,
-    specialties: ['React', 'TypeScript', 'Next.js'],
-  },
-  {
-    id: 2,
-    name: 'Alex Wang',
-    avatar:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-    email: 'alex.wang@example.com',
-    score: 4620,
-    specialties: ['Node.js', 'GraphQL', 'Docker'],
-  },
-  {
-    id: 3,
-    name: 'Li Mei',
-    avatar:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
-    email: 'li.mei@example.com',
-    score: 4480,
-    specialties: ['Vue.js', 'Python', 'AI/ML'],
-  },
-  {
-    id: 4,
-    name: 'David Zhang',
-    avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-    email: 'david.zhang@example.com',
-    score: 4320,
-    specialties: ['Angular', 'Java', 'Cloud'],
-  },
-  {
-    id: 5,
-    name: 'Emma Liu',
-    avatar:
-      'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
-    email: 'emma.liu@example.com',
-    score: 4180,
-    specialties: ['UI/UX', 'Design Systems', 'Figma'],
-  },
-];
+    return [];
+  }
+}
+
+export async function fetchLatestActivities(): Promise<ActivityDisplay[]> {
+  try {
+    // Fetch latest activities - limit to 10 for homepage display
+    const { pageData } = await activityStore.loadPage(1, 10, {} as any);
+
+    return pageData.map(transformActivityToDisplay);
+  } catch (error) {
+    console.error('Failed to fetch latest activities:', error);
+
+    return [];
+  }
+}
+
+export async function fetchActiveInstructors(): Promise<InstructorDisplay[]> {
+  try {
+    // Fetch top users/instructors - limit to 5 for ranking
+    const { pageData } = await userStore.loadPage(1, 5, {} as any);
+
+    return pageData.map(transformUserToInstructor);
+  } catch (error) {
+    console.error('Failed to fetch active instructors:', error);
+
+    return [];
+  }
+}
+
+// Transform backend Activity to frontend ActivityDisplay
+function transformActivityToDisplay(activity: Activity): ActivityDisplay {
+  return {
+    id: activity.id!,
+    title: activity.title || 'Untitled Activity',
+    description: (activity as any).organization?.summary || 'No description available',
+    startTime: activity.startTime || new Date().toISOString(),
+    endTime: activity.endTime,
+    address: activity.address || 'Location TBD',
+    url: `/activity/${activity.id}`,
+    banner: activity.banner || undefined,
+    participants: 0, // Backend doesn't have this field yet, using default
+  };
+}
+
+// Transform backend User to frontend InstructorDisplay
+function transformUserToInstructor(user: User): InstructorDisplay {
+  return {
+    id: user.id!,
+    name: user.name || 'Anonymous User',
+    avatar: user.avatar,
+    email: user.email,
+    score: 0, // Backend doesn't have score field yet, using default
+    specialties: [], // Backend doesn't have specialties field yet, using default
+  };
+}
 
 export const partners: Partner[] = [
   // Technology Partners
@@ -255,14 +204,7 @@ export const framework = [
     link: 'https://react-bootstrap.github.io/',
     repository: 'https://github.com/react-bootstrap/react-bootstrap',
     languages: ['TypeScript', 'JavaScript'],
-    tags: [
-      'react',
-      'javascript',
-      'bootstrap',
-      'typescript',
-      'react-components',
-      'hacktoberfest',
-    ],
+    tags: ['react', 'javascript', 'bootstrap', 'typescript', 'react-components', 'hacktoberfest'],
   },
   {
     title: 'TypeScript',
