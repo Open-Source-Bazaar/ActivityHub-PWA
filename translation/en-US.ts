@@ -56,6 +56,17 @@ export default {
   no_activities_found: 'No Activities Found',
   no_activities_description:
     'There are currently no activities available. Please check back later.',
+    
+  // Meeting/Activity Editor
+  meeting_name: 'Meeting Name',
+  meeting_start_time: 'Meeting Start Time',
+  meeting_end_time: 'Meeting End Time',
+  create_meeting: 'Create Meeting',
+  edit_meeting: 'Edit Meeting',
+  meeting_title_placeholder: 'Enter meeting name',
+  meeting_address: 'Meeting Address',
+  meeting_url: 'Meeting URL',
+  save_meeting: 'Save Meeting',
 
   // Partner types
   technology_partners: 'Technology Partners',

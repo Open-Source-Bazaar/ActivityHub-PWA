@@ -54,6 +54,17 @@ export default {
   discover_activities_description: '发现社区中精彩的活动和事件',
   no_activities_found: '没有找到活动',
   no_activities_description: '暂时没有可用的活动，请稍后再查看',
+  
+  // Meeting/Activity Editor
+  meeting_name: '会议名称',
+  meeting_start_time: '会议开始时间',
+  meeting_end_time: '会议结束时间',
+  create_meeting: '创建会议',
+  edit_meeting: '编辑会议',
+  meeting_title_placeholder: '请输入会议名称',
+  meeting_address: '会议地址',
+  meeting_url: '会议链接',
+  save_meeting: '保存会议',
 
   // Partner types
   technology_partners: '技术合作伙伴',

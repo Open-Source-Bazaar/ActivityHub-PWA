@@ -54,6 +54,17 @@ export default {
   discover_activities_description: '發現社群中精彩的活動和事件',
   no_activities_found: '沒有找到活動',
   no_activities_description: '暫時沒有可用的活動，請稍後再查看',
+  
+  // Meeting/Activity Editor
+  meeting_name: '會議名稱',
+  meeting_start_time: '會議開始時間',
+  meeting_end_time: '會議結束時間',
+  create_meeting: '創建會議',
+  edit_meeting: '編輯會議',
+  meeting_title_placeholder: '請輸入會議名稱',
+  meeting_address: '會議地址',
+  meeting_url: '會議連結',
+  save_meeting: '保存會議',
 
   // Partner types
   technology_partners: '技術合作夥伴',
