@@ -2,6 +2,7 @@ import { Activity } from '@open-source-bazaar/activityhub-service';
 import { observer } from 'mobx-react';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { formatDate } from 'web-utility';
 
 import { PageHead } from '../../../components/PageHead';
 import { ActivityModel } from '../../../models/Activity';
@@ -40,8 +41,9 @@ const ActivityDetailPage = observer(({ activity }: ActivityDetailPageProps) => (
           <Image
             src={activity.banner}
             alt={activity.title}
-            className="w-100 rounded"
-            style={{ maxHeight: '400px', objectFit: 'cover' }}
+            rounded
+            className="w-100 object-fit-cover"
+            style={{ maxHeight: '25rem' }}
           />
         </div>
       )}
@@ -55,8 +57,13 @@ const ActivityDetailPage = observer(({ activity }: ActivityDetailPageProps) => (
             <div className="d-flex flex-wrap gap-3 text-muted">
               <div>
                 <i className="bi bi-calendar me-2" />
-                {new Date(activity.startTime).toLocaleDateString()} -{' '}
-                {new Date(activity.endTime).toLocaleDateString()}
+                <time dateTime={activity.startTime}>
+                  {formatDate(activity.startTime, 'YYYY-MM-DD')}
+                </time>{' '}
+                -{' '}
+                <time dateTime={activity.endTime}>
+                  {formatDate(activity.endTime, 'YYYY-MM-DD')}
+                </time>
               </div>
               {activity.address && (
                 <div>
@@ -105,10 +112,18 @@ const ActivityDetailPage = observer(({ activity }: ActivityDetailPageProps) => (
             <Card.Body>
               <dl className="row">
                 <dt className="col-sm-5">Start Time:</dt>
-                <dd className="col-sm-7">{new Date(activity.startTime).toLocaleString()}</dd>
+                <dd className="col-sm-7">
+                  <time dateTime={activity.startTime}>
+                    {formatDate(activity.startTime, 'YYYY-MM-DD HH:mm')}
+                  </time>
+                </dd>
 
                 <dt className="col-sm-5">End Time:</dt>
-                <dd className="col-sm-7">{new Date(activity.endTime).toLocaleString()}</dd>
+                <dd className="col-sm-7">
+                  <time dateTime={activity.endTime}>
+                    {formatDate(activity.endTime, 'YYYY-MM-DD HH:mm')}
+                  </time>
+                </dd>
 
                 {activity.address && (
                   <>

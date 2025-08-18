@@ -1,18 +1,19 @@
 import { Activity } from '@open-source-bazaar/activityhub-service';
+import { Icon } from 'idea-react';
 import { observer } from 'mobx-react';
 import { Pager } from 'mobx-restful-table';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
+import { FC, useContext } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import { ActivityCard } from '../../components/ActivityCard';
 import { PageHead } from '../../components/PageHead';
 import { ActivityModel } from '../../models/Activity';
+import { I18nContext } from '../../models/Translation';
 
-interface ActivityListPageProps {
+interface ActivityListPageProps
+  extends Pick<ActivityModel, 'pageIndex' | 'pageSize' | 'pageCount'> {
   activities: Activity[];
-  pageIndex: number;
-  pageSize: number;
-  pageCount: number;
 }
 
 export const getServerSideProps = compose<{}, ActivityListPageProps>(
@@ -24,7 +25,7 @@ export const getServerSideProps = compose<{}, ActivityListPageProps>(
     const pageSize = parseInt(query.size as string) || 12;
 
     const activities = await activityStore.getList({}, pageIndex, pageSize);
-    const pageCount = Math.ceil(activities.length / pageSize);
+    const { pageCount } = activityStore;
 
     return {
       props: JSON.parse(JSON.stringify({ activities, pageIndex, pageSize, pageCount })),
@@ -32,18 +33,18 @@ export const getServerSideProps = compose<{}, ActivityListPageProps>(
   },
 );
 
-const ActivityListPage = observer(
-  ({ activities, pageIndex, pageSize, pageCount }: ActivityListPageProps) => (
-    <>
-      <PageHead title="All Activities" />
+const ActivityListPage: FC<ActivityListPageProps> = observer(
+  ({ activities, pageIndex, pageSize, pageCount }) => {
+    const { t } = useContext(I18nContext);
 
+    return (
       <Container className="py-5">
-        <div className="text-center mb-5">
-          <h1 className="display-4 mb-3">All Activities</h1>
-          <p className="lead text-muted">
-            Discover exciting events and activities happening in our community.
-          </p>
-        </div>
+        <PageHead title={t('all_activities')} />
+
+        <hgroup className="text-center mb-5">
+          <h1 className="display-4 mb-3">{t('all_activities')}</h1>
+          <p className="lead text-muted">{t('discover_activities_description')}</p>
+        </hgroup>
 
         {activities.length > 0 ? (
           <>
@@ -56,21 +57,19 @@ const ActivityListPage = observer(
             </Row>
 
             <div className="d-flex justify-content-center mt-5">
-              <Pager pageIndex={pageIndex} pageSize={pageSize} pageCount={pageCount} />
+              <Pager {...{ pageIndex, pageSize, pageCount }} />
             </div>
           </>
         ) : (
           <div className="text-center py-5">
-            <i className="bi bi-calendar-x display-1 text-muted mb-3" />
-            <h3 className="text-muted">No Activities Found</h3>
-            <p className="text-muted">
-              There are currently no activities available. Please check back later.
-            </p>
+            <Icon name="calendar-x" className="display-1 text-muted mb-3" />
+            <h3 className="text-muted">{t('no_activities_found')}</h3>
+            <p className="text-muted">{t('no_activities_description')}</p>
           </div>
         )}
       </Container>
-    </>
-  ),
+    );
+  },
 );
 
 export default ActivityListPage;

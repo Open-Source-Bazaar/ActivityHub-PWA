@@ -25,10 +25,8 @@ export default {
   cancel: '取消',
   edit: '編輯',
   delete: '刪除',
-  total_x_rows: ({ totalCount }: { totalCount: number }) =>
-    `共 ${totalCount} 行`,
-  sure_to_delete_x: ({ keys }: { keys: IDType[] }) =>
-    `您確定刪除 ${keys.join('、')} 嗎？`,
+  total_x_rows: ({ totalCount }: { totalCount: number }) => `共 ${totalCount} 行`,
+  sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `您確定刪除 ${keys.join('、')} 嗎？`,
   repository_name: '倉庫名',
   programming_language: '編程語言',
   topic: '話題',
@@ -50,6 +48,12 @@ export default {
   more_activities: '更多活動',
   view_profile: '查看資料',
   participants: '參與者',
+
+  // Activities
+  all_activities: '所有活動',
+  discover_activities_description: '發現社群中精彩的活動和事件',
+  no_activities_found: '沒有找到活動',
+  no_activities_description: '暫時沒有可用的活動，請稍後再查看',
 
   // Partner types
   technology_partners: '技術合作夥伴',
