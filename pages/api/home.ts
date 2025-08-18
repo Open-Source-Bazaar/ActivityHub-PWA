@@ -1,9 +1,4 @@
-// Import backend types directly - no need for custom display interfaces
-import type { Activity, User } from '@open-source-bazaar/activityhub-service';
-
-import activityStore from '../../models/Activity';
 import { i18n } from '../../models/Translation';
-import userStore from '../../models/User';
 
 export const mainNav = ({ t }: typeof i18n) => [
   {
@@ -28,54 +23,11 @@ export const mainNav = ({ t }: typeof i18n) => [
   },
 ];
 
-// Re-export backend types for use in components
-export type { Activity, User };
-
 export interface Partner {
   name: string;
   logo: string;
   url: string;
   type: 'sponsor' | 'community' | 'technology';
-}
-
-// API functions to fetch real data from backend
-export async function fetchBannerActivities(): Promise<Activity[]> {
-  try {
-    // Fetch activities with banners - limit to latest 5 for carousel
-    const { pageData } = await activityStore.loadPage(1, 5, {} as any);
-
-    return pageData.filter(activity => activity.banner); // Only activities with banners
-  } catch (error) {
-    console.error('Failed to fetch banner activities:', error);
-
-    return [];
-  }
-}
-
-export async function fetchLatestActivities(): Promise<Activity[]> {
-  try {
-    // Fetch latest activities - limit to 10 for homepage display
-    const { pageData } = await activityStore.loadPage(1, 10, {} as any);
-
-    return pageData;
-  } catch (error) {
-    console.error('Failed to fetch latest activities:', error);
-
-    return [];
-  }
-}
-
-export async function fetchActiveInstructors(): Promise<User[]> {
-  try {
-    // Fetch top users/instructors - limit to 5 for ranking
-    const { pageData } = await userStore.loadPage(1, 5, {} as any);
-
-    return pageData;
-  } catch (error) {
-    console.error('Failed to fetch active instructors:', error);
-
-    return [];
-  }
 }
 
 export const partners: Partner[] = [

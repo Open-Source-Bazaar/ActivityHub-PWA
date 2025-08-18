@@ -1,8 +1,8 @@
+import { Activity } from '@open-source-bazaar/activityhub-service';
 import { observer } from 'mobx-react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Activity } from '../pages/api/home';
 import styles from './ActivityCard.module.less';
 
 export const ActivityCard: FC<Activity> = observer(({ title, startTime, address, url, banner }) => (
