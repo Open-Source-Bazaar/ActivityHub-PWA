@@ -1,8 +1,10 @@
 import { Activity, User } from '@open-source-bazaar/activityhub-service';
+import { Loading } from 'idea-react';
+import { observer } from 'mobx-react';
 import { FormField } from 'mobx-restful-table';
 import { compose, JWTProps, jwtVerifier } from 'next-ssr-middleware';
-import { FC, useContext, useEffect,useState } from 'react';
-import { Alert, Button, Container, Form, Modal } from 'react-bootstrap';
+import { FC, useContext, useEffect, useState } from 'react';
+import { Button, Container, Form, Modal } from 'react-bootstrap';
 import { formToJSON } from 'web-utility';
 
 import { PageHead } from '../../../components/PageHead';
@@ -17,8 +19,8 @@ interface ActivityEditorProps extends JWTProps<User> {
 export const getServerSideProps = compose<{ id: string }, ActivityEditorProps>(
   jwtVerifier(),
   async ({ params }) => {
-    // Handle "new" route for creating activities
-    if (params!.id === 'new') return { props: {} };
+    // Handle "new" route for creating activities - id 为 0 即为新增
+    if (params!.id === 'new' || +params!.id === 0) return { props: {} };
     
     if (!+params!.id) return { props: {} };
 
@@ -29,18 +31,15 @@ export const getServerSideProps = compose<{ id: string }, ActivityEditorProps>(
 
       return { props: { activity } };
     } catch {
-      // If activity not found, redirect to new
-      return { props: {} };
+      return { notFound: true };
     }
   },
 );
 
-const ActivityEditor: FC<ActivityEditorProps> = ({ jwtPayload, activity }) => {
+const ActivityEditor: FC<ActivityEditorProps> = observer(({ jwtPayload, activity }) => {
   const { t } = useContext(I18nContext);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const activityStore = new ActivityModel();
   
   // Handle modal display after hydration to prevent SSR mismatch
   useEffect(() => {
@@ -52,49 +51,13 @@ const ActivityEditor: FC<ActivityEditorProps> = ({ jwtPayload, activity }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError('');
-    setLoading(true);
 
-    try {
-      const formData = formToJSON<{
-        title: string;
-        startTime: string;
-        endTime: string;
-        address?: string;
-        url?: string;
-      }>(event.currentTarget);
-      
-      // Validate required fields
-      if (!formData.title?.trim()) {
-        throw new Error('Meeting name is required');
-      }
-      if (!formData.startTime) {
-        throw new Error('Meeting start time is required');
-      }
-      if (!formData.endTime) {
-        throw new Error('Meeting end time is required');
-      }
-      
-      // Validate that end time is after start time
-      if (new Date(formData.endTime) <= new Date(formData.startTime)) {
-        throw new Error('Meeting end time must be after start time');
-      }
+    const formData = formToJSON(event.currentTarget);
 
-      const activityStore = new ActivityModel();
-      await activityStore.updateOne(formData, activity?.id);
-      
-      setSuccess(true);
-      
-      // Redirect to activity list after success
-      setTimeout(() => {
-        window.location.href = '/activity';
-      }, 1500);
-      
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setLoading(false);
-    }
+    const { id } = await activityStore.updateOne(formData, activity?.id);
+
+    alert(isEdit ? 'Meeting updated successfully!' : 'Meeting created successfully!');
+    window.location.href = `/activity/${id}`;
   };
 
   const handleAuthSuccess = () => {
@@ -107,9 +70,11 @@ const ActivityEditor: FC<ActivityEditorProps> = ({ jwtPayload, activity }) => {
     <Container className="py-4">
       <PageHead title={title} />
       
+      {activityStore.uploading > 0 && <Loading />}
+      
       {showAuthModal && (
-        <Modal show onHide={() => setShowAuthModal(false)}>
-          <Modal.Header closeButton>
+        <Modal show>
+          <Modal.Header>
             <Modal.Title>Please Sign In</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -118,104 +83,82 @@ const ActivityEditor: FC<ActivityEditorProps> = ({ jwtPayload, activity }) => {
         </Modal>
       )}
       
-      {jwtPayload && (
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="card shadow">
-              <div className="card-header">
-                <h2 className="card-title mb-0">{title}</h2>
-              </div>
-              <div className="card-body">
-                {error && (
-                  <Alert variant="danger" dismissible onClose={() => setError('')}>
-                    {error}
-                  </Alert>
-                )}
-                
-                {success && (
-                  <Alert variant="success">
-                    {isEdit ? 'Meeting updated successfully!' : 'Meeting created successfully!'}
-                  </Alert>
-                )}
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card shadow">
+            <div className="card-header">
+              <h2 className="card-title mb-0">{title}</h2>
+            </div>
+            <div className="card-body">
+              <Form onSubmit={handleSubmit}>
+                <FormField
+                  type="text"
+                  name="title"
+                  required
+                  label={t('meeting_name')}
+                  defaultValue={activity?.title || ''}
+                  className="mb-3"
+                />
 
-                <Form onSubmit={handleSubmit}>
-                  <FormField
-                    as="input"
-                    type="text"
-                    name="title"
-                    required
-                    label={t('meeting_name')}
-                    placeholder={t('meeting_title_placeholder')}
-                    defaultValue={activity?.title || ''}
-                    className="mb-3"
-                  />
+                <FormField
+                  type="datetime-local"
+                  name="startTime"
+                  required
+                  label={t('meeting_start_time')}
+                  defaultValue={activity?.startTime ? new Date(activity.startTime).toISOString().slice(0, 16) : ''}
+                  className="mb-3"
+                />
 
-                  <FormField
-                    as="input"
-                    type="datetime-local"
-                    name="startTime"
-                    required
-                    label={t('meeting_start_time')}
-                    defaultValue={activity?.startTime ? new Date(activity.startTime).toISOString().slice(0, 16) : ''}
-                    className="mb-3"
-                  />
+                <FormField
+                  type="datetime-local"
+                  name="endTime"
+                  required
+                  label={t('meeting_end_time')}
+                  defaultValue={activity?.endTime ? new Date(activity.endTime).toISOString().slice(0, 16) : ''}
+                  className="mb-3"
+                />
 
-                  <FormField
-                    as="input"
-                    type="datetime-local"
-                    name="endTime"
-                    required
-                    label={t('meeting_end_time')}
-                    defaultValue={activity?.endTime ? new Date(activity.endTime).toISOString().slice(0, 16) : ''}
-                    className="mb-3"
-                  />
+                <FormField
+                  type="text"
+                  name="address"
+                  label={t('meeting_address')}
+                  defaultValue={activity?.address || ''}
+                  className="mb-3"
+                />
 
-                  <FormField
-                    as="input"
-                    type="text"
-                    name="address"
-                    label={t('meeting_address')}
-                    placeholder="Optional meeting address"
-                    defaultValue={activity?.address || ''}
-                    className="mb-3"
-                  />
+                <FormField
+                  type="url"
+                  name="url"
+                  label={t('meeting_url')}
+                  defaultValue={activity?.url || ''}
+                  className="mb-3"
+                />
 
-                  <FormField
-                    as="input"
-                    type="url"
-                    name="url"
-                    label={t('meeting_url')}
-                    placeholder="Optional meeting URL"
-                    defaultValue={activity?.url || ''}
-                    className="mb-3"
-                  />
-
-                  <div className="d-flex gap-2">
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      disabled={loading || success}
-                    >
-                      {loading ? 'Saving...' : t('save_meeting')}
-                    </Button>
-                    
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      disabled={loading}
-                      onClick={() => window.location.href = '/activity'}
-                    >
-                      {t('cancel')}
-                    </Button>
-                  </div>
-                </Form>
-              </div>
+                <div className="d-flex gap-2">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    disabled={activityStore.uploading > 0}
+                  >
+                    {t('save_meeting')}
+                  </Button>
+                  
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={activityStore.uploading > 0}
+                    onClick={() => window.location.href = '/activity'}
+                  >
+                    {t('cancel')}
+                  </Button>
+                </div>
+              </Form>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </Container>
   );
-};
+});
 
 export default ActivityEditor;
