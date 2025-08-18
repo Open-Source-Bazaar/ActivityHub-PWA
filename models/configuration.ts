@@ -11,4 +11,4 @@ export const Own_API_Host = isServer()
     : 'http://localhost:3000'
   : globalThis.location.origin;
 
-export const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+export const API_HOST = process.env.NEXT_PUBLIC_API_HOST!;
