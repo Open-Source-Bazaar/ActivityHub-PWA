@@ -15,30 +15,16 @@ export const getServerSideProps = compose<{ id: string }, ActivityDetailPageProp
   errorLogger,
   async ({ params }) => {
     const activityStore = new ActivityModel();
+    const idOrTitle = params!.id;
 
     try {
-      // Try to get activity by ID first
-      const activity = await activityStore.getOne(Number(params!.id));
+      const activity = await activityStore.getOne(idOrTitle);
 
-      return {
-        props: JSON.parse(JSON.stringify({ activity })),
-      };
+      return { props: { activity } };
     } catch {
-      // If not found by ID, try to find by title or other criteria
-      try {
-        const activities = await activityStore.getList({}, 1, 50);
-        const activity = activities.find((a: Activity) => a.title === params!.id) || activities[0];
+      const [activity] = await activityStore.getList({ title: idOrTitle }, 1, 1);
 
-        if (!activity) {
-          return { notFound: true };
-        }
-
-        return {
-          props: JSON.parse(JSON.stringify({ activity })),
-        };
-      } catch {
-        return { notFound: true };
-      }
+      return activity ? { props: { activity } } : { notFound: true };
     }
   },
 );
