@@ -1,75 +1,125 @@
+import { Activity, Organization, User } from '@open-source-bazaar/activityhub-service';
+import { UserRankView } from 'idea-react';
 import { observer } from 'mobx-react';
+import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { useContext } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
 
-import { GitCard } from '../components/Git/Card';
+import { ActivityCard } from '../components/ActivityCard';
 import { PageHead } from '../components/PageHead';
+import { SponsorCard } from '../components/SponsorCard';
+import { ActivityModel } from '../models/Activity';
+import { OrganizationModel } from '../models/Cooperation';
 import { I18nContext } from '../models/Translation';
-import styles from '../styles/Home.module.less';
-import { framework, mainNav } from './api/home';
+import { UserModel } from '../models/User';
 
-const HomePage = observer(() => {
+interface HomePageProps {
+  activities: Activity[];
+  instructors: User[];
+  organizations: Organization[];
+}
+
+export const getServerSideProps = compose<{}, HomePageProps>(cache(), errorLogger, async () => {
+  const [activities, instructors, organizations] = await Promise.all([
+    new ActivityModel().getList({}, 1, 10),
+    new UserModel().getList({}, 1, 5),
+    new OrganizationModel().getList({}, 1, 20),
+  ]);
+
+  return {
+    props: JSON.parse(JSON.stringify({ activities, instructors, organizations })),
+  };
+});
+
+const HomePage = observer(({ activities, instructors, organizations }: HomePageProps) => {
   const i18n = useContext(I18nContext);
   const { t } = i18n;
 
+  // Filter activities with banners for carousel
+  const activitiesWithBanners = activities.filter(activity => activity.banner);
+
+  // Transform instructor data for UserRankView (using available User fields)
+  const rankData = instructors.map(({ id, name, avatar, email }) => ({
+    id,
+    name,
+    avatar,
+    email,
+    score: 0, // Backend doesn't have score field yet, using default
+  }));
+
   return (
-    <Container as="main" className={styles.main}>
+    <>
       <PageHead title={t('home_page')} />
 
-      <h1 className={`m-0 text-center ${styles.title}`}>
-        {t('welcome_to')}
-        <a className="text-primary mx-2" href="https://nextjs.org">
-          Next.js!
-        </a>
-      </h1>
-
-      <p className={`text-center fs-4 ${styles.description}`}>
-        {t('get_started_by_editing')}
-        <code className={`mx-2 rounded-3 bg-light ${styles.code}`}>
-          pages/index.tsx
-        </code>
-      </p>
-
-      <Row className="g-4" xs={1} sm={2} md={4}>
-        {mainNav(i18n).map(({ link, title, summary }) => (
-          <Col key={link}>
-            <Card
-              className={`h-100 p-4 rounded-3 border ${styles.card}`}
-              tabIndex={-1}
-            >
-              <Card.Body>
-                <Card.Title as="h2" className="fs-4 mb-3">
-                  <a href={link} className="stretched-link">
-                    {title} &rarr;
-                  </a>
-                </Card.Title>
-                <Card.Text className="fs-5">{summary}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-
-      <h2 className="my-4 text-center">{t('upstream_projects')}</h2>
-
-      <Row className="g-4" xs={1} sm={2} md={3}>
-        {framework.map(
-          ({ title, languages, tags, summary, link, repository }) => (
-            <Col key={title}>
-              <GitCard
-                className={`h-100 ${styles.card}`}
-                full_name={title}
-                html_url={repository}
-                homepage={link}
-                languages={languages}
-                topics={tags}
-                description={summary}
-              />
-            </Col>
-          ),
+      {/* Hero Banner Carousel */}
+      <Container fluid className="px-0">
+        {activitiesWithBanners.length > 0 && (
+          <Carousel className="mb-5">
+            {activitiesWithBanners.map(({ id, title, banner, url }) => (
+              <Carousel.Item key={id}>
+                <a className="d-block stretched-link" href={url || `/activity/${id}`}>
+                  <Image
+                    className="w-100 object-fit-cover"
+                    style={{ height: '60vh', minHeight: '25rem' }}
+                    src={banner}
+                    alt={title}
+                  />
+                </a>
+                <Carousel.Caption className="text-shadow">
+                  <h3>{title}</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
         )}
-      </Row>
-    </Container>
+      </Container>
+
+      {/* Latest Activities Section */}
+      <section className="py-5 bg-light">
+        <Container>
+          <h2 className="text-center mb-5">{t('latest_activities')}</h2>
+          <Row className="g-4" xs={1} md={2} lg={3}>
+            {activities.slice(0, 6).map(activity => (
+              <Col key={activity.id}>
+                <ActivityCard {...activity} />
+              </Col>
+            ))}
+          </Row>
+          <div className="text-center mt-4">
+            <Button variant="outline-primary" size="lg" href="/activity">
+              {t('more_activities')}
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      {/* Active Instructors Section */}
+      <section className="py-5">
+        <Container>
+          <h2 className="text-center mb-5">{t('active_instructors')}</h2>
+          <UserRankView
+            title={t('active_instructors')}
+            rank={rankData}
+            linkOf={user => `/instructor/${user.id}`}
+          />
+        </Container>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-5 bg-light">
+        <Container>
+          <h2 className="text-center mb-5">{t('partners')}</h2>
+          <Row className="g-4">
+            {organizations.map(({ name, url, logo }) => (
+              <Col key={name} xs={6} md={4} lg={3}>
+                <SponsorCard name={name} url={url || '#'} logo={logo || ''} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+    </>
   );
 });
+
 export default HomePage;

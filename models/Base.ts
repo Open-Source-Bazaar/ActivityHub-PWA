@@ -1,12 +1,15 @@
 import 'core-js/full/array/from-async';
 
+import { Base, ListChunk } from '@open-source-bazaar/activityhub-service';
 import { HTTPClient } from 'koajax';
 import { githubClient, RepositoryModel } from 'mobx-github';
+import { Filter,IDType, ListModel, toggle } from 'mobx-restful';
+import { buildURLData } from 'web-utility';
 
-import { API_Host, GITHUB_TOKEN } from './configuration';
+import { GITHUB_TOKEN,Own_API_Host } from './configuration';
 
 export const ownClient = new HTTPClient({
-  baseURI: `${API_Host}/api/`,
+  baseURI: `${Own_API_Host}/api/`,
   responseType: 'json',
 });
 
@@ -36,4 +39,26 @@ export async function upload(file: Blob) {
   );
 
   return body!.location;
+}
+
+export abstract class TableModel<D extends Base, F extends Filter<D> = Filter<D>> extends ListModel<
+  D,
+  F
+> {
+  @toggle('uploading')
+  async updateOne(data: Filter<D>, id?: IDType) {
+    const { body } = await (id
+      ? this.client.put<D>(`${this.baseURI}/${id}`, data)
+      : this.client.post<D>(this.baseURI, data));
+
+    return (this.currentOne = body!);
+  }
+
+  async loadPage(pageIndex: number, pageSize: number, filter: F) {
+    const { body } = await this.client.get<ListChunk<D>>(
+      `${this.baseURI}?${buildURLData({ ...filter, pageIndex, pageSize })}`,
+    );
+
+    return { pageData: body!.list, totalCount: body!.count };
+  }
 }

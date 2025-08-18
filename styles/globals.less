@@ -1,7 +1,7 @@
 html,
 body {
-  padding: 0;
   margin: 0;
+  padding: 0;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -14,6 +14,10 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 a {
@@ -31,6 +35,26 @@ article {
     max-width: 100%;
   }
 }
+
+/* Custom carousel styles */
+.carousel-caption {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  padding: 3rem 1rem 2rem;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Hover effects */
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1) !important;
+}
+
 // custom 404 page (Global edition)
 div:has(.next-error-h1) {
   height: auto !important;
