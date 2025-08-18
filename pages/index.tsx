@@ -1,4 +1,4 @@
-import { Activity, User } from '@open-source-bazaar/activityhub-service';
+import { Activity, Organization,User } from '@open-source-bazaar/activityhub-service';
 import { UserRankView } from 'idea-react';
 import { observer } from 'mobx-react';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
@@ -9,17 +9,30 @@ import { groupBy } from 'web-utility';
 import { ActivityCard } from '../components/ActivityCard';
 import { PageHead } from '../components/PageHead';
 import { SponsorCard } from '../components/SponsorCard';
-import activityStore from '../models/Activity';
+import { ActivityModel } from '../models/Activity';
+import { CooperationModel } from '../models/Cooperation';
 import { I18nContext } from '../models/Translation';
-import userStore from '../models/User';
-import { partners } from './api/home';
+import { UserModel } from '../models/User';
 
 interface HomePageProps {
   activities: Activity[];
-  activeInstructors: User[];
+  instructors: User[];
+  organizations: Organization[];
 }
 
-const HomePage = observer(({ activities, activeInstructors }: HomePageProps) => {
+export const getServerSideProps = compose<{}, HomePageProps>(cache(), errorLogger, async () => {
+  const [activities, instructors, organizations] = await Promise.all([
+    new ActivityModel().getList({}, 1, 10),
+    new UserModel().getList({}, 1, 5),
+    new CooperationModel().getList({}, 1, 20),
+  ]);
+
+  return {
+    props: JSON.parse(JSON.stringify({ activities, instructors, organizations })),
+  };
+});
+
+const HomePage = observer(({ activities, instructors, organizations }: HomePageProps) => {
   const i18n = useContext(I18nContext);
   const { t } = i18n;
 
@@ -27,16 +40,13 @@ const HomePage = observer(({ activities, activeInstructors }: HomePageProps) => 
   const activitiesWithBanners = activities.filter(activity => activity.banner);
 
   // Transform instructor data for UserRankView (using available User fields)
-  const rankData = activeInstructors.map(({ id, name, avatar, email }) => ({
+  const rankData = instructors.map(({ id, name, avatar, email }) => ({
     id,
     name,
     avatar,
     email,
     score: 0, // Backend doesn't have score field yet, using default
   }));
-
-  // Group partners by type using web-utility
-  const partnersByType = groupBy(partners, 'type');
 
   return (
     <>
@@ -99,48 +109,18 @@ const HomePage = observer(({ activities, activeInstructors }: HomePageProps) => 
       {/* Partners Section */}
       <section className="py-5 bg-light">
         <Container>
-          <h2 className="text-center mb-4">{t('partners')}</h2>
-          {Object.entries(partnersByType).map(([type, typePartners]) => (
-            <div key={type}>
-              <h3 className="my-4 text-center">
-                {t(`${type}_partners` as keyof typeof i18n.currentMap)}
-              </h3>
-              <Row
-                as="ul"
-                className="list-unstyled justify-content-center align-items-center g-4 mb-5"
-                xs={2}
-                sm={3}
-                md={4}
-                lg={6}
-              >
-                {typePartners.map(partner => (
-                  <Col key={partner.name} as="li" className="text-center">
-                    <SponsorCard name={partner.name} url={partner.url} logo={partner.logo} />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          ))}
+          <h2 className="text-center mb-5">{t('partners')}</h2>
+          <Row className="g-4">
+            {organizations.map(({ name, url, logo }) => (
+              <Col key={name} xs={6} md={4} lg={3}>
+                <SponsorCard name={name} url={url || '#'} logo={logo || ''} />
+              </Col>
+            ))}
+          </Row>
         </Container>
       </section>
     </>
   );
-});
-
-export const getServerSideProps = compose<{}, HomePageProps>(cache(), errorLogger, async () => {
-  const [activitiesResult, instructorsResult] = await Promise.all([
-    activityStore.loadPage(1, 10, {} as any),
-    userStore.loadPage(1, 5, {} as any),
-  ]);
-
-  return {
-    props: JSON.parse(
-      JSON.stringify({
-        activities: activitiesResult.pageData,
-        activeInstructors: instructorsResult.pageData,
-      }),
-    ),
-  };
 });
 
 export default HomePage;

@@ -23,54 +23,8 @@ export const mainNav = ({ t }: typeof i18n) => [
   },
 ];
 
-export interface Partner {
-  name: string;
-  logo: string;
-  url: string;
-  type: 'sponsor' | 'community' | 'technology';
-}
-
-export const partners: Partner[] = [
-  // Technology Partners
-  {
-    name: 'Vercel',
-    logo: 'https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_dark_background.png',
-    url: 'https://vercel.com',
-    type: 'technology',
-  },
-  {
-    name: 'GitHub',
-    logo: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
-    url: 'https://github.com',
-    type: 'technology',
-  },
-  {
-    name: 'TypeScript',
-    logo: 'https://raw.githubusercontent.com/microsoft/TypeScript/main/doc/logo.svg',
-    url: 'https://www.typescriptlang.org',
-    type: 'technology',
-  },
-  // Community Partners
-  {
-    name: 'FreeCodeCamp Chengdu',
-    logo: 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg',
-    url: 'https://freecodecamp-chengdu.github.io',
-    type: 'community',
-  },
-  {
-    name: 'React Community',
-    logo: 'https://react.dev/favicon-32x32.png',
-    url: 'https://react.dev',
-    type: 'community',
-  },
-  // Sponsors
-  {
-    name: 'Tech Innovation Hub',
-    logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=150&h=150&fit=crop',
-    url: '#',
-    type: 'sponsor',
-  },
-];
+// This file can be removed as we're using direct backend integration
+// Partners/Cooperation data is now fetched in getServerSideProps using Organization model
 
 export const framework = [
   {
