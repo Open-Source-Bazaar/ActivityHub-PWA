@@ -31,7 +31,6 @@
 ## Best practice
 
 1.  Install GitHub apps in your organization or account:
-
     1.  [Probot settings][16]: set up Issue labels & Pull Request rules
     2.  [PR badge][17]: set up Online [VS Code][18] editor entries in Pull Request description
 
@@ -49,10 +48,17 @@
 
 ## Getting Started
 
-First, run the development server:
+First, set your GitHub Personal Access Token (PAT) with `read:packages` permission in your Local Environment Variable file:
+
+```bash
+echo NPM_TOKEN=ghp_xxx > .env.personal.local
+```
+
+then run the development server:
 
 ```bash
 npm i pnpm -g
+pnpm pi  # `pnpm install` alternative with GitHub registry authorization
 pnpm dev
 ```
 
