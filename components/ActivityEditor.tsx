@@ -3,7 +3,7 @@ import { Loading } from 'idea-react';
 import { observer } from 'mobx-react';
 import { FormField } from 'mobx-restful-table';
 import { Component } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { formToJSON } from 'web-utility';
 
 import activityStore from '../models/Activity';
@@ -42,15 +42,15 @@ export class ActivityEditor extends Component<ActivityEditorProps> {
       <Container className="py-4">
         {uploading > 0 && <Loading />}
         
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="card shadow">
-              <div className="card-header">
-                <h2 className="card-title mb-0">
+        <Row className="justify-content-center">
+          <Col lg={8}>
+            <Card className="shadow">
+              <Card.Header>
+                <Card.Title as="h2" className="mb-0">
                   {isEdit ? t('edit_activity') : t('create_activity')}
-                </h2>
-              </div>
-              <div className="card-body">
+                </Card.Title>
+              </Card.Header>
+              <Card.Body>
                 <Form onSubmit={this.handleSubmit}>
                   <FormField
                     type="text"
@@ -113,10 +113,10 @@ export class ActivityEditor extends Component<ActivityEditorProps> {
                     </Button>
                   </div>
                 </Form>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     );
   }
