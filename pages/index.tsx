@@ -9,7 +9,7 @@ import { ActivityCard } from '../components/ActivityCard';
 import { PageHead } from '../components/PageHead';
 import { SponsorCard } from '../components/SponsorCard';
 import { ActivityModel } from '../models/Activity';
-import { CooperationModel } from '../models/Cooperation';
+import { OrganizationModel } from '../models/Cooperation';
 import { I18nContext } from '../models/Translation';
 import { UserModel } from '../models/User';
 
@@ -23,7 +23,7 @@ export const getServerSideProps = compose<{}, HomePageProps>(cache(), errorLogge
   const [activities, instructors, organizations] = await Promise.all([
     new ActivityModel().getList({}, 1, 10),
     new UserModel().getList({}, 1, 5),
-    new CooperationModel().getList({}, 1, 20),
+    new OrganizationModel().getList({}, 1, 20),
   ]);
 
   return {
