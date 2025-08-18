@@ -52,7 +52,7 @@ const ActivityListPage: FC<ActivityListPageProps> = observer(
               className="d-inline-flex align-items-center gap-2"
             >
               <Icon name="plus-circle" />
-              {t('create_meeting')}
+              {t('create_activity')}
             </Button>
           </div>
         </hgroup>

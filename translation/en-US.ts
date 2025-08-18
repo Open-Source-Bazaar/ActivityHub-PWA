@@ -57,16 +57,18 @@ export default {
   no_activities_description:
     'There are currently no activities available. Please check back later.',
     
-  // Meeting/Activity Editor
-  meeting_name: 'Meeting Name',
-  meeting_start_time: 'Meeting Start Time',
-  meeting_end_time: 'Meeting End Time',
-  create_meeting: 'Create Meeting',
-  edit_meeting: 'Edit Meeting',
-  meeting_title_placeholder: 'Enter meeting name',
-  meeting_address: 'Meeting Address',
-  meeting_url: 'Meeting URL',
-  save_meeting: 'Save Meeting',
+  // Activity Editor
+  activity_name: 'Activity Name',
+  activity_start_time: 'Activity Start Time',
+  activity_end_time: 'Activity End Time',
+  create_activity: 'Create Activity',
+  edit_activity: 'Edit Activity',
+  activity_title_placeholder: 'Enter activity name',
+  activity_address: 'Activity Address',
+  activity_url: 'Activity URL',
+  save_activity: 'Save Activity',
+  activity_created_successfully: 'Activity created successfully!',
+  activity_updated_successfully: 'Activity updated successfully!',
 
   // Partner types
   technology_partners: 'Technology Partners',

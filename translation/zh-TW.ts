@@ -55,16 +55,18 @@ export default {
   no_activities_found: '沒有找到活動',
   no_activities_description: '暫時沒有可用的活動，請稍後再查看',
   
-  // Meeting/Activity Editor
-  meeting_name: '會議名稱',
-  meeting_start_time: '會議開始時間',
-  meeting_end_time: '會議結束時間',
-  create_meeting: '創建會議',
-  edit_meeting: '編輯會議',
-  meeting_title_placeholder: '請輸入會議名稱',
-  meeting_address: '會議地址',
-  meeting_url: '會議連結',
-  save_meeting: '保存會議',
+  // Activity Editor
+  activity_name: '活動名稱',
+  activity_start_time: '活動開始時間',
+  activity_end_time: '活動結束時間',
+  create_activity: '創建活動',
+  edit_activity: '編輯活動',
+  activity_title_placeholder: '請輸入活動名稱',
+  activity_address: '活動地址',
+  activity_url: '活動連結',
+  save_activity: '保存活動',
+  activity_created_successfully: '活動創建成功！',
+  activity_updated_successfully: '活動更新成功！',
 
   // Partner types
   technology_partners: '技術合作夥伴',

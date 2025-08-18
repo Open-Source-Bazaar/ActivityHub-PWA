@@ -55,16 +55,18 @@ export default {
   no_activities_found: '没有找到活动',
   no_activities_description: '暂时没有可用的活动，请稍后再查看',
   
-  // Meeting/Activity Editor
-  meeting_name: '会议名称',
-  meeting_start_time: '会议开始时间',
-  meeting_end_time: '会议结束时间',
-  create_meeting: '创建会议',
-  edit_meeting: '编辑会议',
-  meeting_title_placeholder: '请输入会议名称',
-  meeting_address: '会议地址',
-  meeting_url: '会议链接',
-  save_meeting: '保存会议',
+  // Activity Editor
+  activity_name: '活动名称',
+  activity_start_time: '活动开始时间',
+  activity_end_time: '活动结束时间',
+  create_activity: '创建活动',
+  edit_activity: '编辑活动',
+  activity_title_placeholder: '请输入活动名称',
+  activity_address: '活动地址',
+  activity_url: '活动链接',
+  save_activity: '保存活动',
+  activity_created_successfully: '活动创建成功！',
+  activity_updated_successfully: '活动更新成功！',
 
   // Partner types
   technology_partners: '技术合作伙伴',
