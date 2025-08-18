@@ -67,6 +67,9 @@ export default {
   save_activity: '保存活動',
   activity_created_successfully: '活動創建成功！',
   activity_updated_successfully: '活動更新成功！',
+  activity_name_required: '請輸入活動名稱',
+  activity_start_time_required: '請選擇活動開始時間',
+  activity_end_time_required: '請選擇活動結束時間',
 
   // Partner types
   technology_partners: '技術合作夥伴',

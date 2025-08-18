@@ -69,6 +69,9 @@ export default {
   save_activity: 'Save Activity',
   activity_created_successfully: 'Activity created successfully!',
   activity_updated_successfully: 'Activity updated successfully!',
+  activity_name_required: 'Please enter activity name',
+  activity_start_time_required: 'Please select activity start time',
+  activity_end_time_required: 'Please select activity end time',
 
   // Partner types
   technology_partners: 'Technology Partners',
