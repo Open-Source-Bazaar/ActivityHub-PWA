@@ -40,14 +40,7 @@ const ActivityEditorPage: FC<ActivityEditorPageProps> = observer(({ jwtPayload, 
     setShowAuthModal(!jwtPayload);
   }, [jwtPayload]);
 
-  const isEdit = !!activity;
-  const title = isEdit ? t('edit_activity') : t('create_activity');
-
-  const handleAuthSuccess = () => {
-    setShowAuthModal(false);
-    // Reload the page to get user data
-    window.location.reload();
-  };
+  const title = activity ? t('edit_activity') : t('create_activity');
 
   return (
     <Container className="py-4">
@@ -60,7 +53,7 @@ const ActivityEditorPage: FC<ActivityEditorPageProps> = observer(({ jwtPayload, 
       {showAuthModal && (
         <Modal show>
           <Modal.Body>
-            <SessionForm onSignIn={handleAuthSuccess} />
+            <SessionForm onSignIn={() => window.location.reload()} />
           </Modal.Body>
         </Modal>
       )}

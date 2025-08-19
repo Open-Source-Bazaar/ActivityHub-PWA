@@ -1,23 +1,32 @@
-import { FileModel } from 'mobx-restful-table';
+import { SignedLink } from '@open-source-bazaar/activityhub-service';
 import { toggle } from 'mobx-restful';
-import { blobOf } from 'web-utility';
+import { FileModel } from 'mobx-restful-table';
+import { blobOf, uniqueID } from 'web-utility';
 
-import { upload } from './Base';
+import userStore from './User';
 
 export class S3FileModel extends FileModel {
+  client = userStore.client;
+
   @toggle('uploading')
   async upload(file: string | Blob) {
     if (typeof file === 'string') {
-      file = await blobOf(file);
+      const name = file.split('/').pop()!;
+
+      file = new File([await blobOf(file)], name);
     }
-    
-    const fileURL = await upload(file);
-    return super.upload(fileURL);
+    const { body } = await this.client.post<SignedLink>(
+      `file/signed-link/${file instanceof File ? file.name : uniqueID()}`,
+    );
+    await this.client.put(body!.putLink, file, { 'Content-Type': file.type });
+
+    return super.upload(body!.getLink);
   }
 
   @toggle('uploading')
   async delete(link: string) {
-    // For now, we don't have a delete API, so just remove from the files array
+    await this.client.delete(`file/${link.replace(`${this.client.baseURI}/file/`, '')}`);
+
     await super.delete(link);
   }
 }

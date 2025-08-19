@@ -3,7 +3,7 @@ import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { Field, FileUploader,RestForm } from 'mobx-restful-table';
+import { Field, RestForm } from 'mobx-restful-table';
 
 import activityStore from '../models/Activity';
 import fileStore from '../models/File';
@@ -47,16 +47,9 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
       {
         key: 'banner',
         renderLabel: t('banner'),
-        renderInput: ({ banner }) => (
-          <RestForm.FieldBox name="banner">
-            <FileUploader
-              store={fileStore}
-              name="banner"
-              accept="image/*"
-              defaultValue={banner ? [banner] : []}
-            />
-          </RestForm.FieldBox>
-        ),
+        type: 'file',
+        accept: 'image/*',
+        uploader: fileStore,
       },
       {
         key: 'startTime',
