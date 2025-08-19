@@ -2,7 +2,7 @@ import { User, WebAuthnChallenge } from '@open-source-bazaar/activityhub-service
 import { client } from '@passwordless-id/webauthn';
 import { clear } from 'idb-keyval';
 import { HTTPClient } from 'koajax';
-import { observable } from 'mobx';
+import { observable, reaction } from 'mobx';
 import { persist, restore, toggle } from 'mobx-restful';
 import { setCookie } from 'web-utility';
 
@@ -16,9 +16,11 @@ export class UserModel extends TableModel<User> {
   @observable
   accessor session: User | undefined;
 
-  restored =
-    !isServer() &&
-    restore(this, 'User').then(() => setCookie('token', this.session?.token || '', { path: '/' }));
+  disposer = reaction(
+    () => this.session?.token,
+    token => setCookie('token', token || '', { path: '/' }),
+  );
+  restored = !isServer() && restore(this, 'User');
 
   client = new HTTPClient({ baseURI: API_HOST, responseType: 'json' }).use(({ request }, next) => {
     const isSameDomain = API_HOST.startsWith(new URL(request.path, API_HOST).origin);

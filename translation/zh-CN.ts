@@ -54,6 +54,23 @@ export default {
   discover_activities_description: '发现社区中精彩的活动和事件',
   no_activities_found: '没有找到活动',
   no_activities_description: '暂时没有可用的活动，请稍后再查看',
+  
+  // Activity Editor
+  activity_name: '活动名称',
+  banner: '横幅图片',
+  activity_start_time: '活动开始时间',
+  activity_end_time: '活动结束时间',
+  create_activity: '创建活动',
+  edit_activity: '编辑活动',
+  activity_title_placeholder: '请输入活动名称',
+  activity_address: '活动地址',
+  activity_url: '活动链接',
+  save_activity: '保存活动',
+  activity_created_successfully: '活动创建成功！',
+  activity_updated_successfully: '活动更新成功！',
+  activity_name_required: '请输入活动名称',
+  activity_start_time_required: '请选择活动开始时间',
+  activity_end_time_required: '请选择活动结束时间',
 
   // Partner types
   technology_partners: '技术合作伙伴',

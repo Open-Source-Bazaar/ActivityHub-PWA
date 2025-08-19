@@ -1,41 +1,63 @@
 import { Activity, User } from '@open-source-bazaar/activityhub-service';
+import { observer } from 'mobx-react';
 import { compose, JWTProps, jwtVerifier } from 'next-ssr-middleware';
-import { FC } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Container, Modal } from 'react-bootstrap';
 
+import { ActivityEditor } from '../../../components/ActivityEditor';
 import { PageHead } from '../../../components/PageHead';
 import { SessionForm } from '../../../components/User/SessionForm';
 import { ActivityModel } from '../../../models/Activity';
+import { I18nContext } from '../../../models/Translation';
 
-interface ActivityEditorProps extends JWTProps<User> {
+interface ActivityEditorPageProps extends JWTProps<User> {
   activity?: Activity;
 }
 
-export const getServerSideProps = compose<{ id: string }, ActivityEditorProps>(
+export const getServerSideProps = compose<{ id: string }, ActivityEditorPageProps>(
   jwtVerifier(),
   async ({ params }) => {
     if (!+params!.id) return { props: {} };
 
     const activityStore = new ActivityModel();
 
-    const activity = await activityStore.getOne(+params!.id);
+    try {
+      const activity = await activityStore.getOne(+params!.id);
 
-    return { props: { activity } };
+      return { props: { activity } };
+    } catch {
+      return { notFound: true };
+    }
   },
 );
 
-const ActivityEditor: FC<ActivityEditorProps> = ({ jwtPayload }) => (
-  <Container>
-    <PageHead />
+const ActivityEditorPage: FC<ActivityEditorPageProps> = observer(({ jwtPayload, activity }) => {
+  const { t } = useContext(I18nContext);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
-    {!jwtPayload && (
-      <Modal show>
-        <Modal.Body>
-          <SessionForm />
-        </Modal.Body>
-      </Modal>
-    )}
-  </Container>
-);
+  // Handle modal display after hydration to prevent SSR mismatch
+  useEffect(() => {
+    setShowAuthModal(!jwtPayload);
+  }, [jwtPayload]);
 
-export default ActivityEditor;
+  const title = activity ? t('edit_activity') : t('create_activity');
+
+  return (
+    <Container className="py-4">
+      <PageHead title={title} />
+
+      <h1>{title}</h1>
+
+      <ActivityEditor activity={activity} />
+
+      {showAuthModal && (
+        <Modal show>
+          <Modal.Body>
+            <SessionForm onSignIn={() => window.location.reload()} />
+          </Modal.Body>
+        </Modal>
+      )}
+    </Container>
+  );
+});
+export default ActivityEditorPage;
