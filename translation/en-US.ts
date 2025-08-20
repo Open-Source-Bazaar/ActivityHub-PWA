@@ -86,6 +86,7 @@ export default {
 
   // Forum Manager
   manage_forum: 'Manage Forum',
+  forum_list: 'Forum List',
   create_forum: 'Create Forum',
   edit_forum: 'Edit Forum',
   forum_created_successfully: 'Forum created successfully!',

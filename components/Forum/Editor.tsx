@@ -11,7 +11,6 @@ import { i18n, I18nContext } from '../../models/Translation';
 import { renderTagInput } from '../Tag';
 
 export interface ForumEditorProps {
-  id?: number;
   forum?: Forum;
   activityId: number;
 }

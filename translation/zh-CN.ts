@@ -84,6 +84,7 @@ export default {
 
   // Forum Manager
   manage_forum: '管理论坛',
+  forum_list: '分论坛列表',
   create_forum: '创建分论坛',
   edit_forum: '编辑分论坛',
   forum_created_successfully: '分论坛创建成功！',
