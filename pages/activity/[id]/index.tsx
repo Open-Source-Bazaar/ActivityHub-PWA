@@ -76,17 +76,10 @@ const ActivityDetailPage = observer(({ activity }: ActivityDetailPageProps) => (
 
           {/* Action Buttons */}
           <div className="mb-4">
-            {activity.url && (
-              <Button
-                variant="primary"
-                size="lg"
-                href={activity.url}
-                target="_blank"
-                className="me-3"
-              >
-                Register Now
-              </Button>
-            )}
+            <Button variant="primary" size="lg" target="_blank" className="me-3">
+              Register Now
+            </Button>
+
             <Button variant="outline-secondary" href="/">
               Back to Home
             </Button>

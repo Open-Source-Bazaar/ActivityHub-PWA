@@ -54,7 +54,7 @@ export default {
   discover_activities_description: '发现社区中精彩的活动和事件',
   no_activities_found: '没有找到活动',
   no_activities_description: '暂时没有可用的活动，请稍后再查看',
-  
+
   // Activity Editor
   activity_name: '活动名称',
   banner: '横幅图片',
@@ -71,6 +71,9 @@ export default {
   activity_name_required: '请输入活动名称',
   activity_start_time_required: '请选择活动开始时间',
   activity_end_time_required: '请选择活动结束时间',
+
+  // Forum Manager
+  manage_forum: '管理论坛',
 
   // Partner types
   technology_partners: '技术合作伙伴',

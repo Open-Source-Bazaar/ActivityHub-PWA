@@ -70,9 +70,8 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
         renderLabel: t('activity_address'),
       },
       {
-        key: 'url',
+        key: 'slug',
         renderLabel: t('activity_url'),
-        type: 'url',
       },
     ];
   }

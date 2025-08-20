@@ -1,12 +1,12 @@
 import { Activity, User } from '@open-source-bazaar/activityhub-service';
 import { observer } from 'mobx-react';
+import { useRouter } from 'next/router';
 import { compose, JWTProps, jwtVerifier } from 'next-ssr-middleware';
-import { FC, useContext, useEffect, useState } from 'react';
-import { Container, Modal } from 'react-bootstrap';
+import { FC, useContext } from 'react';
 
+import { organizerMenu } from '../../../components/Activity/menu';
 import { ActivityEditor } from '../../../components/ActivityEditor';
-import { PageHead } from '../../../components/PageHead';
-import { SessionForm } from '../../../components/User/SessionForm';
+import { SessionBox } from '../../../components/User/SessionBox';
 import { ActivityModel } from '../../../models/Activity';
 import { I18nContext } from '../../../models/Translation';
 
@@ -32,32 +32,20 @@ export const getServerSideProps = compose<{ id: string }, ActivityEditorPageProp
 );
 
 const ActivityEditorPage: FC<ActivityEditorPageProps> = observer(({ jwtPayload, activity }) => {
-  const { t } = useContext(I18nContext);
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { asPath } = useRouter(),
+    i18n = useContext(I18nContext);
 
-  // Handle modal display after hydration to prevent SSR mismatch
-  useEffect(() => {
-    setShowAuthModal(!jwtPayload);
-  }, [jwtPayload]);
-
-  const title = activity ? t('edit_activity') : t('create_activity');
+  const title = i18n.t(activity ? 'edit_activity' : 'create_activity');
 
   return (
-    <Container className="py-4">
-      <PageHead title={title} />
-
-      <h1>{title}</h1>
-
+    <SessionBox
+      title={title}
+      path={asPath}
+      menu={organizerMenu(i18n, activity?.id || 0)}
+      jwtPayload={jwtPayload}
+    >
       <ActivityEditor activity={activity} />
-
-      {showAuthModal && (
-        <Modal show>
-          <Modal.Body>
-            <SessionForm onSignIn={() => window.location.reload()} />
-          </Modal.Body>
-        </Modal>
-      )}
-    </Container>
+    </SessionBox>
   );
 });
 export default ActivityEditorPage;

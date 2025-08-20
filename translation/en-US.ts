@@ -56,7 +56,7 @@ export default {
   no_activities_found: 'No Activities Found',
   no_activities_description:
     'There are currently no activities available. Please check back later.',
-    
+
   // Activity Editor
   activity_name: 'Activity Name',
   banner: 'Banner Image',
@@ -73,6 +73,9 @@ export default {
   activity_name_required: 'Please enter activity name',
   activity_start_time_required: 'Please select activity start time',
   activity_end_time_required: 'Please select activity end time',
+
+  // Forum Manager
+  manage_forum: 'Manage Forum',
 
   // Partner types
   technology_partners: 'Technology Partners',

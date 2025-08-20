@@ -54,7 +54,7 @@ export default {
   discover_activities_description: '發現社群中精彩的活動和事件',
   no_activities_found: '沒有找到活動',
   no_activities_description: '暫時沒有可用的活動，請稍後再查看',
-  
+
   // Activity Editor
   activity_name: '活動名稱',
   banner: '橫幅圖片',
@@ -71,6 +71,9 @@ export default {
   activity_name_required: '請輸入活動名稱',
   activity_start_time_required: '請選擇活動開始時間',
   activity_end_time_required: '請選擇活動結束時間',
+
+  // Forum Manager
+  manage_forum: '管理論壇',
 
   // Partner types
   technology_partners: '技術合作夥伴',
