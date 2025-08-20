@@ -25,6 +25,7 @@ export default {
   cancel: '取消',
   edit: '编辑',
   delete: '删除',
+  actions: '操作',
   total_x_rows: ({ totalCount }: { totalCount: number }) => `共 ${totalCount} 行`,
   sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `您确定删除 ${keys.join('、')} 吗？`,
   repository_name: '仓库名',

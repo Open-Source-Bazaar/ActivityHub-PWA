@@ -1,4 +1,4 @@
-import { Place } from '@open-source-bazaar/activityhub-service';
+import { Place, PlaceType } from '@open-source-bazaar/activityhub-service';
 import { FC, useContext } from 'react';
 import { Badge, Button, Card } from 'react-bootstrap';
 
@@ -23,12 +23,12 @@ export const PlaceCard: FC<PlaceCardProps> = ({
 }) => {
   const { t } = useContext(I18nContext);
   
-  const placeTypeLabels = [
-    t('meeting_room'),
-    t('lecture_hall'), 
-    t('reception_hall'),
-    t('lounge')
-  ];
+  const placeTypeLabels = {
+    [PlaceType.Room]: t('meeting_room'),
+    [PlaceType.Hall]: t('lecture_hall'),
+    [PlaceType.Cafe]: t('reception_hall'),
+    [PlaceType.Restaurant]: t('lounge')
+  };
 
   const weekDayLabels = [
     t('sunday'),

@@ -56,6 +56,14 @@ export class ForumList extends ObservedComponent<ForumListProps, typeof i18n> {
         renderHead: t('place'),
         renderBody: ({ place }) => place?.name,
       },
+      {
+        renderHead: t('actions'),
+        renderBody: ({ id }) => (
+          <a href={`/activity/${this.props.activityId}/forum/${id}/editor`}>
+            {t('edit')}
+          </a>
+        ),
+      },
     ];
   }
 

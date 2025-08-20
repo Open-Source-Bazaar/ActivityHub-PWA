@@ -25,6 +25,7 @@ export default {
   cancel: 'Cancel',
   edit: 'Edit',
   delete: 'Delete',
+  actions: 'Actions',
   total_x_rows: ({ totalCount }: { totalCount: number }) => `Total ${totalCount} rows`,
   sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `Are you sure to delete ${keys.join(', ')}?`,
   repository_name: 'Repository Name',
