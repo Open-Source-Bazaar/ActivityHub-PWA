@@ -7,15 +7,10 @@ import App, { AppContext } from 'next/app';
 import Head from 'next/head';
 import { Image } from 'react-bootstrap';
 
-import { MainNavigator } from '../components/MainNavigator';
 import { MDXLayout } from '../components/MDXLayout';
+import { MainNavigator } from '../components/Navigator/MainNavigator';
 import { isServer } from '../models/configuration';
-import {
-  createI18nStore,
-  I18nContext,
-  I18nProps,
-  loadSSRLanguage,
-} from '../models/Translation';
+import { createI18nStore, I18nContext, I18nProps, loadSSRLanguage } from '../models/Translation';
 
 configure({ enforceActions: 'never' });
 
@@ -74,12 +69,7 @@ export default class CustomApp extends App<I18nProps> {
           >
             {t('powered_by')}
             <span className="mx-2">
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                width={72}
-                height={16}
-              />
+              <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
             </span>
           </a>
         </footer>

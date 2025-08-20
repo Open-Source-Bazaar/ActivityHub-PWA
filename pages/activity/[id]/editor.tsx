@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { compose, JWTProps, jwtVerifier } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
 
+import { ActivityEditor } from '../../../components/Activity/Editor';
 import { organizerMenu } from '../../../components/Activity/menu';
-import { ActivityEditor } from '../../../components/ActivityEditor';
 import { SessionBox } from '../../../components/User/SessionBox';
 import { ActivityModel } from '../../../models/Activity';
 import { I18nContext } from '../../../models/Translation';

@@ -6,11 +6,11 @@ import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { useContext } from 'react';
 import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
 
-import { ActivityCard } from '../components/ActivityCard';
-import { PageHead } from '../components/PageHead';
-import { SponsorCard } from '../components/SponsorCard';
+import { ActivityCard } from '../components/Activity/Card';
+import { PageHead } from '../components/Navigator/PageHead';
+import { SponsorCard } from '../components/Organization/SponsorCard';
 import { ActivityModel } from '../models/Activity';
-import { OrganizationModel } from '../models/Cooperation';
+import { OrganizationModel } from '../models/Organization';
 import { I18nContext } from '../models/Translation';
 import { UserModel } from '../models/User';
 

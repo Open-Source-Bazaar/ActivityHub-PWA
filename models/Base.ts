@@ -3,10 +3,14 @@ import 'core-js/full/array/from-async';
 import { Base, ListChunk } from '@open-source-bazaar/activityhub-service';
 import { HTTPClient } from 'koajax';
 import { githubClient, RepositoryModel } from 'mobx-github';
-import { Filter,IDType, ListModel, toggle } from 'mobx-restful';
+import { Filter, IDType, ListModel, toggle } from 'mobx-restful';
 import { buildURLData } from 'web-utility';
 
-import { GITHUB_TOKEN,Own_API_Host } from './configuration';
+import { GITHUB_TOKEN, Own_API_Host } from './configuration';
+
+export interface TagBase extends Base {
+  name: string;
+}
 
 export const ownClient = new HTTPClient({
   baseURI: `${Own_API_Host}/api/`,

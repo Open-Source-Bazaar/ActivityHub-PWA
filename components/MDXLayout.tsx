@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Container, ContainerProps } from 'react-bootstrap';
 
-import { PageHead } from './PageHead';
+import { PageHead } from './Navigator/PageHead';
 
 export const MDXLayout: FC<ContainerProps> = ({
   className = 'mt-5 pt-5 pb-3',

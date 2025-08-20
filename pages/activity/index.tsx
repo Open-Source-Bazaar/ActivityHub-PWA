@@ -6,8 +6,8 @@ import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
-import { ActivityCard } from '../../components/ActivityCard';
-import { PageHead } from '../../components/PageHead';
+import { ActivityCard } from '../../components/Activity/Card';
+import { PageHead } from '../../components/Navigator/PageHead';
 import { ActivityModel } from '../../models/Activity';
 import { I18nContext } from '../../models/Translation';
 

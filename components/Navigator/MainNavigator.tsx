@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
-import { Name } from '../models/configuration';
-import { I18nContext } from '../models/Translation';
+import { Name } from '../../models/configuration';
+import { I18nContext } from '../../models/Translation';
 
 const LightSwitch = dynamic(() => import('./LightSwitch'), { ssr: false }),
   LanguageMenu = dynamic(() => import('./LanguageMenu'), { ssr: false });
@@ -13,13 +13,7 @@ export const MainNavigator: FC = observer(() => {
   const { t } = useContext(I18nContext);
 
   return (
-    <Navbar
-      bg="primary"
-      variant="dark"
-      fixed="top"
-      expand="sm"
-      collapseOnSelect
-    >
+    <Navbar bg="primary" variant="dark" fixed="top" expand="sm" collapseOnSelect>
       <Container>
         <Navbar.Brand href="/">{Name}</Navbar.Brand>
 
@@ -35,10 +29,7 @@ export const MainNavigator: FC = observer(() => {
 
             <Nav.Link href="/scroll-list">{t('scroll_list')}</Nav.Link>
 
-            <Nav.Link
-              target="_blank"
-              href="https://github.com/open-source-bazaar/activityhub-pwa"
-            >
+            <Nav.Link target="_blank" href="https://github.com/open-source-bazaar/activityhub-pwa">
               {t('source_code')}
             </Nav.Link>
           </Nav>
