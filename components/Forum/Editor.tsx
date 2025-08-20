@@ -20,12 +20,7 @@ export interface ForumEditorProps {
 export class ForumEditor extends ObservedComponent<ForumEditorProps, typeof i18n> {
   static contextType = I18nContext;
 
-  forumStore: ForumModel;
-
-  constructor(props: ForumEditorProps) {
-    super(props);
-    this.forumStore = new ForumModel(props.activityId);
-  }
+  forumStore = new ForumModel(this.props.activityId);
 
   componentDidMount() {
     const { forum } = this.props;
@@ -35,10 +30,11 @@ export class ForumEditor extends ObservedComponent<ForumEditorProps, typeof i18n
 
   submitHandler = ({ id }: Forum) => {
     const { activityId, forum } = this.props;
+    const { t } = this.observedContext;
 
-    alert(forum ? '分论坛更新成功！' : '分论坛创建成功！');
+    alert(forum ? t('forum_updated_successfully') : t('forum_created_successfully'));
 
-    window.location.href = `/${activityId}/forum/${id}`;
+    window.location.href = `/activity/${activityId}/forum/${id}`;
   };
 
 

@@ -84,6 +84,22 @@ export default {
 
   // Forum Manager
   manage_forum: '管理论坛',
+  forum_created_successfully: '分论坛创建成功！',
+  forum_updated_successfully: '分论坛更新成功！',
+  name: '名称',
+  type: '类型',
+  location: '位置',
+  capacity: '容纳人数',
+  opening_hours: '开放时间',
+  open_days: '开放日期',
+  equipment: '设备',
+  sunday: '周日',
+  monday: '周一', 
+  tuesday: '周二',
+  wednesday: '周三',
+  thursday: '周四',
+  friday: '周五',
+  saturday: '周六',
 
   // Room/Place Management
   room_management: '会议室管理',

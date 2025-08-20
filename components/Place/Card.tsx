@@ -1,6 +1,8 @@
 import { Place } from '@open-source-bazaar/activityhub-service';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Badge, Button, Card } from 'react-bootstrap';
+
+import { I18nContext } from '../../models/Translation';
 
 export interface PlaceCardProps {
   place: Place;
@@ -19,6 +21,25 @@ export const PlaceCard: FC<PlaceCardProps> = ({
   selected,
   onSelect,
 }) => {
+  const { t } = useContext(I18nContext);
+  
+  const placeTypeLabels = [
+    t('meeting_room'),
+    t('lecture_hall'), 
+    t('reception_hall'),
+    t('lounge')
+  ];
+
+  const weekDayLabels = [
+    t('sunday'),
+    t('monday'),
+    t('tuesday'), 
+    t('wednesday'),
+    t('thursday'),
+    t('friday'),
+    t('saturday')
+  ];
+
   const className = [
     onSelect ? 'cursor-pointer' : '',
     selected ? 'border-primary' : ''
@@ -32,7 +53,7 @@ export const PlaceCard: FC<PlaceCardProps> = ({
       <Card.Header className="d-flex justify-content-between align-items-center">
         <div>
           <Badge bg="secondary" className="me-2">
-            {['房间', '会堂', '茶座', '餐厅'][place.type] || '未知'}
+            {placeTypeLabels[place.type] || t('type')}
           </Badge>
           <strong>{place.name}</strong>
         </div>
@@ -42,41 +63,41 @@ export const PlaceCard: FC<PlaceCardProps> = ({
             variant="outline-primary"
             href={`/place/${place.id}/editor`}
           >
-            编辑
+            {t('edit')}
           </Button>
         )}
       </Card.Header>
       <Card.Body as="dl">
         {place.address && (
           <>
-            <dt>位置</dt>
+            <dt>{t('location')}</dt>
             <dd>{place.address}</dd>
           </>
         )}
-        <dt>容纳人数</dt>
-        <dd>{place.size} 人</dd>
+        <dt>{t('capacity')}</dt>
+        <dd>{place.size} {t('participants')}</dd>
         {place.openTime && place.closeTime && (
           <>
-            <dt>开放时间</dt>
+            <dt>{t('opening_hours')}</dt>
             <dd>{place.openTime} - {place.closeTime}</dd>
           </>
         )}
-        {place.openWeekDays && place.openWeekDays.length > 0 && (
+        {place.openWeekDays?.length && (
           <>
-            <dt>开放日期</dt>
+            <dt>{t('open_days')}</dt>
             <dd>
               {place.openWeekDays
-                .map(day => ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][day])
+                .map(day => weekDayLabels[day])
                 .join(', ')}
             </dd>
           </>
         )}
-        {place.devices && place.devices.length > 0 && (
+        {place.devices?.length && (
           <>
-            <dt>设备</dt>
+            <dt>{t('equipment')}</dt>
             <dd>
-              {place.devices.map((device, index) => (
-                <Badge key={index} bg="info" className="me-1">
+              {place.devices.map(device => (
+                <Badge key={device} bg="info" className="me-1">
                   {device}
                 </Badge>
               ))}

@@ -86,6 +86,22 @@ export default {
 
   // Forum Manager
   manage_forum: 'Manage Forum',
+  forum_created_successfully: 'Forum created successfully!',
+  forum_updated_successfully: 'Forum updated successfully!',
+  name: 'Name',
+  type: 'Type',
+  location: 'Location',
+  capacity: 'Capacity',
+  opening_hours: 'Opening Hours',
+  open_days: 'Open Days',
+  equipment: 'Equipment',
+  sunday: 'Sunday',
+  monday: 'Monday', 
+  tuesday: 'Tuesday',
+  wednesday: 'Wednesday',
+  thursday: 'Thursday',
+  friday: 'Friday',
+  saturday: 'Saturday',
 
   // Room/Place Management
   room_management: 'Room Management',
