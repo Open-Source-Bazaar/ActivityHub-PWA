@@ -11,7 +11,7 @@ import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-tsx';
 
-import { PageHead } from '../components/PageHead';
+import { PageHead } from '../components/Navigator/PageHead';
 import { I18nContext } from '../models/Translation';
 import RichEditData from './api/rich-edit.json';
 
@@ -25,10 +25,7 @@ const BlockEditor = dynamic(() => import('../components/BlockEditor'), {
 });
 BlockEditor.displayName = 'BlockEditor';
 
-const Example: FC<PropsWithChildren<{ title: string }>> = ({
-  title,
-  children,
-}) => (
+const Example: FC<PropsWithChildren<{ title: string }>> = ({ title, children }) => (
   <>
     <h2 className="mt-3">{title}</h2>
     {children}
@@ -44,10 +41,7 @@ const ComponentPage = observer(() => {
   return (
     <>
       <PageHead title={title}>
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css"
-        />
+        <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism.min.css" />
       </PageHead>
 
       <Container>

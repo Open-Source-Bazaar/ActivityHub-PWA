@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import styles from './ActivityCard.module.less';
+import styles from './Card.module.less';
 
 export const ActivityCard: FC<Activity> = observer(
   ({ id, title, startTime, address, slug, banner }) => (

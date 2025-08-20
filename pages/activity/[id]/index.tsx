@@ -4,7 +4,7 @@ import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { formatDate } from 'web-utility';
 
-import { PageHead } from '../../../components/PageHead';
+import { PageHead } from '../../../components/Navigator/PageHead';
 import { ActivityModel } from '../../../models/Activity';
 
 interface ActivityDetailPageProps {

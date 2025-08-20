@@ -5,7 +5,7 @@ import { JWTProps } from 'next-ssr-middleware';
 import { Component, HTMLAttributes, JSX } from 'react';
 import { Modal, Nav } from 'react-bootstrap';
 
-import { PageHead } from '../PageHead';
+import { PageHead } from '../Navigator/PageHead';
 import { SessionForm } from './SessionForm';
 
 export type MenuItem = Pick<JSX.IntrinsicElements['a'], 'href' | 'title'>;
