@@ -72,6 +72,16 @@ export default {
   activity_start_time_required: '請選擇活動開始時間',
   activity_end_time_required: '請選擇活動結束時間',
 
+  // General fields
+  title: '標題',
+  title_required: '請輸入標題',
+  summary: '簡介',
+  start_time: '開始時間',
+  start_time_required: '請選擇開始時間',
+  end_time: '結束時間',
+  end_time_required: '請選擇結束時間',
+  place: '場地',
+
   // Forum Manager
   manage_forum: '管理論壇',
 

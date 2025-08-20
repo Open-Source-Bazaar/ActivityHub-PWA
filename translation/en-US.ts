@@ -74,6 +74,16 @@ export default {
   activity_start_time_required: 'Please select activity start time',
   activity_end_time_required: 'Please select activity end time',
 
+  // General fields
+  title: 'Title',
+  title_required: 'Please enter title',
+  summary: 'Summary',
+  start_time: 'Start Time',
+  start_time_required: 'Please select start time',
+  end_time: 'End Time',
+  end_time_required: 'Please select end time',
+  place: 'Place',
+
   // Forum Manager
   manage_forum: 'Manage Forum',
 

@@ -1,3 +1,4 @@
+import { Place, PlaceType } from '@open-source-bazaar/activityhub-service';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -7,7 +8,6 @@ import { Field, RestForm } from 'mobx-restful-table';
 import { OrganizationModel } from '../../models/Organization';
 import placeStore from '../../models/Place';
 import { i18n, I18nContext } from '../../models/Translation';
-import { DeviceType, Place, PlaceType } from '../../types/temp';
 
 export interface PlaceEditorProps {
   id?: number;
@@ -21,11 +21,11 @@ const placeTypeOptions = [
   { value: PlaceType.Restaurant, label: 'lounge' },
 ];
 
-const deviceTypeOptions = [
-  { value: DeviceType.Network, label: 'network' },
-  { value: DeviceType.Projector, label: 'projector' },
-  { value: DeviceType.LED, label: 'led_screen' },
-  { value: DeviceType.Microphone, label: 'microphone' },
+const equipmentOptions = [
+  { value: 'network', label: 'network' },
+  { value: 'projector', label: 'projector' },
+  { value: 'led_screen', label: 'led_screen' },
+  { value: 'microphone', label: 'microphone' },
 ];
 
 const weekDayOptions = [
@@ -81,13 +81,13 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
         type: 'select',
         options: placeTypeOptions.map(({ value, label }) => ({
           value: value.toString(),
-          title: t(label as any),
+          title: t(label as keyof typeof i18n.currentMap),
         })),
         required: true,
       },
       {
         key: 'address',
-        renderLabel: t('room_address'),
+        renderLabel: t('activity_address'),
       },
       {
         key: 'size',
@@ -102,9 +102,9 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
         renderLabel: t('devices'),
         type: 'select',
         multiple: true,
-        options: deviceTypeOptions.map(({ value, label }) => ({
-          value: value.toString(),
-          title: t(label as any),
+        options: equipmentOptions.map(({ value, label }) => ({
+          value: value + '',
+          title: t(label as keyof typeof i18n.currentMap),
         })),
       },
       {

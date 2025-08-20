@@ -29,9 +29,7 @@ export const MainNavigator: FC = observer(() => {
 
             <Nav.Link href="/scroll-list">{t('scroll_list')}</Nav.Link>
 
-            <Nav.Link href="/place">{t('room_management')}</Nav.Link>
 
-            <Nav.Link href="/forum/create">创建分论坛</Nav.Link>
 
             <Nav.Link target="_blank" href="https://github.com/open-source-bazaar/activityhub-pwa">
               {t('source_code')}

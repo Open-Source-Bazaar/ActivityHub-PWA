@@ -1,12 +1,14 @@
-import { Base } from '@open-source-bazaar/activityhub-service';
-import { Forum } from '../types/temp';
+import { Forum } from '@open-source-bazaar/activityhub-service';
 
 import { TableModel } from './Base';
 import userStore from './User';
 
-export class ForumModel extends TableModel<Forum & Base> {
-  baseURI = 'forum';
+export class ForumModel extends TableModel<Forum> {
+  baseURI = '';
   client = userStore.client;
-}
 
-export default new ForumModel();
+  constructor(activityId: number) {
+    super();
+    this.baseURI = `activity/${activityId}/forum`;
+  }
+}

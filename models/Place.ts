@@ -1,10 +1,9 @@
-import { Base } from '@open-source-bazaar/activityhub-service';
-import { Place } from '../types/temp';
+import { Place } from '@open-source-bazaar/activityhub-service';
 
 import { TableModel } from './Base';
 import userStore from './User';
 
-export class PlaceModel extends TableModel<Place & Base> {
+export class PlaceModel extends TableModel<Place> {
   baseURI = 'place';
   client = userStore.client;
 }
