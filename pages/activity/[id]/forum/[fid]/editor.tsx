@@ -36,16 +36,15 @@ const ForumEditorPage: FC<ForumEditorPageProps> = observer(({ jwtPayload, forum 
     i18n = useContext(I18nContext);
 
   const activityId = +(query.id as string);
-  const title = forum ? '编辑分论坛' : '创建分论坛';
+  const title = forum ? i18n.t('edit_forum') : i18n.t('create_forum');
 
   return (
     <SessionBox
-      title={title}
+      {...{ title, jwtPayload }}
       path={asPath}
       menu={organizerMenu(i18n, activityId)}
-      jwtPayload={jwtPayload}
     >
-      <ForumEditor activityId={activityId} forum={forum} />
+      <ForumEditor {...{ activityId, forum }} />
     </SessionBox>
   );
 });

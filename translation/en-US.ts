@@ -86,12 +86,16 @@ export default {
 
   // Forum Manager
   manage_forum: 'Manage Forum',
+  create_forum: 'Create Forum',
+  edit_forum: 'Edit Forum',
   forum_created_successfully: 'Forum created successfully!',
   forum_updated_successfully: 'Forum updated successfully!',
   name: 'Name',
   type: 'Type',
+  address: 'Address',
   location: 'Location',
   capacity: 'Capacity',
+  field_required: 'This field is required',
   opening_hours: 'Opening Hours',
   open_days: 'Open Days',
   equipment: 'Equipment',

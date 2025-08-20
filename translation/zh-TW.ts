@@ -84,12 +84,16 @@ export default {
 
   // Forum Manager
   manage_forum: '管理論壇',
+  create_forum: '創建分論壇',
+  edit_forum: '編輯分論壇',
   forum_created_successfully: '分論壇創建成功！',
   forum_updated_successfully: '分論壇更新成功！',
   name: '名稱',
   type: '類型',
+  address: '地址',
   location: '位置',
   capacity: '容納人數',
+  field_required: '此字段為必填項',
   opening_hours: '開放時間',
   open_days: '開放日期',
   equipment: '設備',

@@ -21,11 +21,11 @@ const placeTypeOptions = ({ t }: typeof i18n) => [
   { value: PlaceType.Restaurant, label: t('lounge') },
 ];
 
-const equipmentOptions = [
-  { value: 'network', label: 'network' },
-  { value: 'projector', label: 'projector' },
-  { value: 'led_screen', label: 'led_screen' },
-  { value: 'microphone', label: 'microphone' },
+const equipmentOptions = ({ t }: typeof i18n) => [
+  { value: 'network', label: t('network') },
+  { value: 'projector', label: t('projector') },
+  { value: 'led_screen', label: t('led_screen') },
+  { value: 'microphone', label: t('microphone') },
 ];
 
 const weekDayOptions = ({ t }: typeof i18n) => [
@@ -73,38 +73,38 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
         key: 'name',
         renderLabel: t('name'),
         required: true,
-        invalidMessage: t('room_name_required'),
+        invalidMessage: t('field_required'),
       },
       {
         key: 'type',
         renderLabel: t('type'),
         type: 'select',
         options: placeTypeOptions(this.observedContext).map(({ value, label }) => ({
-          value: value.toString(),
+          value: value + '',
           title: label,
         })),
         required: true,
       },
       {
         key: 'address',
-        renderLabel: t('activity_address'),
+        renderLabel: t('address'),
       },
       {
         key: 'size',
-        renderLabel: t('room_capacity'),
+        renderLabel: t('capacity'),
         type: 'number',
         min: 1,
         required: true,
-        invalidMessage: t('room_capacity_required'),
+        invalidMessage: t('field_required'),
       },
       {
         key: 'devices',
         renderLabel: t('devices'),
         type: 'select',
         multiple: true,
-        options: equipmentOptions.map(({ value, label }) => ({
+        options: equipmentOptions(this.observedContext).map(({ value, label }) => ({
           value: value + '',
-          title: t(label as keyof typeof i18n.currentMap),
+          title: label,
         })),
       },
       {

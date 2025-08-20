@@ -84,12 +84,16 @@ export default {
 
   // Forum Manager
   manage_forum: '管理论坛',
+  create_forum: '创建分论坛',
+  edit_forum: '编辑分论坛',
   forum_created_successfully: '分论坛创建成功！',
   forum_updated_successfully: '分论坛更新成功！',
   name: '名称',
   type: '类型',
+  address: '地址',
   location: '位置',
   capacity: '容纳人数',
+  field_required: '此字段为必填项',
   opening_hours: '开放时间',
   open_days: '开放日期',
   equipment: '设备',
