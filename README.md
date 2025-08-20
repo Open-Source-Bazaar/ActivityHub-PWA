@@ -58,7 +58,7 @@ then run the development server:
 
 ```bash
 npm i pnpm -g
-pnpm pi  # `pnpm install` alternative with GitHub registry authorization
+pnpm e i  # `pnpm install` alternative with GitHub registry authorization
 pnpm dev
 ```
 

@@ -1,6 +1,7 @@
 import { Activity, Organization, User } from '@open-source-bazaar/activityhub-service';
 import { UserRankView } from 'idea-react';
 import { observer } from 'mobx-react';
+import Link from 'next/link';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { useContext } from 'react';
 import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
@@ -55,16 +56,19 @@ const HomePage = observer(({ activities, instructors, organizations }: HomePageP
       <Container fluid className="px-0">
         {activitiesWithBanners.length > 0 && (
           <Carousel className="mb-5">
-            {activitiesWithBanners.map(({ id, title, banner, url }) => (
+            {activitiesWithBanners.map(({ id, title, banner, slug }) => (
               <Carousel.Item key={id}>
-                <a className="d-block stretched-link" href={url || `/activity/${id}`}>
+                <Link
+                  className="d-block stretched-link"
+                  href={slug ? `/activity/${slug}` : `/activity/${id}`}
+                >
                   <Image
                     className="w-100 object-fit-cover"
                     style={{ height: '60vh', minHeight: '25rem' }}
                     src={banner}
                     alt={title}
                   />
-                </a>
+                </Link>
                 <Carousel.Caption className="text-shadow">
                   <h3>{title}</h3>
                 </Carousel.Caption>
@@ -110,9 +114,9 @@ const HomePage = observer(({ activities, instructors, organizations }: HomePageP
         <Container>
           <h2 className="text-center mb-5">{t('partners')}</h2>
           <Row className="g-4">
-            {organizations.map(({ name, url, logo }) => (
-              <Col key={name} xs={6} md={4} lg={3}>
-                <SponsorCard name={name} url={url || '#'} logo={logo || ''} />
+            {organizations.map(organization => (
+              <Col key={organization.id} xs={6} md={4} lg={3}>
+                <SponsorCard {...organization} />
               </Col>
             ))}
           </Row>
