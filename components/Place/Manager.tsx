@@ -1,10 +1,10 @@
-import { Place } from '../../types/temp';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { Button, Col,Modal, Row } from 'react-bootstrap';
 
 import placeStore from '../../models/Place';
 import { i18n, I18nContext } from '../../models/Translation';
+import { Place } from '../../types/temp';
 import { PlaceCard } from './Card';
 import { PlaceEditor } from './Editor';
 

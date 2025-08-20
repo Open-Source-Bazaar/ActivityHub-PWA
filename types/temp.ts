@@ -1,4 +1,11 @@
 // Temporary types for development
+export interface Base {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
 export enum PlaceType {
   Room = 0,
   Hall = 1,
@@ -13,8 +20,7 @@ export enum DeviceType {
   Microphone = 3,
 }
 
-export interface Place {
-  id?: number;
+export interface Place extends Base {
   type: PlaceType;
   name: string;
   address?: string;
@@ -26,8 +32,7 @@ export interface Place {
   organization?: any;
 }
 
-export interface Forum {
-  id?: number;
+export interface Forum extends Base {
   title: string;
   summary?: string;
   startTime: string;

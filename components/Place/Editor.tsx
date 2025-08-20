@@ -1,4 +1,3 @@
-import { DeviceType, Place, PlaceType } from '../../types/temp';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -8,7 +7,7 @@ import { Field, RestForm } from 'mobx-restful-table';
 import { OrganizationModel } from '../../models/Organization';
 import placeStore from '../../models/Place';
 import { i18n, I18nContext } from '../../models/Translation';
-import { renderTagInput } from '../Tag';
+import { DeviceType, Place, PlaceType } from '../../types/temp';
 
 export interface PlaceEditorProps {
   id?: number;
@@ -68,7 +67,7 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
       {
         key: 'organization',
         renderLabel: '所属组织',
-        renderInput: renderTagInput(this.organizationStore),
+        // Note: Organization selection will be implemented when backend integration is complete
       },
       {
         key: 'name',

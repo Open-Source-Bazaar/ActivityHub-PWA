@@ -1,6 +1,7 @@
-import { DeviceType, Place, PlaceType } from '../../types/temp';
 import { FC } from 'react';
 import { Badge, Card } from 'react-bootstrap';
+
+import { DeviceType, Place, PlaceType } from '../../types/temp';
 
 export interface PlaceCardProps {
   place: Place;

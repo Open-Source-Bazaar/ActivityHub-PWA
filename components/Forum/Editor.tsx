@@ -1,4 +1,3 @@
-import { Forum } from '../../types/temp';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -7,6 +6,7 @@ import { Field, RestForm } from 'mobx-restful-table';
 
 import forumStore from '../../models/Forum';
 import { i18n, I18nContext } from '../../models/Translation';
+import { Forum } from '../../types/temp';
 import { PlaceSelector } from '../Place';
 
 export interface ForumEditorProps {
