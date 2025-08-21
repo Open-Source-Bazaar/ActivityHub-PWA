@@ -5,6 +5,7 @@ import { ObservedComponent } from 'mobx-react-helper';
 import { Column, RestTable } from 'mobx-restful-table';
 
 import { CooperationModel } from '../../models/Cooperation';
+import { S3FileModel } from '../../models/File';
 import { OrganizationModel } from '../../models/Organization';
 import { i18n, I18nContext } from '../../models/Translation';
 import { renderTagInput } from '../Tag';
@@ -20,6 +21,7 @@ export class CooperationList extends ObservedComponent<CooperationListProps, typ
 
   cooperationStore = new CooperationModel(this.props.activityId);
   organizationStore = new OrganizationModel();
+  fileStore = new S3FileModel();
 
   @computed
   get columns(): Column<Cooperation>[] {

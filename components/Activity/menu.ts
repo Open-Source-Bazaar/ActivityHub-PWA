@@ -8,7 +8,7 @@ export const organizerMenu = ({ t }: typeof i18n, activityId: number): MenuItem[
 ];
 
 export const userMenu = ({ t }: typeof i18n): MenuItem[] => [
-  { href: '/organization', title: t('organization_list') },
-  { href: '/activity', title: t('activity_list') },
-  // { href: '/session', title: t('session_list') }, // TODO: Add when session management is implemented
+  { href: '/user/organization', title: t('organization_list') },
+  { href: '/user/activity', title: t('activity_list') },
+  { href: '/user/session', title: t('session_list') },
 ];

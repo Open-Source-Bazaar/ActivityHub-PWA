@@ -144,11 +144,6 @@ export default {
   english_name: 'English Name',
   logo: 'Logo',
   activity_list: 'Activity List',
-  cooperation_created_successfully: 'Cooperation created successfully!',
-  cooperation_updated_successfully: 'Cooperation updated successfully!',
-  cooperation_deleted_successfully: 'Cooperation deleted successfully!',
-  organization_created_successfully: 'Organization created successfully!',
-  organization_updated_successfully: 'Organization updated successfully!',
-  organization_deleted_successfully: 'Organization deleted successfully!',
+  session_list: 'Session List',
   unknown: 'Unknown',
 } as const;

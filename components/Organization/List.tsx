@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { Column, RestTable } from 'mobx-restful-table';
 
+import { S3FileModel } from '../../models/File';
 import organizationStore from '../../models/Organization';
 import { i18n, I18nContext } from '../../models/Translation';
 
@@ -15,6 +16,8 @@ export interface OrganizationListProps {
 export class OrganizationList extends ObservedComponent<OrganizationListProps, typeof i18n> {
   static contextType = I18nContext;
 
+  fileStore = new S3FileModel();
+
   @computed
   get columns(): Column<Organization>[] {
     const { t } = this.observedContext;
@@ -23,7 +26,7 @@ export class OrganizationList extends ObservedComponent<OrganizationListProps, t
       {
         key: 'name',
         renderHead: t('name'),
-        renderBody: ({ id, name }) => <a href={`/organization/${id}/editor`}>{name}</a>,
+        renderBody: ({ name }) => name,
         required: true,
         minLength: 2,
         invalidMessage: t('field_required'),
@@ -44,17 +47,26 @@ export class OrganizationList extends ObservedComponent<OrganizationListProps, t
           ),
       },
       {
+        key: 'logo',
+        renderHead: t('logo'),
+        type: 'file',
+        accept: 'image/*',
+        uploader: this.fileStore,
+      },
+      {
         key: 'summary',
         renderHead: t('summary'),
+        rows: 3,
       },
     ];
   }
 
   render() {
     // const { userId } = this.observedProps;
-    
+
     // TODO: Apply userId filter when backend supports user-specific organization filtering
-    
+    // The filter would be applied through the store's filter mechanism, not as a RestTable prop
+
     return (
       <RestTable
         className="h-100 text-center"

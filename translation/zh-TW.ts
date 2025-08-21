@@ -142,11 +142,6 @@ export default {
   english_name: '英文名稱',
   logo: '標誌',
   activity_list: '活動列表',
-  cooperation_created_successfully: '合作創建成功！',
-  cooperation_updated_successfully: '合作更新成功！',
-  cooperation_deleted_successfully: '合作刪除成功！',
-  organization_created_successfully: '組織創建成功！',
-  organization_updated_successfully: '組織更新成功！',
-  organization_deleted_successfully: '組織刪除成功！',
+  session_list: '環節列表',
   unknown: '未知',
 } as const;

@@ -142,11 +142,6 @@ export default {
   english_name: '英文名称',
   logo: '标志',
   activity_list: '活动列表',
-  cooperation_created_successfully: '合作创建成功！',
-  cooperation_updated_successfully: '合作更新成功！',
-  cooperation_deleted_successfully: '合作删除成功！',
-  organization_created_successfully: '组织创建成功！',
-  organization_updated_successfully: '组织更新成功！',
-  organization_deleted_successfully: '组织删除成功！',
+  session_list: '环节列表',
   unknown: '未知',
 } as const;
