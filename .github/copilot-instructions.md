@@ -196,7 +196,7 @@ Based on recent project review feedback, follow these critical development stand
 
 ### Scope and Modification Guidelines
 
-**When fixing issues, make changes project-wide:**
+#### When fixing issues, make changes project-wide
 - If a requirement applies to one component, apply it to ALL similar components
 - Don't fix issues in isolation - check entire codebase for similar patterns
 - Remove unused code and translation keys immediately when making replacements
@@ -204,30 +204,29 @@ Based on recent project review feedback, follow these critical development stand
 
 ### Navigation and UI Structure
 
-**Main Navigation Guidelines:**
+#### Main Navigation Guidelines
 - Main navigation should focus on user viewing links and core functionality accessible to all users
 - Specialized management features should be integrated into their respective workflow contexts rather than exposed as standalone navigation items
 - Essential content creation entry points should be prominently accessible but not clutter the main navigation
 - Management and editing features should follow contextual access patterns through their respective workflows
 
-**Route Structure:**
+#### Route Structure
 - Follow RESTful patterns: `/activity/[id]/forum/[fid]/editor`
 - Place management routes under activity context, not standalone
 - Use `0` as ID for creation routes (e.g., `/activity/[id]/forum/0/editor` for new forum)
 
 ### Code Organization and Architecture
 
-**Import and Type Management:**
+#### Import and Type Management
 - When backend interfaces are already defined, don't add mock data or types, directly reference real interfaces
 - ALWAYS import types from `@open-source-bazaar/activityhub-service` package when available
 - NEVER create custom type definitions when official service types exist
-- Delete any temporary type files like `types/temp.ts`
 
-**Component Initialization:**
+#### Component Initialization
 - Initialize models with proper parameters (e.g., `new ForumModel(activityId)`)
 - Use class properties for model initialization: `forumStore = new ForumModel(this.props.activityId)`
 
-**File Structure:**
+#### File Structure
 - No need for `index.ts` export files in SSR applications
 - Create `index.tsx` for list pages that provide edit entry points
 - Follow established architectural patterns from existing pages
@@ -235,12 +234,12 @@ Based on recent project review feedback, follow these critical development stand
 
 ### Translation and Internationalization
 
-**Critical Translation Requirements:**
+#### Critical Translation Requirements
 - ALL plain text MUST be translated using i18n system
 - This includes `alert()` messages, button text, labels, error messages, and field names
 - Use consistent terminology across components (e.g., `start_time`, `end_time`, not activity-specific variants)
 
-**Translation Patterns:**
+#### Translation Patterns
 ```typescript
 // ✅ Correct - use translation functions for dynamic content
 const placeTypeOptions = ({ t }: typeof i18n) => [
@@ -258,14 +257,14 @@ alert('Forum created successfully!');
 invalidMessage: t('activity_name_required')
 ```
 
-**Translation Maintenance:**
+#### Translation Maintenance
 - Remove unused translation keys when replacing with generic ones
 - Keep translations consistent across all language files (zh-CN, en-US, zh-TW)
 - Use generic field terms unless specifically scoped (prefer `t('name')` over `t('room_name')`)
 
 ### Component Design Patterns
 
-**CSS and Styling:**
+#### CSS and Styling
 ```typescript
 // ✅ Correct - use filter/join for complex conditional classes
 className={[
@@ -278,7 +277,7 @@ className={[
 className={`card ${selectable ? 'cursor-pointer' : ''} ${selected ? 'border-primary' : ''}`}
 ```
 
-**Data Mapping:**
+#### Data Mapping
 ```typescript
 // ✅ Correct - object mapping for enum-based labels
 const placeTypeLabels = {
@@ -290,32 +289,32 @@ const placeTypeLabels = {
 const placeTypeLabels = ['Room', 'Hall'];
 ```
 
-**Key Props and Array Handling:**
+#### Key Props and Array Handling
 - Use meaningful identifiers for `key` props, not array indices
 - Use optional chaining for array/object access: `place.openWeekDays?.length`
 - Use proper key props: `key={device}` not `key={index}`
 
-**Component Props:**
+#### Component Props
 - Avoid duplicate data in props interfaces
 - If object contains `id`, don't add separate `id` prop
 - Let external layout handle spacing, don't hardcode margins in components
 
 ### Form and Input Handling
 
-**Form Field Patterns:**
-- 相同后端类型字段在不同组件和页面尽量保持相同配置。
+#### Form Field Patterns
+- Same backend type fields should maintain consistent configuration across different components and pages
 - Use `SearchableInput` from `mobx-restful-table` instead of custom selectors
 - Summary fields should use plain text (`rows: 3`), not rich text editors
 - Use `renderTagInput` for multi-select inputs
 
-**Validation:**
+#### Validation
 - Use unified error messages: `t('field_required')` for all required field validation
 - Apply consistent field types across components
 - Use proper field validation patterns
 
 ### TypeScript and Import Standards
 
-**Props Interface Design:**
+#### Props Interface Design
 ```typescript
 // ✅ Correct - minimal props
 export interface ForumEditorProps {
@@ -331,14 +330,14 @@ export interface ForumEditorProps {
 }
 ```
 
-**Server-Side Props:**
+#### Server-Side Props
 - Validate route parameters properly
 - Use proper TypeScript typing for `getServerSideProps`
 - Only load data that's actually needed for rendering
 
 ### API and Backend Integration
 
-**Server-Side Rendering Patterns:**
+#### Server-Side Rendering Patterns
 ```typescript
 // ✅ Correct - validate parameters and handle missing data
 export const getServerSideProps = compose<{ id: string; fid: string }, ForumEditorPageProps>(
@@ -357,21 +356,21 @@ export const getServerSideProps = compose<{ id: string; fid: string }, ForumEdit
 );
 ```
 
-**Model Initialization:**
+#### Model Initialization
 - Pass required parameters through constructors: `new ForumModel(activityId)`
 - Don't load unnecessary data - only fetch what's needed for rendering
 - Use proper error handling in getServerSideProps
 
 ### Testing and Validation
 
-**Before Committing ANY Changes:**
+#### Before Committing ANY Changes
 1. Run `pnpm lint` to fix formatting and catch errors
 2. Ensure all plain text is properly translated
 3. Check that unused imports and translation keys are removed
 4. Verify consistent patterns across similar components
 5. Test that navigation flows work as expected
 
-**Manual Testing Priority:**
+#### Manual Testing Priority
 - Test core navigation between pages
 - Verify form submission and validation messages
 - Check responsive design on different screen sizes
@@ -379,12 +378,12 @@ export const getServerSideProps = compose<{ id: string; fid: string }, ForumEdit
 
 ### Global Design Principles
 
-**Data Management:**
+#### Data Management
 - Places are global shared data - only editable from forum/activity context
 - Don't create standalone management pages for shared resources
 - Access editing through proper workflow (e.g., place editing from forum list)
 
-**Architecture Consistency:**
+#### Architecture Consistency
 - Follow established patterns from existing components
 - Use consistent API patterns and data flow
 - Maintain proper separation of concerns
