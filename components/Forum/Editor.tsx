@@ -45,7 +45,7 @@ export class ForumEditor extends ObservedComponent<ForumEditorProps, typeof i18n
         key: 'title',
         renderLabel: t('title'),
         required: true,
-        invalidMessage: t('title_required'),
+        invalidMessage: t('field_required'),
       },
       {
         key: 'summary',
@@ -57,14 +57,14 @@ export class ForumEditor extends ObservedComponent<ForumEditorProps, typeof i18n
         renderLabel: t('start_time'),
         type: 'datetime-local',
         required: true,
-        invalidMessage: t('start_time_required'),
+        invalidMessage: t('field_required'),
       },
       {
         key: 'endTime',
         renderLabel: t('end_time'),
         type: 'datetime-local',
         required: true,
-        invalidMessage: t('end_time_required'),
+        invalidMessage: t('field_required'),
       },
       {
         key: 'place',
