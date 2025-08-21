@@ -124,4 +124,34 @@ export default {
   technology_partners: '技術合作夥伴',
   community_partners: '社群合作夥伴',
   sponsors: '贊助商',
+
+  // Sponsor Management
+  sponsor_management: '贊助商管理',
+  sponsor_list: '贊助商列表',
+  create_sponsor: '添加贊助商',
+  edit_sponsor: '編輯贊助商',
+  sponsor_level: '贊助等級',
+  sponsorship_amount: '贊助金額',
+  contact_person: '聯繫人',
+  remarks: '備註',
+  status: '狀態',
+  website: '網站',
+  organization: '組織',
+  english_name: '英文名稱',
+  logo: '標誌',
+  sponsor_created_successfully: '贊助商創建成功！',
+  sponsor_updated_successfully: '贊助商更新成功！',
+  sponsor_deleted_successfully: '贊助商刪除成功！',
+
+  // Sponsor Levels
+  sponsor_level_platinum: '白金贊助商',
+  sponsor_level_gold: '金牌贊助商',
+  sponsor_level_silver: '銀牌贊助商',
+  sponsor_level_bronze: '銅牌贊助商',
+
+  // Sponsor Status
+  sponsor_status_active: '活躍',
+  sponsor_status_pending: '待定',
+  sponsor_status_inactive: '非活躍',
+  sponsor_status_rejected: '已拒絕',
 } as const;

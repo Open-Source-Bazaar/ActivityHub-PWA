@@ -124,4 +124,34 @@ export default {
   technology_partners: '技术合作伙伴',
   community_partners: '社区合作伙伴',
   sponsors: '赞助商',
+
+  // Sponsor Management
+  sponsor_management: '赞助商管理',
+  sponsor_list: '赞助商列表',
+  create_sponsor: '添加赞助商',
+  edit_sponsor: '编辑赞助商',
+  sponsor_level: '赞助等级',
+  sponsorship_amount: '赞助金额',
+  contact_person: '联系人',
+  remarks: '备注',
+  status: '状态',
+  website: '网站',
+  organization: '组织',
+  english_name: '英文名称',
+  logo: '标志',
+  sponsor_created_successfully: '赞助商创建成功！',
+  sponsor_updated_successfully: '赞助商更新成功！',
+  sponsor_deleted_successfully: '赞助商删除成功！',
+
+  // Sponsor Levels
+  sponsor_level_platinum: '白金赞助商',
+  sponsor_level_gold: '金牌赞助商',
+  sponsor_level_silver: '银牌赞助商',
+  sponsor_level_bronze: '铜牌赞助商',
+
+  // Sponsor Status
+  sponsor_status_active: '活跃',
+  sponsor_status_pending: '待定',
+  sponsor_status_inactive: '非活跃',
+  sponsor_status_rejected: '已拒绝',
 } as const;

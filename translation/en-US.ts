@@ -126,4 +126,34 @@ export default {
   technology_partners: 'Technology Partners',
   community_partners: 'Community Partners',
   sponsors: 'Sponsors',
+
+  // Sponsor Management
+  sponsor_management: 'Sponsor Management',
+  sponsor_list: 'Sponsor List',
+  create_sponsor: 'Add Sponsor',
+  edit_sponsor: 'Edit Sponsor',
+  sponsor_level: 'Sponsor Level',
+  sponsorship_amount: 'Sponsorship Amount',
+  contact_person: 'Contact Person',
+  remarks: 'Remarks',
+  status: 'Status',
+  website: 'Website',
+  organization: 'Organization',
+  english_name: 'English Name',
+  logo: 'Logo',
+  sponsor_created_successfully: 'Sponsor created successfully!',
+  sponsor_updated_successfully: 'Sponsor updated successfully!',
+  sponsor_deleted_successfully: 'Sponsor deleted successfully!',
+
+  // Sponsor Levels
+  sponsor_level_platinum: 'Platinum Sponsor',
+  sponsor_level_gold: 'Gold Sponsor',
+  sponsor_level_silver: 'Silver Sponsor',
+  sponsor_level_bronze: 'Bronze Sponsor',
+
+  // Sponsor Status
+  sponsor_status_active: 'Active',
+  sponsor_status_pending: 'Pending',
+  sponsor_status_inactive: 'Inactive',
+  sponsor_status_rejected: 'Rejected',
 } as const;
