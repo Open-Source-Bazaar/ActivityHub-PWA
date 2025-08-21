@@ -205,10 +205,10 @@ Based on recent project review feedback, follow these critical development stand
 ### Navigation and UI Structure
 
 **Main Navigation Guidelines:**
-- Main navigation should ONLY include user viewing links and core functionality for activity organizers and issue authors
-- Remove specialized management links (like "room management", "create forum") from main navigation
-- Add essential entry points: "Publish Activity" (`/activity/0/editor`) and "Submit Manuscript" (`/manuscript/0/editor`) buttons
-- Other editing features should be accessible through their respective workflows (e.g., forum editing from activity management)
+- Main navigation should focus on user viewing links and core functionality accessible to all users
+- Specialized management features should be integrated into their respective workflow contexts rather than exposed as standalone navigation items
+- Essential content creation entry points should be prominently accessible but not clutter the main navigation
+- Management and editing features should follow contextual access patterns through their respective workflows
 
 **Route Structure:**
 - Follow RESTful patterns: `/activity/[id]/forum/[fid]/editor`
@@ -218,8 +218,9 @@ Based on recent project review feedback, follow these critical development stand
 ### Code Organization and Architecture
 
 **Import and Type Management:**
-- ALWAYS import types from `@open-source-bazaar/activityhub-service` package
-- NEVER create custom type definitions - use official service types
+- When backend interfaces are already defined, don't add mock data or types, directly reference real interfaces
+- ALWAYS import types from `@open-source-bazaar/activityhub-service` package when available
+- NEVER create custom type definitions when official service types exist
 - Delete any temporary type files like `types/temp.ts`
 
 **Component Initialization:**
@@ -236,7 +237,7 @@ Based on recent project review feedback, follow these critical development stand
 
 **Critical Translation Requirements:**
 - ALL plain text MUST be translated using i18n system
-- This includes alert() messages, button text, labels, error messages, and field names
+- This includes `alert()` messages, button text, labels, error messages, and field names
 - Use consistent terminology across components (e.g., `start_time`, `end_time`, not activity-specific variants)
 
 **Translation Patterns:**
@@ -302,7 +303,7 @@ const placeTypeLabels = ['Room', 'Hall'];
 ### Form and Input Handling
 
 **Form Field Patterns:**
-- Copy field configurations from existing similar components (especially activity editor)
+- 相同后端类型字段在不同组件和页面尽量保持相同配置。
 - Use `SearchableInput` from `mobx-restful-table` instead of custom selectors
 - Summary fields should use plain text (`rows: 3`), not rich text editors
 - Use `renderTagInput` for multi-select inputs
