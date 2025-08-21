@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 
 import { Name } from '../../models/configuration';
 import { I18nContext } from '../../models/Translation';
@@ -33,6 +33,15 @@ export const MainNavigator: FC = observer(() => {
               {t('source_code')}
             </Nav.Link>
           </Nav>
+
+          <nav className="ms-auto d-flex gap-2">
+            <Button variant="outline-light" size="sm" href="/activity/0/editor">
+              {t('publish_activity')}
+            </Button>
+            <Button variant="outline-light" size="sm" href="/agenda/0/editor">
+              {t('submit_agenda')}
+            </Button>
+          </nav>
 
           <LightSwitch className="my-3 my-sm-0 mx-sm-3" />
           <LanguageMenu />
