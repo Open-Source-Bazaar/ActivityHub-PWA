@@ -71,18 +71,12 @@ export default {
   save_activity: '保存活動',
   activity_created_successfully: '活動創建成功！',
   activity_updated_successfully: '活動更新成功！',
-  activity_name_required: '請輸入活動名稱',
-  activity_start_time_required: '請選擇活動開始時間',
-  activity_end_time_required: '請選擇活動結束時間',
 
   // General fields
   title: '標題',
-  title_required: '請輸入標題',
   summary: '簡介',
   start_time: '開始時間',
-  start_time_required: '請選擇開始時間',
   end_time: '結束時間',
-  end_time_required: '請選擇結束時間',
   place: '場地',
 
   // Forum Manager
@@ -132,8 +126,6 @@ export default {
   room_created_successfully: '房間創建成功！',
   room_updated_successfully: '房間更新成功！',
   room_deleted_successfully: '房間刪除成功！',
-  room_name_required: '請輸入房間名稱',
-  room_capacity_required: '請輸入容納人數',
   select_room: '選擇房間',
   no_rooms_available: '暫無可用房間',
   network: '網路',

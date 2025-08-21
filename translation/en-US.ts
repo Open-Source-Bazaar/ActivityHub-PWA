@@ -73,18 +73,12 @@ export default {
   save_activity: 'Save Activity',
   activity_created_successfully: 'Activity created successfully!',
   activity_updated_successfully: 'Activity updated successfully!',
-  activity_name_required: 'Please enter activity name',
-  activity_start_time_required: 'Please select activity start time',
-  activity_end_time_required: 'Please select activity end time',
 
   // General fields
   title: 'Title',
-  title_required: 'Please enter title',
   summary: 'Summary',
   start_time: 'Start Time',
-  start_time_required: 'Please select start time',
   end_time: 'End Time',
-  end_time_required: 'Please select end time',
   place: 'Place',
 
   // Forum Manager
@@ -134,8 +128,6 @@ export default {
   room_created_successfully: 'Room created successfully!',
   room_updated_successfully: 'Room updated successfully!',
   room_deleted_successfully: 'Room deleted successfully!',
-  room_name_required: 'Please enter room name',
-  room_capacity_required: 'Please enter capacity',
   select_room: 'Select Room',
   no_rooms_available: 'No rooms available',
   network: 'Network',

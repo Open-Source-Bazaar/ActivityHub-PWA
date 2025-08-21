@@ -71,18 +71,12 @@ export default {
   save_activity: '保存活动',
   activity_created_successfully: '活动创建成功！',
   activity_updated_successfully: '活动更新成功！',
-  activity_name_required: '请输入活动名称',
-  activity_start_time_required: '请选择活动开始时间',
-  activity_end_time_required: '请选择活动结束时间',
 
   // General fields
   title: '标题',
-  title_required: '请输入标题',
   summary: '简介',
   start_time: '开始时间',
-  start_time_required: '请选择开始时间',
   end_time: '结束时间',
-  end_time_required: '请选择结束时间',
   place: '场地',
 
   // Forum Manager
@@ -132,8 +126,6 @@ export default {
   room_created_successfully: '房间创建成功！',
   room_updated_successfully: '房间更新成功！',
   room_deleted_successfully: '房间删除成功！',
-  room_name_required: '请输入房间名称',
-  room_capacity_required: '请输入容纳人数',
   select_room: '选择房间',
   no_rooms_available: '暂无可用房间',
   network: '网络',
