@@ -29,31 +29,19 @@ export const MainNavigator: FC = observer(() => {
 
             <Nav.Link href="/scroll-list">{t('scroll_list')}</Nav.Link>
 
-
-
             <Nav.Link target="_blank" href="https://github.com/open-source-bazaar/activityhub-pwa">
               {t('source_code')}
             </Nav.Link>
           </Nav>
 
-          <Nav className="ms-auto">
-            <Button
-              variant="outline-light"
-              size="sm"
-              href="/activity/0/editor"
-              className="me-2"
-            >
+          <nav className="ms-auto d-flex gap-2">
+            <Button variant="outline-light" size="sm" href="/activity/0/editor">
               {t('publish_activity')}
             </Button>
-            <Button
-              variant="outline-light"
-              size="sm"
-              href="/manuscript/0/editor"
-              className="me-3"
-            >
-              {t('submit_manuscript')}
+            <Button variant="outline-light" size="sm" href="/agenda/0/editor">
+              {t('submit_agenda')}
             </Button>
-          </Nav>
+          </nav>
 
           <LightSwitch className="my-3 my-sm-0 mx-sm-3" />
           <LanguageMenu />

@@ -36,8 +36,6 @@ export class ForumEditor extends ObservedComponent<ForumEditorProps, typeof i18n
     window.location.href = `/activity/${activityId}/forum/${id}`;
   };
 
-
-
   @computed
   get fields(): Field<Forum>[] {
     const { t } = this.observedContext;

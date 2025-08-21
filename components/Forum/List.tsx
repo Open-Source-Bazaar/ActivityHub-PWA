@@ -21,16 +21,15 @@ export class ForumList extends ObservedComponent<ForumListProps, typeof i18n> {
 
   @computed
   get columns(): Column<Forum>[] {
-    const { t } = this.observedContext;
+    const { t } = this.observedContext,
+      { activityId } = this.observedProps;
 
     return [
       {
         key: 'title',
         renderHead: t('title'),
         renderBody: ({ id, title }) => (
-          <a href={`/activity/${this.props.activityId}/forum/${id}/editor`}>
-            {title}
-          </a>
+          <a href={`/activity/${activityId}/forum/${id}/editor`}>{title}</a>
         ),
         required: true,
         minLength: 3,
@@ -54,14 +53,12 @@ export class ForumList extends ObservedComponent<ForumListProps, typeof i18n> {
       {
         key: 'place',
         renderHead: t('place'),
-        renderBody: ({ place }) => place ? (
-          <div>
-            <div>{place.name}</div>
+        renderBody: ({ place }) =>
+          place && (
             <a href={`/place/${place.id}/editor`} className="text-primary small">
-              {t('edit')}
+              {place.name} ({t('edit')})
             </a>
-          </div>
-        ) : null,
+          ),
       },
     ];
   }

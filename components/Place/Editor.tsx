@@ -9,33 +9,24 @@ import { OrganizationModel } from '../../models/Organization';
 import placeStore from '../../models/Place';
 import { i18n, I18nContext } from '../../models/Translation';
 import { renderTagInput } from '../Tag';
+import { WeekDayMap } from './Card';
 
 export interface PlaceEditorProps {
   place?: Place;
 }
 
 const placeTypeOptions = ({ t }: typeof i18n) => [
-  { value: PlaceType.Room, label: t('meeting_room') },
-  { value: PlaceType.Hall, label: t('lecture_hall') },
-  { value: PlaceType.Cafe, label: t('reception_hall') },
-  { value: PlaceType.Restaurant, label: t('lounge') },
+  { value: PlaceType.Room, title: t('meeting_room') },
+  { value: PlaceType.Hall, title: t('lecture_hall') },
+  { value: PlaceType.Cafe, title: t('reception_hall') },
+  { value: PlaceType.Restaurant, title: t('lounge') },
 ];
 
 const equipmentOptions = ({ t }: typeof i18n) => [
-  { value: 'network', label: t('network') },
-  { value: 'projector', label: t('projector') },
-  { value: 'led_screen', label: t('led_screen') },
-  { value: 'microphone', label: t('microphone') },
-];
-
-const weekDayOptions = ({ t }: typeof i18n) => [
-  { value: '0', title: t('sunday') },
-  { value: '1', title: t('monday') },
-  { value: '2', title: t('tuesday') },
-  { value: '3', title: t('wednesday') },
-  { value: '4', title: t('thursday') },
-  { value: '5', title: t('friday') },
-  { value: '6', title: t('saturday') },
+  { value: 'network', title: t('network') },
+  { value: 'projector', title: t('projector') },
+  { value: 'led_screen', title: t('led_screen') },
+  { value: 'microphone', title: t('microphone') },
 ];
 
 @observer
@@ -61,7 +52,8 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
 
   @computed
   get fields(): Field<Place>[] {
-    const { t } = this.observedContext;
+    const i18n = this.observedContext;
+    const { t } = i18n;
 
     return [
       {
@@ -79,10 +71,7 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
         key: 'type',
         renderLabel: t('type'),
         type: 'select',
-        options: placeTypeOptions(this.observedContext).map(({ value, label }) => ({
-          value: value + '',
-          title: label,
-        })),
+        options: placeTypeOptions(i18n).map(({ value, title }) => ({ value: value + '', title })),
         required: true,
       },
       {
@@ -102,17 +91,14 @@ export class PlaceEditor extends ObservedComponent<PlaceEditorProps, typeof i18n
         renderLabel: t('devices'),
         type: 'select',
         multiple: true,
-        options: equipmentOptions(this.observedContext).map(({ value, label }) => ({
-          value: value + '',
-          title: label,
-        })),
+        options: equipmentOptions(i18n).map(({ value, title }) => ({ value: value + '', title })),
       },
       {
         key: 'openWeekDays',
         renderLabel: t('open_weekdays'),
         type: 'select',
         multiple: true,
-        options: weekDayOptions(this.observedContext),
+        options: Object.entries(WeekDayMap(i18n)).map(([value, title]) => ({ value, title })),
       },
       {
         key: 'openTime',
