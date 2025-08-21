@@ -8,6 +8,8 @@ export default {
   source_code: 'Source Code',
   component: 'Component',
   pagination: 'Pagination',
+  publish_activity: 'Publish Activity',
+  submit_manuscript: 'Submit Manuscript',
   powered_by: 'Powered by',
   documentation: 'Documentation',
   documentation_summary: 'Find in-depth information about Next.js features and API.',

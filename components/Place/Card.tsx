@@ -30,15 +30,15 @@ export const PlaceCard: FC<PlaceCardProps> = ({
     [PlaceType.Restaurant]: t('lounge')
   };
 
-  const weekDayLabels = [
-    t('sunday'),
-    t('monday'),
-    t('tuesday'), 
-    t('wednesday'),
-    t('thursday'),
-    t('friday'),
-    t('saturday')
-  ];
+  const weekDayLabels: Record<string, string> = {
+    '1': t('monday'),
+    '2': t('tuesday'), 
+    '3': t('wednesday'),
+    '4': t('thursday'),
+    '5': t('friday'),
+    '6': t('saturday'),
+    '7': t('sunday')
+  };
 
   const className = [
     onSelect ? 'cursor-pointer' : '',
@@ -87,7 +87,7 @@ export const PlaceCard: FC<PlaceCardProps> = ({
             <dt>{t('open_days')}</dt>
             <dd>
               {place.openWeekDays
-                .map(day => weekDayLabels[day])
+                .map(day => weekDayLabels[day.toString()])
                 .join(', ')}
             </dd>
           </>

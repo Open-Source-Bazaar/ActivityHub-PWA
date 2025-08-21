@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 
 import { Name } from '../../models/configuration';
 import { I18nContext } from '../../models/Translation';
@@ -34,6 +34,25 @@ export const MainNavigator: FC = observer(() => {
             <Nav.Link target="_blank" href="https://github.com/open-source-bazaar/activityhub-pwa">
               {t('source_code')}
             </Nav.Link>
+          </Nav>
+
+          <Nav className="ms-auto">
+            <Button
+              variant="outline-light"
+              size="sm"
+              href="/activity/0/editor"
+              className="me-2"
+            >
+              {t('publish_activity')}
+            </Button>
+            <Button
+              variant="outline-light"
+              size="sm"
+              href="/manuscript/0/editor"
+              className="me-3"
+            >
+              {t('submit_manuscript')}
+            </Button>
           </Nav>
 
           <LightSwitch className="my-3 my-sm-0 mx-sm-3" />

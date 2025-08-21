@@ -8,6 +8,8 @@ export default {
   source_code: '源代碼',
   component: '元件',
   pagination: '分頁',
+  publish_activity: '發佈活動',
+  submit_manuscript: '投遞稿件',
   powered_by: '強力驅動自',
   documentation: '文檔',
   documentation_summary: '查找有關 Next.js 功能和 API 的深入資訊。',
