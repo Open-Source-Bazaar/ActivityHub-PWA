@@ -3,14 +3,16 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { Column, RestTable } from 'mobx-restful-table';
-import { Container } from 'react-bootstrap';
 
 import organizationStore from '../../models/Organization';
 import { i18n, I18nContext } from '../../models/Translation';
-import { PageHead } from '../Navigator/PageHead';
+
+export interface OrganizationListProps {
+  userId?: number;
+}
 
 @observer
-export class OrganizationList extends ObservedComponent<{}, typeof i18n> {
+export class OrganizationList extends ObservedComponent<OrganizationListProps, typeof i18n> {
   static contextType = I18nContext;
 
   @computed
@@ -49,23 +51,21 @@ export class OrganizationList extends ObservedComponent<{}, typeof i18n> {
   }
 
   render() {
-    const { t } = this.observedContext;
-
+    // const { userId } = this.observedProps;
+    
+    // TODO: Apply userId filter when backend supports user-specific organization filtering
+    
     return (
-      <Container fluid>
-        <PageHead title={t('organization_list')} />
-
-        <RestTable
-          className="h-100 text-center"
-          striped
-          hover
-          editable
-          deletable
-          columns={this.columns}
-          store={organizationStore}
-          translator={this.observedContext}
-        />
-      </Container>
+      <RestTable
+        className="h-100 text-center"
+        striped
+        hover
+        editable
+        deletable
+        columns={this.columns}
+        store={organizationStore}
+        translator={this.observedContext}
+      />
     );
   }
 }

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { compose, JWTProps, jwtVerifier } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
 
+import { userMenu } from '../../components/Activity/menu';
 import { OrganizationList } from '../../components/Organization/List';
 import { SessionBox } from '../../components/User/SessionBox';
 import { I18nContext } from '../../models/Translation';
@@ -19,8 +20,8 @@ const OrganizationListPage: FC<OrganizationListPageProps> = observer(({ jwtPaylo
   const title = i18n.t('organization_list');
 
   return (
-    <SessionBox {...{ title, jwtPayload }} path={asPath}>
-      <OrganizationList />
+    <SessionBox {...{ title, jwtPayload }} path={asPath} menu={userMenu(i18n)}>
+      <OrganizationList userId={jwtPayload?.id} />
     </SessionBox>
   );
 });

@@ -141,6 +141,7 @@ export default {
   edit_organization: '編輯組織',
   english_name: '英文名稱',
   logo: '標誌',
+  activity_list: '活動列表',
   cooperation_created_successfully: '合作創建成功！',
   cooperation_updated_successfully: '合作更新成功！',
   cooperation_deleted_successfully: '合作刪除成功！',

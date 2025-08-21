@@ -143,6 +143,7 @@ export default {
   edit_organization: 'Edit Organization',
   english_name: 'English Name',
   logo: 'Logo',
+  activity_list: 'Activity List',
   cooperation_created_successfully: 'Cooperation created successfully!',
   cooperation_updated_successfully: 'Cooperation updated successfully!',
   cooperation_deleted_successfully: 'Cooperation deleted successfully!',

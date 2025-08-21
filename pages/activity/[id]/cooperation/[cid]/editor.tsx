@@ -25,10 +25,7 @@ export const getServerSideProps = compose<{ id: string; cid: string }, Cooperati
       const cooperationStore = new CooperationModel(+params!.id);
       const activity = await activityStore.getOne(+params!.id);
       
-      let cooperation: Cooperation | undefined;
-      if (+params!.cid) {
-        cooperation = await cooperationStore.getOne(+params!.cid);
-      }
+      const cooperation = +params!.cid ? await cooperationStore.getOne(+params!.cid) : undefined;
 
       return { props: { cooperation, activity } };
     } catch {

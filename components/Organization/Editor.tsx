@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { Field, RestForm } from 'mobx-restful-table';
 
-import fileStore from '../../models/File';
+import { S3FileModel } from '../../models/File';
 import organizationStore from '../../models/Organization';
 import { i18n, I18nContext } from '../../models/Translation';
 
@@ -16,7 +16,7 @@ export interface OrganizationEditorProps {
 export class OrganizationEditor extends ObservedComponent<OrganizationEditorProps, typeof i18n> {
   static contextType = I18nContext;
 
-  fileStore = fileStore;
+  fileStore = new S3FileModel();
 
   componentDidMount() {
     const { organization } = this.props;
