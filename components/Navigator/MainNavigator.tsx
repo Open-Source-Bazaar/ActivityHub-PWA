@@ -23,6 +23,8 @@ export const MainNavigator: FC = observer(() => {
           <Nav className="me-auto">
             <Nav.Link href="/article">{t('article')}</Nav.Link>
 
+            <Nav.Link href="/organization">{t('organization_list')}</Nav.Link>
+
             <Nav.Link href="/component">{t('component')}</Nav.Link>
 
             <Nav.Link href="/pagination">{t('pagination')}</Nav.Link>

@@ -8,7 +8,7 @@ import { Button, Carousel, Col, Container, Image, Row } from 'react-bootstrap';
 
 import { ActivityCard } from '../components/Activity/Card';
 import { PageHead } from '../components/Navigator/PageHead';
-import { SponsorCard } from '../components/Organization/SponsorCard';
+import { CooperationCard } from '../components/Organization/CooperationCard';
 import { ActivityModel } from '../models/Activity';
 import { OrganizationModel } from '../models/Organization';
 import { I18nContext } from '../models/Translation';
@@ -116,7 +116,7 @@ const HomePage = observer(({ activities, instructors, organizations }: HomePageP
           <Row className="g-4">
             {organizations.map(organization => (
               <Col key={organization.id} xs={6} md={4} lg={3}>
-                <SponsorCard {...organization} />
+                <CooperationCard {...organization} />
               </Col>
             ))}
           </Row>
