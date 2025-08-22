@@ -12,7 +12,7 @@ import userStore from '../../models/User';
 import { renderTagInput } from '../Tag';
 
 export interface AgendaListProps {
-  activityId: number;
+  activityId?: number;
   isOrganizer?: boolean;
   userId?: number;
 }
