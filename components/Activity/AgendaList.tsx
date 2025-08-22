@@ -12,16 +12,16 @@ import userStore from '../../models/User';
 import { renderTagInput } from '../Tag';
 
 export interface AgendaListProps {
+  userId?: number;
   activityId?: number;
   isOrganizer?: boolean;
-  userId?: number;
 }
 
 @observer
 export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> {
   static contextType = I18nContext;
 
-  agendaStore = new AgendaModel(this.props.activityId);
+  agendaStore = new AgendaModel();
 
   @computed
   get columns(): Column<Agenda>[] {
@@ -43,12 +43,14 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
       },
       {
         renderHead: t('start_time'),
-        renderBody: ({ forum }) => forum?.startTime ? new Date(forum.startTime).toLocaleString() : '-',
+        renderBody: ({ forum }) =>
+          forum?.startTime ? new Date(forum.startTime).toLocaleString() : '-',
         type: 'datetime-local',
       },
       {
         renderHead: t('end_time'),
-        renderBody: ({ forum }) => forum?.endTime ? new Date(forum.endTime).toLocaleString() : '-',
+        renderBody: ({ forum }) =>
+          forum?.endTime ? new Date(forum.endTime).toLocaleString() : '-',
         type: 'datetime-local',
       },
       {
@@ -61,8 +63,7 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
       {
         key: 'mentors',
         renderHead: t('mentors'),
-        renderBody: ({ mentors }) => 
-          mentors?.map(mentor => mentor.name).join(', ') || '-',
+        renderBody: ({ mentors }) => mentors?.map(mentor => mentor.name).join(', ') || '-',
         renderInput: renderTagInput(userStore),
         required: true,
         invalidMessage: t('field_required'),
@@ -83,7 +84,7 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
 
   render() {
     const { activityId, userId } = this.props;
-    
+
     return (
       <RestTable
         className="h-100 text-center"
@@ -93,7 +94,7 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
         deletable
         columns={this.columns}
         store={this.agendaStore}
-        {...({ filter: { activity: activityId, createdBy: userId } } as any)}
+        filter={{ activity: activityId, createdBy: userId }}
         translator={this.observedContext}
       />
     );

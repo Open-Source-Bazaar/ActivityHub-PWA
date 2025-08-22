@@ -8,20 +8,15 @@ import { Button } from 'react-bootstrap';
 import sessionStore from '../../models/Session';
 import { i18n, I18nContext } from '../../models/Translation';
 
-export interface SessionListProps {
-  showActions?: boolean;
-}
-
 @observer
-export class SessionList extends ObservedComponent<SessionListProps, typeof i18n> {
+export class SessionList extends ObservedComponent<{}, typeof i18n> {
   static contextType = I18nContext;
 
   @computed
   get columns(): Column<Session>[] {
     const { t } = this.observedContext;
-    const { showActions = true } = this.observedProps;
 
-    const baseColumns: Column<Session>[] = [
+    return [
       {
         key: 'title',
         renderHead: t('title'),
@@ -52,32 +47,25 @@ export class SessionList extends ObservedComponent<SessionListProps, typeof i18n
         type: 'number',
         min: 1,
       },
-    ];
-
-    if (showActions) {
-      baseColumns.push({
+      {
         renderHead: t('actions'),
         renderBody: () => (
           <Button variant="outline-success" size="sm" href="/user/agenda">
             {t('submit_to_activity')}
           </Button>
         ),
-      });
-    }
-
-    return baseColumns;
+      },
+    ];
   }
 
   render() {
-    const { showActions = true } = this.observedProps;
-
     return (
       <RestTable
         className="h-100 text-center"
         striped
         hover
-        editable={showActions}
-        deletable={showActions}
+        editable
+        deletable
         columns={this.columns}
         store={sessionStore}
         translator={this.observedContext}
