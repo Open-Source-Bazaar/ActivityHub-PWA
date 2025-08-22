@@ -6,12 +6,14 @@ import { Column, RestTable } from 'mobx-restful-table';
 import { Badge } from 'react-bootstrap';
 
 import { AgendaModel } from '../../models/Agenda';
+import placeStore from '../../models/Place';
 import { i18n, I18nContext } from '../../models/Translation';
 import userStore from '../../models/User';
 import { renderTagInput } from '../Tag';
 
 export interface AgendaListProps {
   activityId: number;
+  isOrganizer?: boolean;
 }
 
 @observer
@@ -23,27 +25,37 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
   @computed
   get columns(): Column<Agenda>[] {
     const { t } = this.observedContext;
+    const { isOrganizer = false } = this.observedProps;
 
     return [
       {
         renderHead: t('title'),
         renderBody: ({ forum }) => forum?.title || t('unknown'),
+        required: true,
+        invalidMessage: t('field_required'),
       },
       {
         renderHead: t('summary'),
         renderBody: ({ forum }) => forum?.summary || '-',
+        type: 'textarea',
+        rows: 3,
       },
       {
         renderHead: t('start_time'),
         renderBody: ({ forum }) => forum?.startTime ? new Date(forum.startTime).toLocaleString() : '-',
+        type: 'datetime-local',
       },
       {
         renderHead: t('end_time'),
         renderBody: ({ forum }) => forum?.endTime ? new Date(forum.endTime).toLocaleString() : '-',
+        type: 'datetime-local',
       },
       {
         renderHead: t('place'),
         renderBody: ({ forum }) => forum?.place?.name || t('unknown'),
+        renderInput: renderTagInput(placeStore),
+        required: true,
+        invalidMessage: t('field_required'),
       },
       {
         key: 'mentors',
@@ -51,6 +63,8 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
         renderBody: ({ mentors }) => 
           mentors?.map(mentor => mentor.name).join(', ') || '-',
         renderInput: renderTagInput(userStore),
+        required: true,
+        invalidMessage: t('field_required'),
       },
       {
         key: 'adopted',
@@ -61,6 +75,7 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
           </Badge>
         ),
         type: 'checkbox',
+        readOnly: !isOrganizer,
       },
     ];
   }

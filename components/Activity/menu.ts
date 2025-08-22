@@ -12,4 +12,5 @@ export const userMenu = ({ t }: typeof i18n): MenuItem[] => [
   { href: '/user/organization', title: t('organization_list') },
   { href: '/user/activity', title: t('activity_list') },
   { href: '/user/session', title: t('session_list') },
+  { href: '/user/agenda', title: t('agenda_management') },
 ];
