@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { FC } from 'react';
 import { Image } from 'react-bootstrap';
 
-export const SponsorCard: FC<Organization> = observer(({ name, url, logo }) => (
+export const OrganizationCard: FC<Organization> = observer(({ name, url, logo }) => (
   <a
     href={url}
     target="_blank"

@@ -38,8 +38,11 @@ export const MainNavigator: FC = observer(() => {
             <Button variant="outline-light" size="sm" href="/activity/0/editor">
               {t('publish_activity')}
             </Button>
-            <Button variant="outline-light" size="sm" href="/agenda/0/editor">
+            <Button variant="outline-light" size="sm" href="/session/0/editor">
               {t('submit_agenda')}
+            </Button>
+            <Button variant="outline-light" size="sm" href="/user/organization">
+              {t('create_organization')}
             </Button>
           </nav>
 
