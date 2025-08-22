@@ -5,6 +5,7 @@ export const organizerMenu = ({ t }: typeof i18n, activityId: number): MenuItem[
   { href: `/activity/${activityId}/editor`, title: t('edit_activity') },
   { href: `/activity/${activityId}/forum`, title: t('forum_list') },
   { href: `/activity/${activityId}/cooperation`, title: t('cooperation_management') },
+  { href: `/activity/${activityId}/agenda`, title: t('agenda_management') },
 ];
 
 export const userMenu = ({ t }: typeof i18n): MenuItem[] => [
