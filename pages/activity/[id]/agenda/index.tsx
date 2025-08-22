@@ -24,7 +24,7 @@ const AgendaListPage: FC<AgendaListPageProps> = observer(({ jwtPayload }) => {
 
   return (
     <SessionBox {...{ title, jwtPayload }} path={asPath} menu={organizerMenu(i18n, activityId)}>
-      <AgendaList activityId={activityId} isOrganizer={true} />
+      <AgendaList activityId={activityId} isOrganizer />
     </SessionBox>
   );
 });
