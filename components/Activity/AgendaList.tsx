@@ -21,7 +21,7 @@ export interface AgendaListProps {
 export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> {
   static contextType = I18nContext;
 
-  agendaStore = new AgendaModel(this.props.activityId, this.props.userId);
+  agendaStore = new AgendaModel(this.props.activityId);
 
   @computed
   get columns(): Column<Agenda>[] {
@@ -82,6 +82,8 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
   }
 
   render() {
+    const { activityId, userId } = this.props;
+    
     return (
       <RestTable
         className="h-100 text-center"
@@ -91,6 +93,7 @@ export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> 
         deletable
         columns={this.columns}
         store={this.agendaStore}
+        {...({ filter: { activity: activityId, createdBy: userId } } as any)}
         translator={this.observedContext}
       />
     );

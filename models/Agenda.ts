@@ -7,15 +7,8 @@ export class AgendaModel extends TableModel<Agenda> {
   baseURI = '';
   client = userStore.client;
 
-  constructor(activityId: number, userId?: number) {
+  constructor(activityId: number) {
     super();
-    if (userId) {
-      // For user-specific agenda filtering, we might need a different endpoint
-      // For now, we'll use the activity-based endpoint but will set up for user filtering
-      this.baseURI = `activity/${activityId}/agenda`;
-      // TODO: Set up user filtering when backend supports it
-    } else {
-      this.baseURI = `activity/${activityId}/agenda`;
-    }
+    this.baseURI = `activity/${activityId}/agenda`;
   }
 }
