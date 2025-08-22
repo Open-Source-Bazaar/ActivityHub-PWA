@@ -13,7 +13,6 @@ interface AgendaListPageProps extends JWTProps<User> {}
 
 export const getServerSideProps = compose<{ id: string }, AgendaListPageProps>(
   jwtVerifier(),
-  async () => ({ props: {} }),
 );
 
 const AgendaListPage: FC<AgendaListPageProps> = observer(({ jwtPayload }) => {
