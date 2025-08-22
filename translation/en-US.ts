@@ -162,6 +162,8 @@ export default {
   please_select: 'Please select...',
   submitting: 'Submitting...',
   agenda_submitted_successfully: 'Agenda submitted successfully!',
+  submission_failed: 'Submission failed. Please try again.',
+  submitted: 'Submitted',
   agenda_management: 'Agenda Management',
   submitted_agendas: 'Submitted Agendas',
   review_agenda: 'Review Agenda',

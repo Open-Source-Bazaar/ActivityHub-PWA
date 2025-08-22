@@ -160,6 +160,8 @@ export default {
   please_select: '请选择...',
   submitting: '提交中...',
   agenda_submitted_successfully: '议程提交成功！',
+  submission_failed: '提交失败，请重试。',
+  submitted: '已提交',
   agenda_management: '议程管理',
   submitted_agendas: '已提交议程',
   review_agenda: '审核议程',

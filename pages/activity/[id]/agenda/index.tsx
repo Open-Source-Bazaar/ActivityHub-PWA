@@ -1,32 +1,19 @@
-import { Activity, User } from '@open-source-bazaar/activityhub-service';
+import { User } from '@open-source-bazaar/activityhub-service';
 import { observer } from 'mobx-react';
 import { useRouter } from 'next/router';
 import { compose, JWTProps, jwtVerifier } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
 
+import { AgendaList } from '../../../../components/Activity/AgendaList';
 import { organizerMenu } from '../../../../components/Activity/menu';
-import { AgendaList } from '../../../../components/Session/AgendaList';
 import { SessionBox } from '../../../../components/User/SessionBox';
-import activityStore from '../../../../models/Activity';
 import { I18nContext } from '../../../../models/Translation';
 
-interface AgendaListPageProps extends JWTProps<User> {
-  activity?: Activity;
-}
+interface AgendaListPageProps extends JWTProps<User> {}
 
 export const getServerSideProps = compose<{ id: string }, AgendaListPageProps>(
   jwtVerifier(),
-  async ({ params }) => {
-    if (!+params!.id) return { props: {} };
-
-    try {
-      const activity = await activityStore.getOne(+params!.id);
-
-      return { props: { activity } };
-    } catch {
-      return { props: {} };
-    }
-  },
+  async () => ({ props: {} }),
 );
 
 const AgendaListPage: FC<AgendaListPageProps> = observer(({ jwtPayload }) => {
