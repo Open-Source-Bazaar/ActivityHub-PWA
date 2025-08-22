@@ -14,13 +14,14 @@ import { renderTagInput } from '../Tag';
 export interface AgendaListProps {
   activityId: number;
   isOrganizer?: boolean;
+  userId?: number;
 }
 
 @observer
 export class AgendaList extends ObservedComponent<AgendaListProps, typeof i18n> {
   static contextType = I18nContext;
 
-  agendaStore = new AgendaModel(this.props.activityId);
+  agendaStore = new AgendaModel(this.props.activityId, this.props.userId);
 
   @computed
   get columns(): Column<Agenda>[] {
